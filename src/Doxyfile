@@ -50,14 +50,14 @@ PROJECT_NUMBER         = 0.0
 
 #hotovo ... asi
 
-PROJECT_BRIEF          = IVS-KalkulaËka
+PROJECT_BRIEF          = IVS-Kalkulaƒçka
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-#nevÌm jestli bude
+#nev√≠m jestli bude
 
 PROJECT_LOGO           =
 
@@ -66,7 +66,7 @@ PROJECT_LOGO           =
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-# v zad·nÌ neni, kde ma byt, navrhuji d·t na ˙roveÚ dokumentace.pdf
+# v zad√°n√≠ neni, kde ma byt, navrhuji d√°t na √∫rove≈à dokumentace.pdf
 
 OUTPUT_DIRECTORY       = ../
 
@@ -78,7 +78,7 @@ OUTPUT_DIRECTORY       = ../
 # performance problems for the file system.
 # The default value is: NO.
 
-#nenÌ pot¯eba
+#nen√≠ pot≈ôeba
 
 CREATE_SUBDIRS         = NO
 
@@ -88,7 +88,7 @@ CREATE_SUBDIRS         = NO
 # U+3044.
 # The default value is: NO.
 
-#asi nenÌ pot¯eba
+#asi nen√≠ pot≈ôeba
 
 ALLOW_UNICODE_NAMES    = NO
 
@@ -105,7 +105,7 @@ ALLOW_UNICODE_NAMES    = NO
 # Ukrainian and Vietnamese.
 # The default value is: English.
 
-# t˝m se shodl na ËeötinÏ
+# t√Ωm se shodl na ƒçe≈°tinƒõ
 
 OUTPUT_LANGUAGE        = Czech
 
@@ -114,7 +114,7 @@ OUTPUT_LANGUAGE        = Czech
 # documentation (similar to Javadoc). Set to NO to disable this.
 # The default value is: YES.
 
-# nenÌ d˘vod to vypÌnat, nevÌm ale jak to reaguje na xml koment·¯e
+# nen√≠ d≈Øvod to vyp√≠nat, nev√≠m ale jak to reaguje na xml koment√°≈ôe
 
 BRIEF_MEMBER_DESC      = YES
 
@@ -125,7 +125,7 @@ BRIEF_MEMBER_DESC      = YES
 # brief descriptions will be completely suppressed.
 # The default value is: YES.
 
-# stejnÏ jako naho¯e
+# stejnƒõ jako naho≈ôe
 
 REPEAT_BRIEF           = YES
 
@@ -138,7 +138,7 @@ REPEAT_BRIEF           = YES
 # the entity):The $name class, The $name widget, The $name file, is, provides,
 # specifies, contains, represents, a, an and the.
 
-# tady jsem skonËil ==============================================================================================================================================
+# tady jsem skonƒçil ==============================================================================================================================================
 
 ABBREVIATE_BRIEF       = "The $name class" \
                          "The $name widget" \
