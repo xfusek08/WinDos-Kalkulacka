@@ -1,12 +1,12 @@
-# IVS-Kalkulacka
+# IVS-Kalkulačka
 Týmový projekt do předmětu IVS na FIT VUT
 
-Prostredi
+Prostředí
 ---------
 
 Windows 64bit
 
-Autori
+Autoři
 ------
 
 WinDos
@@ -18,4 +18,4 @@ WinDos
 Licence
 -------
 
-Tento program je poskytovan pod licenci GPLv3.0.
+Tento program je poskytován pod licencí GPLv3.0.
