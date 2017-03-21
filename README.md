@@ -1,21 +1,21 @@
-# IVS-Kalkulacka
+# IVS-Kalkulačka
 Týmový projekt do předmětu IVS na FIT VUT
 
-Prostredi
+Prostředí
 ---------
 
 Windows 64bit
 
-Autori
+Autoři
 ------
 
 WinDos
 - xblaha28 Radim Blaha 
-- xlogin02 jmeno prijmeni 
-- xlogin03 jmeno prijmeni 
-- xlogin04 jmeno prijmeni 
+- xfrane16 Jaromír Franěk
+- xfusek08 Petr Fusek
+- xvosyk00 Pavel Vosyka
 
 Licence
 -------
 
-Tento program je poskytovan pod licenci GPLv3.0.
+Tento program je poskytován pod licencí GPLv3.0.
