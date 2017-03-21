@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*******************************************************************
+* Název projektu: Testovací třída pro testování funkcí matematické knihovny
+* Balíček: ProjectTesting
+* Soubor: MathLibTest.cs
+* Datum: 21.03.2017
+* Autor: Petr Fusek
+* Naposledy upravil: Petr Fusek
+* Datum poslední změny: 21.03.2017
+*
+* Popis: Třída testuje funkce matematického objektu MathLib.CalcMath.
+* Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Petr Fusek a Radim Blaha.
+*
+*****************************************************************/
+
+using System;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
