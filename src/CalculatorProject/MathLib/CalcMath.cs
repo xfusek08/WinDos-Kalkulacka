@@ -48,7 +48,7 @@ namespace MathLib
     }
 
     // Vypočte faktorial z 'x'
-    public long Fact(int x)
+    public long Fact(Byte x)
     {
       return 0;
     }
