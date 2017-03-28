@@ -4,8 +4,8 @@
 * Soubor: MathLibTest.cs
 * Datum: 21.03.2017
 * Autor: Petr Fusek
-* Naposledy upravil: Radim Blaha
-* Datum poslední změny: 24.03.2017
+* Naposledy upravil: Petr Fusek
+* Datum poslední změny: 28.03.2017
 *
 * Popis: Třída testuje funkce matematického objektu MathLib.CalcMath.
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Petr Fusek a Radim Blaha.
@@ -86,12 +86,12 @@ namespace ProjectTesting
 
       Assert.AreEqual(0, mathclass.Divide(0, 5)); // 0/5=0
       Assert.AreEqual(0, mathclass.Divide(0, -5)); // 0/(-5)=0
-      //Assert.AreEqual(0, mathclass.Divide(0, double.PositiveInfinity)); // 0/INF=0 - ANO nebo NE?
+      Assert.AreEqual(0, mathclass.Divide(0, double.PositiveInfinity)); // 0/INF=0
       Assert.AreEqual(0, mathclass.Divide(5, double.PositiveInfinity)); // 5/INF=0
 
       Assert.IsTrue(double.IsNaN(mathclass.Divide(0,0))); // 0/0=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Divide(0, 0))); // 0/INF=0
-      //Assert.IsTrue(double.IsNaN(mathclass.Divide(0, double.PositiveInfinity))); // INF/0=NaN - ANO nebo NE? 2. moznost: INF/0=INF
+      Assert.IsTrue(double.IsNaN(mathclass.Divide(0, double.PositiveInfinity))); // INF/0=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Divide(double.PositiveInfinity, double.PositiveInfinity)));  // INF/INF=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Divide(double.NaN, 5)));  //NaN/5=NaN
     }
@@ -189,10 +189,14 @@ namespace ProjectTesting
     [TestMethod]
     public void TestFact()
     {
-      Assert.AreEqual(1, mathclass.Fact(0));  // 0! = 1
-      Assert.AreEqual(1, mathclass.Fact(1));  // 1! = 1
-      Assert.AreEqual(6, mathclass.Fact(3));  // 3! = 6
-      Assert.AreEqual(3628800, mathclass.Fact(10)); // 10! = 3628800
+      Assert.AreEqual(1.0, mathclass.Fact(0));  // 0! = 1
+      Assert.AreEqual(1.0, mathclass.Fact(Byte.MinValue));  // Byte.MinValue = 0 => 0! = 1
+      Assert.AreEqual(1.0, mathclass.Fact(1));  // 1! = 1
+      Assert.AreEqual(6.0, mathclass.Fact(3));  // 3! = 6
+      Assert.AreEqual(3628800.0, mathclass.Fact(10)); // 10! = 3628800
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Fact(Byte.MaxValue)); // 255! > double.MaxValue
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Fact(171)); // 171! > double.MaxValue
+      Assert.AreEqual("7.257E+306", mathclass.Fact(170).ToString("E3")); // 170! = "7.257E+306"
     }
 
     [TestMethod]
@@ -215,7 +219,7 @@ namespace ProjectTesting
 
       Assert.AreEqual(0.02, mathclass.Modulo(0.08, 0.03)); // 0.08 % 0.03 = 0.02
 
-      Assert.AreEqual(0, mathclass.Modulo(0.0000005, 0.0000005)); // 0.0000005 % 0.0000005 = 0                                                                                            
+      Assert.AreEqual(0, mathclass.Modulo(0.0000005, 0.0000005)); // 0.0000005 % 0.0000005 = 0
 
       Assert.IsTrue(double.IsNaN(mathclass.Modulo(double.NaN, 5))); // NaN % 5=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Modulo(double.NaN, double.NaN))); // NaN % NaN = NaN

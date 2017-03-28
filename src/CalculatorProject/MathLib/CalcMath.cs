@@ -48,7 +48,7 @@ namespace MathLib
     }
 
     // Vypočte faktorial z 'x'
-    public long Fact(Byte x)
+    public double Fact(Byte x)
     {
       return 0;
     }
@@ -59,7 +59,7 @@ namespace MathLib
       return 0;
     }
 
-    // Vypočte logaritmus z 'x' o základu 10 
+    // Vypočte logaritmus z 'x' o základu 10
     public double Log(double x)
     {
       return 0;
