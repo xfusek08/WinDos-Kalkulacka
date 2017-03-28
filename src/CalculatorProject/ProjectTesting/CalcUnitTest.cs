@@ -4,8 +4,8 @@
 * Soubor: CalcUnitTest.cs
 * Datum: 28.03.2017
 * Autor: Jaromír Franěk
-* Naposledy upravil: Jaromír Franěk
-* Datum poslední změny: 28.03.2017
+* Naposledy upravil: Pavel Vosyka
+* Datum poslední změny: 29.03.2017
 *
 * Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation. 
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Jaromír Franěk a Pavel Vosyka.
@@ -157,30 +157,122 @@ namespace ProjectTesting
     [TestMethod]
     public void TestErrorNone()
     {
-
+      calcunit.Expresion = "4 + 1";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "8 - 3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "8 / 3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "8 * 3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "8 ^ 3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "16 @ 2";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "8 * 3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "8!";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "15 % 5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      calcunit.Expresion = "L10";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
     }
 
     [TestMethod]
     public void TestErrorFuncDomain()
     {
-
+      calcunit.Expresion = "8 / 0";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      calcunit.Expresion = "0 /0";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      calcunit.Expresion = "-1 @ 3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      calcunit.Expresion = "-1 @ 3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      calcunit.Expresion = "200!";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      calcunit.Expresion = "-20!";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      calcunit.Expresion = "L-1";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
     }
 
     [TestMethod]
     public void TestErrorOverFlow()
     {
-
+      calcunit.Expresion = double.MaxValue + "+ 5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
+      calcunit.Expresion = double.MinValue + "- 5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
+      calcunit.Expresion = double.MaxValue + "* 5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
+      calcunit.Expresion = "1" + double.MaxValue + " + 5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
     }
 
     [TestMethod]
     public void TestErrorExprFormat()
     {
-
+      calcunit.Expresion = "5 +";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "+";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5+++3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "-12-";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5 + * 5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "*5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5 *";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5 ** 12";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5^";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "^5 ";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5^^3";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5 @ ";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "@5";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5 @@ 1";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "!";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "L";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "10L ";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "L*10";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = null;
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5+5a";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5, +1";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "5. + 2";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "(1+1))";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "((())";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "(/)";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = "(";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      calcunit.Expresion = ")";
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
     }
 
     [TestMethod]
     public void TestErrorUnknownError()
-    {
+    {                                                                 
 
     }
 
