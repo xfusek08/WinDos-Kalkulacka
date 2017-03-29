@@ -4,7 +4,7 @@
 * Soubor: CalcUnitTest.cs
 * Datum: 28.03.2017
 * Autor: Jaromír Franěk
-* Naposledy upravil: Pavel Vosyka
+* Naposledy upravil: Jaromír Franěk
 * Datum poslední změny: 29.03.2017
 *
 * Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation. 
@@ -40,8 +40,12 @@ namespace ProjectTesting
     {
       calcunit.Expresion = "9 + 2";
       Assert.AreEqual(calcunit.Value, 11);
+      calcunit.Expresion = "-9 + 11";
+      Assert.AreEqual(calcunit.Value, 2);
       calcunit.Expresion = "8 - 3";
       Assert.AreEqual(calcunit.Value, 5);
+      calcunit.Expresion = "8 - 11";
+      Assert.AreEqual(calcunit.Value, -3);
       calcunit.Expresion = "-2 - 3";
       Assert.AreEqual(calcunit.Value, -5);
       calcunit.Expresion = "2 - -3";
@@ -146,12 +150,29 @@ namespace ProjectTesting
       Assert.AreEqual(calcunit.Value, 0);
       calcunit.Expresion = "(-16 / 4) - (3 * -1)";
       Assert.AreEqual(calcunit.Value, -1);
+      calcunit.Expresion = "(8-3)!";
+      Assert.AreEqual(calcunit.Value, 120);
+      calcunit.Expresion = "L(200 - 50 * 2)";
+      Assert.AreEqual(calcunit.Value, 2);
+      calcunit.Expresion = "(6 - 1)^(3 * 1)";
+      Assert.AreEqual(calcunit.Value, 125);
+      calcunit.Expresion = "(30 - 3)@(6 - 3)";
+      Assert.AreEqual(calcunit.Value, 3);
     }
 
     [TestMethod]
     public void TestCompStringValue()
     {
-      
+      calcunit.Expresion = "(-16 / (5 - 1)) - ((2 + 1) * -1)";
+      Assert.AreEqual(calcunit.Value, -1);
+      calcunit.Expresion = "(2*8 - (8 + 4)) + (12 / 3)";
+      Assert.AreEqual(calcunit.Value, 8);
+      calcunit.Expresion = "(-16 / (5 - 1)) - ((30 - 3)@(6 - 3) * -1)";
+      Assert.AreEqual(calcunit.Value, -1);
+      calcunit.Expresion = "((7-3)! / (5 + 1)) - ((30 - 3)@(6 - 3) * -1)";
+      Assert.AreEqual(calcunit.Value, -1);
+      calcunit.Expresion = "((7-3)! / (5 + 1)) - ((30 - (L(200 - 50 * 2) + 1))@(6 - 3) * -1)";
+      Assert.AreEqual(calcunit.Value, -1);
     }
 
     [TestMethod]
