@@ -4,8 +4,8 @@
 * Soubor: CalcUnitTest.cs
 * Datum: 28.03.2017
 * Autor: Jaromír Franěk
-* Naposledy upravil: Jaromír Franěk
-* Datum poslední změny: 29.03.2017
+* Naposledy upravil: Pavel Vosyka
+* Datum poslední změny: 31.03.2017
 *
 * Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation. 
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Jaromír Franěk a Pavel Vosyka.
@@ -180,24 +180,34 @@ namespace ProjectTesting
     {
       calcunit.Expresion = "4 + 1";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "8 - 3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "8 / 3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "8 * 3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "8 ^ 3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "16 @ 2";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "8 * 3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "8!";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "15 % 5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "L10";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.None);
+      Assert.AreEqual(calcunit.Value, double.NaN);
     }
 
     [TestMethod]
@@ -205,18 +215,25 @@ namespace ProjectTesting
     {
       calcunit.Expresion = "8 / 0";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "0 /0";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "-1 @ 3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "-1 @ 3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "200!";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "-20!";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "L-1";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.FuncDomainError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
     }
 
     [TestMethod]
@@ -224,12 +241,16 @@ namespace ProjectTesting
     {
       calcunit.Expresion = double.MaxValue + "+ 5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = double.MinValue + "- 5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = double.MaxValue + "* 5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "1" + double.MaxValue + " + 5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.DataTypeOwerflow);
+      Assert.AreEqual(calcunit.Value, double.NaN);
     }
 
     [TestMethod]
@@ -237,58 +258,85 @@ namespace ProjectTesting
     {
       calcunit.Expresion = "5 +";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "+";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5+++3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "-12-";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5 + * 5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "*5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5 *";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5 ** 12";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5^";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "^5 ";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5^^3";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5 @ ";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "@5";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5 @@ 1";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "!";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "L";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "10L ";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "L*10";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = null;
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5+5a";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5, +1";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "5. + 2";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "(1+1))";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "((())";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "(/)";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = "(";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
       calcunit.Expresion = ")";
       Assert.AreEqual(calcunit.ErrorType, CalcErrorType.ExprFormatError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
     }
 
     [TestMethod]
@@ -300,7 +348,24 @@ namespace ProjectTesting
     [TestMethod]
     public void TestGetAsString()
     {
+      calcunit.Expresion = "10";
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Dec, ""), "10");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Bin, ""), "1010");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Hex, ""), "10");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Oct, ""), "12");
 
+      //!nehotove
+      calcunit.Expresion = "10.23";
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Dec, ""), "10");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Bin, ""), "1010.00111");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Hex, ""), "A");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Oct, ""), "12");
+
+      calcunit.Expresion = "AB";
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Dec, ""), "NaN");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Bin, ""), "NaN");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Hex, ""), "NaN");
+      Assert.AreEqual(calcunit.GetAsString(NumSystem.Oct, ""), "NaN");
     }
   }
 }
