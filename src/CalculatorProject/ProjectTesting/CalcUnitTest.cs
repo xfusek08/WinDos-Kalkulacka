@@ -341,8 +341,10 @@ namespace ProjectTesting
 
     [TestMethod]
     public void TestErrorUnknownError()
-    {                                                                 
-
+    {
+      calcunit.Expresion = null;
+      Assert.AreEqual(calcunit.ErrorType, CalcErrorType.UnknownError);
+      Assert.AreEqual(calcunit.Value, double.NaN);
     }
 
     [TestMethod]
@@ -354,13 +356,14 @@ namespace ProjectTesting
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Hex, ""), "10");
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Oct, ""), "12");
 
-      //!nehotove
+      //Nehotové, nutná domluva viz. issue "Testy výpočetní jednotky".
+      /*
       calcunit.Expresion = "10.23";
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Dec, ""), "10");
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Bin, ""), "1010.00111");
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Hex, ""), "A");
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Oct, ""), "12");
-
+      */
       calcunit.Expresion = "AB";
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Dec, ""), "NaN");
       Assert.AreEqual(calcunit.GetAsString(NumSystem.Bin, ""), "NaN");
