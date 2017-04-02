@@ -4,8 +4,8 @@
 * Soubor: CalcUnitTest.cs
 * Datum: 28.03.2017
 * Autor: Jaromír Franěk
-* Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 31.03.2017
+* Naposledy upravil: Jaromír Franěk
+* Datum poslední změny: 2.04.2017
 *
 * Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation. 
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Jaromír Franěk a Pavel Vosyka.
@@ -42,10 +42,14 @@ namespace ProjectTesting
       Assert.AreEqual(calcunit.Value, 11);
       calcunit.Expresion = "-9 + 11";
       Assert.AreEqual(calcunit.Value, 2);
+      calcunit.Expresion = "-9.2 + 1.2";
+      Assert.AreEqual(calcunit.Value, -8);
       calcunit.Expresion = "8 - 3";
       Assert.AreEqual(calcunit.Value, 5);
       calcunit.Expresion = "8 - 11";
       Assert.AreEqual(calcunit.Value, -3);
+      calcunit.Expresion = "-4.25 - 11.25";
+      Assert.AreEqual(calcunit.Value, -15,5);
       calcunit.Expresion = "-2 - 3";
       Assert.AreEqual(calcunit.Value, -5);
       calcunit.Expresion = "2 - -3";
@@ -54,6 +58,8 @@ namespace ProjectTesting
       Assert.AreEqual(calcunit.Value, -5);
       calcunit.Expresion = "9 * 2";
       Assert.AreEqual(calcunit.Value, 18);
+      calcunit.Expresion = "9.5 * 2.5";
+      Assert.AreEqual(calcunit.Value, 23.75);
       calcunit.Expresion = "9 * -2";
       Assert.AreEqual(calcunit.Value, -18);
       calcunit.Expresion = "-9 * 2";
@@ -64,6 +70,8 @@ namespace ProjectTesting
       Assert.AreEqual(calcunit.Value, 4);
       calcunit.Expresion = "12 / -2";
       Assert.AreEqual(calcunit.Value, -6);
+      calcunit.Expresion = "17.5 / -2.5";
+      Assert.AreEqual(calcunit.Value, -7);
       calcunit.Expresion = "-12 / 2";
       Assert.AreEqual(calcunit.Value, -6);
       calcunit.Expresion = "-12 / -2";
@@ -98,6 +106,8 @@ namespace ProjectTesting
       Assert.AreEqual(calcunit.Value, 0);
       calcunit.Expresion = "5%3";
       Assert.AreEqual(calcunit.Value, 2);
+      calcunit.Expresion = "5%2.3";
+      Assert.AreEqual(calcunit.Value, 0.4);
       calcunit.Expresion = "-5%3";
       Assert.AreEqual(calcunit.Value, -2);
       calcunit.Expresion = "5%-3";
