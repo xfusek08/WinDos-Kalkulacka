@@ -34,7 +34,9 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "My Project"
+# na jméně programu se můžeme dohodnout později
+
+PROJECT_NAME           = "IVS Kalkulačka"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -50,7 +52,7 @@ PROJECT_NUMBER         = 0.0
 
 #hotovo ... asi
 
-PROJECT_BRIEF          = IVS-Kalkulačka
+PROJECT_BRIEF          = "Týmový projekt do předmětu IVS na FIT VUT"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -68,7 +70,7 @@ PROJECT_LOGO           =
 
 # v zadání neni, kde ma byt, navrhuji dát na úroveň dokumentace.pdf
 
-OUTPUT_DIRECTORY       = ../
+OUTPUT_DIRECTORY       = ../Documentation
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -138,7 +140,7 @@ REPEAT_BRIEF           = YES
 # the entity):The $name class, The $name widget, The $name file, is, provides,
 # specifies, contains, represents, a, an and the.
 
-# tady jsem skončil ==============================================================================================================================================
+# nevím co to znamená otestujeme na dokumentaci   ----------------------------------------------------------------------
 
 ABBREVIATE_BRIEF       = "The $name class" \
                          "The $name widget" \
@@ -157,6 +159,8 @@ ABBREVIATE_BRIEF       = "The $name class" \
 # description.
 # The default value is: NO.
 
+# až bude co generovat, tak je potřeba vyzkoušet   ----------------------------------------------------------------------
+
 ALWAYS_DETAILED_SEC    = NO
 
 # If the INLINE_INHERITED_MEMB tag is set to YES, doxygen will show all
@@ -165,12 +169,16 @@ ALWAYS_DETAILED_SEC    = NO
 # operators of the base classes will not be shown.
 # The default value is: NO.
 
+# Nepotřebujeme
+
 INLINE_INHERITED_MEMB  = NO
 
 # If the FULL_PATH_NAMES tag is set to YES, doxygen will prepend the full path
 # before files name in the file list and in the header files. If set to NO the
 # shortest path that makes the file name unique will be used
 # The default value is: YES.
+
+# ok
 
 FULL_PATH_NAMES        = YES
 
@@ -184,6 +192,8 @@ FULL_PATH_NAMES        = YES
 # will be relative from the directory where doxygen is started.
 # This tag requires that the tag FULL_PATH_NAMES is set to YES.
 
+# podle toho co to bude dělat   ----------------------------------------------------------------------
+
 STRIP_FROM_PATH        =
 
 # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of the
@@ -193,12 +203,16 @@ STRIP_FROM_PATH        =
 # specify the list of include paths that are normally passed to the compiler
 # using the -I flag.
 
+# není potřeba
+
 STRIP_FROM_INC_PATH    =
 
 # If the SHORT_NAMES tag is set to YES, doxygen will generate much shorter (but
 # less readable) file names. This can be useful is your file systems doesn't
 # support long names like on DOS, Mac, or CD-ROM.
 # The default value is: NO.
+
+# není potřeba
 
 SHORT_NAMES            = NO
 
@@ -209,7 +223,9 @@ SHORT_NAMES            = NO
 # description.)
 # The default value is: NO.
 
-JAVADOC_AUTOBRIEF      = NO
+# Ano, uvidíme jak se to využije
+
+JAVADOC_AUTOBRIEF      = YES
 
 # If the QT_AUTOBRIEF tag is set to YES then doxygen will interpret the first
 # line (until the first dot) of a Qt-style comment as the brief description. If
@@ -217,7 +233,9 @@ JAVADOC_AUTOBRIEF      = NO
 # requiring an explicit \brief command for a brief description.)
 # The default value is: NO.
 
-QT_AUTOBRIEF           = NO
+# stejně jako nahoře
+
+QT_AUTOBRIEF           = YES
 
 # The MULTILINE_CPP_IS_BRIEF tag can be set to YES to make doxygen treat a
 # multi-line C++ special comment block (i.e. a block of //! or /// comments) as
@@ -229,11 +247,15 @@ QT_AUTOBRIEF           = NO
 # not recognized any more.
 # The default value is: NO.
 
+# nám k ničemu
+
 MULTILINE_CPP_IS_BRIEF = NO
 
 # If the INHERIT_DOCS tag is set to YES then an undocumented member inherits the
 # documentation from any documented member that it re-implements.
 # The default value is: YES.
+
+# asi fajn věc
 
 INHERIT_DOCS           = YES
 
@@ -242,13 +264,17 @@ INHERIT_DOCS           = YES
 # of the file/class/namespace that contains it.
 # The default value is: NO.
 
+# není potřeba
+
 SEPARATE_MEMBER_PAGES  = NO
 
 # The TAB_SIZE tag can be used to set the number of spaces in a tab. Doxygen
 # uses this value to replace tabs by spaces in code fragments.
 # Minimum value: 1, maximum value: 16, default value: 4.
 
-TAB_SIZE               = 4
+# DVA !!
+
+TAB_SIZE               = 2
 
 # This tag can be used to specify a number of aliases that act as commands in
 # the documentation. An alias has the form:
@@ -260,11 +286,15 @@ TAB_SIZE               = 4
 # "Side Effects:". You can put \n's in the value part of an alias to insert
 # newlines.
 
+# je možné si s tím pohrát ----------------------------------------------------------------------
+
 ALIASES                =
 
 # This tag can be used to specify a number of word-keyword mappings (TCL only).
 # A mapping has the form "name=value". For example adding "class=itcl::class"
 # will allow you to use the command class in the itcl::class meaning.
+
+# nevyužijeme
 
 TCL_SUBST              =
 
@@ -273,6 +303,8 @@ TCL_SUBST              =
 # instance, some of the names that are used will be different. The list of all
 # members will be omitted, etc.
 # The default value is: NO.
+
+# C# != c
 
 OPTIMIZE_OUTPUT_FOR_C  = NO
 
@@ -457,7 +489,9 @@ LOOKUP_CACHE_SIZE      = 0
 # normally produced when WARNINGS is set to YES.
 # The default value is: NO.
 
-EXTRACT_ALL            = NO
+# opravuje se to pohodlněji v dokumentaaci než z varování
+
+EXTRACT_ALL            = YES
 
 # If the EXTRACT_PRIVATE tag is set to YES, all private members of a class will
 # be included in the documentation.
@@ -475,7 +509,9 @@ EXTRACT_PACKAGE        = NO
 # included in the documentation.
 # The default value is: NO.
 
-EXTRACT_STATIC         = NO
+# nevidím důvod proč ne
+
+EXTRACT_STATIC         = YES
 
 # If the EXTRACT_LOCAL_CLASSES tag is set to YES, classes (and structs) defined
 # locally in source files will be included in the documentation. If set to NO,
@@ -800,7 +836,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # messages should be written. If left blank the output is written to standard
 # error (stderr).
 
-WARN_LOGFILE           =
+WARN_LOGFILE           = ../Documentation/Warnlog.log
 
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
@@ -812,7 +848,12 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  =
+# Pouze validní soubory
+
+INPUT                  = "CalculatorProject\MathLib\CalcMath.cs" \
+                         "CalculatorProject\CalculatorUnit\Calculation.cs"
+                         #"CalculatorProject\GUI\MainWindows.cs"
+
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -885,6 +926,8 @@ FILE_PATTERNS          = *.c \
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
 # The default value is: NO.
+
+# asi ano
 
 RECURSIVE              = NO
 
