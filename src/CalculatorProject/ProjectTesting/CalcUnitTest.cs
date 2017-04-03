@@ -7,7 +7,7 @@
 * Naposledy upravil: Pavel Vosyka
 * Datum poslední změny: 3.04.2017
 *
-* Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation. 
+* Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation.
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Jaromír Franěk a Pavel Vosyka.
 *
 *****************************************************************/
@@ -28,7 +28,7 @@ namespace ProjectTesting
   {
 
     public Calculation calcunit;
-    public string argument = "";  
+    public string argument = "";
 
     public CalcUnitTest()
     {
