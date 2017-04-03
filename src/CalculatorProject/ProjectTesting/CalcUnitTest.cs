@@ -4,8 +4,8 @@
 * Soubor: CalcUnitTest.cs
 * Datum: 28.03.2017
 * Autor: Jaromír Franěk
-* Naposledy upravil: Jaromír Franěk
-* Datum poslední změny: 2.04.2017
+* Naposledy upravil: Pavel Vosyka
+* Datum poslední změny: 3.04.2017
 *
 * Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation. 
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Jaromír Franěk a Pavel Vosyka.
