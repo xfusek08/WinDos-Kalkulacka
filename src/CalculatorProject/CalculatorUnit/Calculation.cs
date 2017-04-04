@@ -214,6 +214,60 @@ namespace CalculatorUnit
       return expr.Replace(" ", "");
     }
 
+    private double EvaluateExpr(string expr)
+    {
+      string workStr = PreprocessExpr("(" + expr + ")");
+      Stack<double> operandStack = new Stack<double>();
+      Stack<char> operatorStack = new Stack<char>();
+
+      for (int i = 0; i < workStr.Length; i++)
+      {
+        if (Char.IsDigit(workStr[i]))
+        {
+          string subString = "";
+          while (Char.IsDigit(workStr[i])||workStr[i] == '.')
+          {
+            subString += workStr[i];
+            i++;
+            if (i >= workStr.Length)
+              break;
+          }
+          i--;
+          operandStack.Push(double.Parse(subString, System.Globalization.CultureInfo.InvariantCulture));
+        }
+        else if ("!L^@%*/-+(".Contains(workStr[i]))
+        {
+          while (
+            operatorStack.Count > 0 &&
+            GetOperatorPriority(operatorStack.Peek()) >=
+            GetOperatorPriority(workStr[i])
+          )
+          {
+            operandStack.Push(eval(operandStack.Pop(),
+              operandStack.Pop(), operatorStack.Pop()));
+          }
+          operatorStack.Push(workStr[i]);
+        }
+        else if (workStr[i] == ')')
+        {
+          while(operatorStack.Peek() != '(')
+          {
+            //vyhodnoceni - pravý operand je nad levým v zásobníku
+            operandStack.Push(eval(operandStack.Pop(),
+              operandStack.Pop(), operatorStack.Pop()));
+          }
+          operatorStack.Pop();
+        }
+      }
+      while(operatorStack.Count > 0)
+      {
+        operandStack.Push(eval(operandStack.Pop(),
+              operandStack.Pop(), operatorStack.Pop()));
+      }
+
+      return operandStack.Pop();//double.NaN;
+    }
+
     private int GetOperatorPriority(char oper)
     {
       switch (oper)
@@ -241,47 +295,41 @@ namespace CalculatorUnit
       }
     }
 
-    private double EvaluateExpr(string expr)
+    private bool isUnary(char op)
     {
-      string workStr = PreprocessExpr("(" + expr + ")");
-      Stack<double> operandStack = new Stack<double>();
-      Stack<char> operatorStack = new Stack<char>();
-
-      for (int i = 0; i < workStr.Length; i++)
+      switch (op)
       {
-        if (Char.IsDigit(workStr[i]))
-        {
-          string subString = "";
-          while (Char.IsDigit(workStr[i]))
-          {
-            subString += workStr[i];
-            i++;
-            if (i >= workStr.Length)
-              break;
-          }
-          i--;
-          operandStack.Push(double.Parse(subString));
-        }
-        else if ("!L^@%*/-+(".Contains(workStr[i]))
-        {
-          char operatorChar = operatorStack.Pop();
-          while (
-            operatorStack.Count > 0 &&
-            GetOperatorPriority(operatorChar) >= GetOperatorPriority(workStr[i])
-          )
-          {
-            double right = operandStack.Pop();
-            double left = operandStack.Pop();
-
-          }
-          operatorStack.Push(workStr[i]);
-        }
-        else if (workStr[i] == ')')
-        {
-          // do a lot
-        }
+        case '!':
+        case 'L':
+          return true;
+        case '/':
+        case '-':
+        case '+':
+        case '^':
+        case '@':
+        case '%':
+        case '*':
+          return false;
+        default:
+          throw new Exception();
       }
-      return operandStack.Pop();//double.NaN;
+    }
+
+    private double eval(double rightOp, double leftOp, char operand)
+    {
+      switch (operand)
+      {
+        case '+':
+          return leftOp + rightOp;
+        case '-':
+          return leftOp - rightOp;
+        case '*':
+          return leftOp * rightOp;
+        case '/':
+          return leftOp / rightOp;
+        default:
+          return double.NaN;
+      }
     }
   } // Calculation
 }
