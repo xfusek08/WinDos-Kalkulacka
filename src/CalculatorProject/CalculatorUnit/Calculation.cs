@@ -22,10 +22,64 @@ using System.Threading.Tasks;
 namespace CalculatorUnit
 {
   /// <summary>
+  /// Druhy chyb, které mohou nastat během výpočtu.
+  /// </summary>
+  public enum CalcErrorType
+  {
+    /// <summary>Žádná chyba</summary>
+    /// <description>Výpočet proběhl v pořádku.</description>
+    None,
+    /// <summary>Chyba definičního oboru fukce</summary>
+    /// <description>Ve výrazu jsou hodnoty operátorů, které nemají definovanou hodnotu v konkrétní funkci.</description>
+    FuncDomainError,
+    /// <summary>Během výpočtu došlo k přetečení.</summary>
+    /// <description>V případě, že se během výpočtů dostaneme za hranice rozsahu typu <b>double</b>.</description>
+    DataTypeOwerflow,
+    /// <summary>Chyba formátování výrazu</summary>
+    /// <description>
+    /// Chyba pokud vyhodnocovaný řetězec není platný matematický výraz.<br />
+    /// např.:
+    /// <list>
+    ///   <item>Neukončené závorky</item>
+    ///   <item>Operátory bez operandů</item>
+    ///   <item>neznámé znaky</item>
+    ///   <item>...</item>
+    /// </list>
+    /// </description>
+    ExprFormatError,
+    /// <summary>Ostatní neznámé chyby</summary>
+    UnknownError
+  }
+
+  /// <summary>
+  /// Typ číselné soustavy.
+  /// </summary>
+  public enum NumSystem
+  {
+    /// <summary>Desítková soustava</summary>
+    Dec,
+    /// <summary>Binární soustava</summary>
+    Bin,
+    /// <summary>Šestnáctková soustava</summary>
+    Hex,
+    /// <summary>Osmičková soustava</summary>
+    Oct
+  }
+
+  /// <summary>
   /// Třída objektů představující jeden výpočet.
   /// </summary>
   public class Calculation
   {
+    // privatni atributy
+    private double d_value;
+    private string s_expression;
+    private CalcErrorType t_calcError;
+    private string s_errMsg;
+    private string s_errSubExpr;
+
+    #region Properties
+
     /// <summary>
     /// Výsledek výpočtu
     /// </summary>
@@ -44,7 +98,10 @@ namespace CalculatorUnit
     ///   </item>
     /// </list>
     /// </description>
-    public double Value { get; }
+    public double Value
+    {
+      get { return d_value; }
+    }
 
     /// <summary>
     /// Matematický výraz
@@ -75,7 +132,16 @@ namespace CalculatorUnit
     ///   </item>
     /// </list>
     /// </description>
-    public string Expresion { get; set; }
+    public string Expression
+    {
+      get { return s_expression; }
+      set
+      {
+        // TODO: logika spracovani
+        s_expression = PreprocessExpr(value);
+        Console.WriteLine(s_expression);
+      }
+    }
 
     /// <summary>
     /// Typ chyby, která nastala během výpočtu
@@ -86,7 +152,10 @@ namespace CalculatorUnit
     ///   <item>Hodnota se aktualizuje při každém výpočtu.</item>
     /// </list>
     /// </description>
-    public CalcErrorType ErrorType { get; }
+    public CalcErrorType ErrorType
+    {
+      get { return t_calcError; }
+    }
 
     /// <summary>
     /// Stručný popis chyby pro uživatele
@@ -97,7 +166,11 @@ namespace CalculatorUnit
     ///   <item>Hodnota se mění pouze v případě chyby.</item>
     /// </list>
     /// </description>
-    public string ErrorMessage { get; }
+    public string ErrorMessage
+    {
+      get { return s_errMsg; }
+    }
+
     /// <summary>
     /// Stručný popis chyby pro uživatele
     /// </summary>
@@ -107,25 +180,38 @@ namespace CalculatorUnit
     ///   <item>Hodnota se mění pouze v případě chyby.</item>
     /// </list>
     /// </description>
-    public string ErrorSubExpr { get; }
+    public string ErrorSubExpr
+    {
+      get { return s_errSubExpr; }
+    }
 
+    #endregion
+
+    // verejne metody
+    /// <summary>
+    /// Konstruktor objektu
+    /// </summary>
+    /// <description>
+    /// Bere jako parametr výraz, který nastavý do vlastnosti <see cref="Expresion">
+    /// </description>
     public Calculation(string expr)
     {
+      d_value = double.NaN;
+      t_calcError = CalcErrorType.None;
+      s_errMsg = "";
+      s_errSubExpr = "";
+      s_expression = expr; 
     }
 
     public string GetAsString(NumSystem numbase, string format)
     {
       return "";
     }
-  }
 
-  public enum CalcErrorType
-  {
-    None, FuncDomainError, DataTypeOwerflow, ExprFormatError, UnknownError
-  }
-
-  public enum NumSystem
-  {
-    Dec, Bin, Hex, Oct
-  }
+    //privatni metody
+    private string PreprocessExpr(string as_expr)
+    {
+      return new string(as_expr.Where(c => !Char.IsWhiteSpace(c)).ToArray());
+    }
+  } // Calculation
 }
