@@ -12,7 +12,7 @@ namespace CalculatorUnit
   public class Calculation
   {
     public double Value { get; set; }
-    public string Expresion { get; set; }
+    public string Expression { get; set; }
     public string ErrorMessage { get; set; }
     public string ErrorSubExpr { get; set; }
     public CalcErrorType ErrorType { get; set; }
