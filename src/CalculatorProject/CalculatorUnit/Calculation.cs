@@ -139,7 +139,7 @@ namespace CalculatorUnit
       {
         // TODO: logika spracovani
         s_expression = PreprocessExpr(value);
-        Console.WriteLine(s_expression);
+        
       }
     }
 
@@ -209,9 +209,27 @@ namespace CalculatorUnit
     }
 
     //privatni metody
-    private string PreprocessExpr(string as_expr)
+    private string PreprocessExpr(string expr)
     {
-      return new string(as_expr.Where(c => !Char.IsWhiteSpace(c)).ToArray());
+      return expr.Replace(" ", "");
+    }
+
+    private double EvaluateExpr(string expr)
+    {
+      string workStr = PreprocessExpr(expr);
+      if (workStr[0] == "(")
+      {
+      }
+      for (int i = 0; i < workStr.Length; i++)
+      {
+        if (workStr[i] == '+')
+        {
+          return 
+            EvaluateExpr(workStr.Substring(0, i)) + 
+            EvaluateExpr(workStr.Substring(i, workStr.Length - 1));
+        }
+      }
+      return double.NaN;
     }
   } // Calculation
 }
