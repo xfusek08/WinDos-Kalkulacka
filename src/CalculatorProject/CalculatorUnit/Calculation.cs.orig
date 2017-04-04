@@ -5,7 +5,7 @@
 * Datum: 03.04.2017
 * Autor: Petr Fusek
 * Naposledy upravil: Petr Fusek
-* Datum poslední změny: 04.04.2017
+* Datum poslední změny: 03.04.2017
 *
 * Popis: Třída, která zapouztřuje celý jeden matematický výpočet do jednoho objektu.
 * Vyhodnocuje matematické výrazy pomocí vlastního zjednodušeného jazyka.
@@ -71,6 +71,7 @@ namespace CalculatorUnit
   /// </summary>
   public class Calculation
   {
+<<<<<<< HEAD
     // privatni atributy
     private double d_value;
     private string s_expression;
@@ -139,9 +140,16 @@ namespace CalculatorUnit
       {
         // TODO: logika spracovani
         s_expression = PreprocessExpr(value);
-        d_value = EvaluateExpr(value);
+        
       }
     }
+=======
+    public double Value { get; set; }
+    public string Expression { get; set; }
+    public string ErrorMessage { get; set; }
+    public string ErrorSubExpr { get; set; }
+    public CalcErrorType ErrorType { get; set; }
+>>>>>>> implementace-testování
 
     /// <summary>
     /// Typ chyby, která nastala během výpočtu
@@ -200,7 +208,7 @@ namespace CalculatorUnit
       t_calcError = CalcErrorType.None;
       s_errMsg = "";
       s_errSubExpr = "";
-      Expression = expr;
+      s_expression = expr; 
     }
 
     public string GetAsString(NumSystem numbase, string format)
@@ -214,74 +222,22 @@ namespace CalculatorUnit
       return expr.Replace(" ", "");
     }
 
-    private int GetOperatorPriority(char oper)
-    {
-      switch (oper)
-      {
-        case '!':
-          return 9;
-        case 'L':
-          return 8;
-        case '^':
-          return 7;
-        case '@':
-          return 6;
-        case '%':
-          return 5;
-        case '*':
-          return 4;
-        case '/':
-          return 3;
-        case '-':
-          return 2;
-        case '+':
-          return 1;
-        default:
-          return 0;
-      }
-    }
-
     private double EvaluateExpr(string expr)
     {
-      string workStr = PreprocessExpr("(" + expr + ")");
-      Stack<double> operandStack = new Stack<double>();
-      Stack<char> operatorStack = new Stack<char>();
-
+      string workStr = PreprocessExpr(expr);
+      if (workStr[0] == "(")
+      {
+      }
       for (int i = 0; i < workStr.Length; i++)
       {
-        if (Char.IsDigit(workStr[i]))
+        if (workStr[i] == '+')
         {
-          string subString = "";
-          while (Char.IsDigit(workStr[i]))
-          {
-            subString += workStr[i];
-            i++;
-            if (i >= workStr.Length)
-              break;
-          }
-          i--;
-          operandStack.Push(double.Parse(subString));
-        }
-        else if ("!L^@%*/-+(".Contains(workStr[i]))
-        {
-          char operatorChar = operatorStack.Pop();
-          while (
-            operatorStack.Count > 0 &&
-            GetOperatorPriority(operatorChar) >= GetOperatorPriority(workStr[i])
-          )
-          {
-            double right = operandStack.Pop();
-            double left = operandStack.Pop();
-
-          }
-          operatorStack.Push(workStr[i]);
-        }
-        else if (workStr[i] == ')')
-        {
-          // do a lot
+          return 
+            EvaluateExpr(workStr.Substring(0, i)) + 
+            EvaluateExpr(workStr.Substring(i, workStr.Length - 1));
         }
       }
-      return operandStack.Pop();//double.NaN;
+      return double.NaN;
     }
   } // Calculation
 }
