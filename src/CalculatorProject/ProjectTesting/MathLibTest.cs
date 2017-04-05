@@ -133,12 +133,14 @@ namespace ProjectTesting
       Assert.AreEqual(1, mathclass.Pow(2, 0));  // 2^0=1
       Assert.AreEqual(0, mathclass.Pow(0, 5));  // 0^5=0
       Assert.AreEqual(390625, mathclass.Pow(5, 8));  // 5^8=390625
-      Assert.AreEqual(-390625, mathclass.Pow(-5, 8));  // (-5)^8=-390625
+      Assert.AreEqual(390625, mathclass.Pow(-5, 8));  // (-5)^8=390625
+      Assert.AreEqual(-78125, mathclass.Pow(-5, 7));  // (-5)^7=-78125
       Assert.AreEqual(0.00000256, mathclass.Pow(5, -8));  // 5^(-8)=0.00000256
       Assert.AreEqual(0.04, mathclass.Pow(-5, -2));  // (-5)^(-2)=0.04
 
       Assert.AreEqual(1525.87890625, mathclass.Pow(2.5, 8));  // 2.5^8=1525.87890625
-      Assert.AreEqual(-1525.87890625, mathclass.Pow(-2.5, 8));  // (-2.5)^8=-1525.87890625
+      Assert.AreEqual(1525.87890625, mathclass.Pow(-2.5, 8));  // (-2.5)^8=1525.87890625
+      Assert.AreEqual(-610.3515625, mathclass.Pow(-2.5, 7));  // (-2.5)^7=-610.3515625
       Assert.AreEqual(0.00065536, mathclass.Pow(2.5, -8));  // 2.5^(-8)=0.00065536
       Assert.AreEqual(0.00065536, mathclass.Pow(-2.5, -8));  // (-2.5)^(-8)=0.00065536
 
@@ -154,10 +156,18 @@ namespace ProjectTesting
       Assert.AreEqual(double.PositiveInfinity, mathclass.Pow(double.PositiveInfinity, 2));  // INF^2=INF
       Assert.AreEqual(double.PositiveInfinity, mathclass.Pow(double.PositiveInfinity, 3));  // INF^3=INF
 
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Pow(double.NegativeInfinity, 2));
+      Assert.AreEqual(double.NegativeInfinity, mathclass.Pow(double.NegativeInfinity, 3));
+
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Pow(double.PositiveInfinity, double.PositiveInfinity));
+      Assert.IsTrue(double.IsNaN(mathclass.Pow(double.NegativeInfinity, double.NegativeInfinity)));
+      Assert.IsTrue(double.IsNaN(mathclass.Pow(double.PositiveInfinity, double.NegativeInfinity)));
+      Assert.IsTrue(double.IsNaN(mathclass.Pow(double.NegativeInfinity, double.PositiveInfinity)));
+
       //Testy maximálního rozsahu
-      Assert.IsTrue(double.IsNaN(mathclass.Pow(double.MaxValue, double.MaxValue)));
-      Assert.IsTrue(double.IsNaN(mathclass.Pow(double.MinValue, double.MaxValue)));
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Pow(double.MaxValue, double.MaxValue));
       Assert.IsTrue(double.IsNaN(mathclass.Pow(double.MaxValue, double.MinValue)));
+      Assert.IsTrue(double.IsNaN(mathclass.Pow(double.MinValue, double.MaxValue)));
       Assert.IsTrue(double.IsNaN(mathclass.Pow(double.MinValue, double.MinValue)));
 
       Assert.IsTrue(double.IsNaN(mathclass.Pow(5, double.NaN)));  // 5^NaN=NaN
@@ -173,17 +183,17 @@ namespace ProjectTesting
     [TestMethod]
     public void TestRoot()
     {
-      Assert.AreEqual(0, mathclass.Root(2, 0));
-      Assert.AreEqual(1.5341274046, Math.Round(mathclass.Root(7, 20)), 10);  //zaokrouhlená sedmá odmocnina z dvaceti
-      Assert.AreEqual(-19, mathclass.Root(3, -6859));
-      Assert.AreEqual(16, mathclass.Root(8, 4294967296));
+      Assert.AreEqual(0, mathclass.Root(0, 2));
+      Assert.AreEqual(1.5341274046, Math.Round(mathclass.Root(20, 7)), 10);  //zaokrouhlená sedmá odmocnina z dvaceti
+      Assert.AreEqual(-19, mathclass.Root(-6859, 3));
+      Assert.AreEqual(16, mathclass.Root(4294967296, 8));
 
-      Assert.AreEqual(double.PositiveInfinity, mathclass.Root(2, double.PositiveInfinity));
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Root(double.PositiveInfinity, 2));
 
-      Assert.IsTrue(double.IsNaN(mathclass.Root(2, -8)));
-      Assert.IsTrue(double.IsNaN(mathclass.Root(0, 8)));
-      Assert.IsTrue(double.IsNaN(mathclass.Root(-2, -4)));
-      Assert.IsTrue(double.IsNaN(mathclass.Root(-3, -4)));
+      Assert.IsTrue(double.IsNaN(mathclass.Root(-8, 2)));
+      Assert.IsTrue(double.IsNaN(mathclass.Root(8, 0)));
+      Assert.IsTrue(double.IsNaN(mathclass.Root(-4 , -2)));
+      Assert.IsTrue(double.IsNaN(mathclass.Root(-4 , -3)));
     }
 
     [TestMethod]
