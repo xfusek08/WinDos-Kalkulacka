@@ -59,13 +59,13 @@ namespace ProjectTesting
       Assert.AreEqual(double.PositiveInfinity, mathclass.Subtract(0, double.NegativeInfinity));
       Assert.AreEqual(double.NegativeInfinity, mathclass.Subtract(0, double.PositiveInfinity));
       Assert.IsTrue(double.IsNaN(mathclass.Subtract(double.NaN, 5)));
-      Assert.IsTrue(double.IsNaN(mathclass.Subtract(double.PositiveInfinity, double.NegativeInfinity)));
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Subtract(double.PositiveInfinity, double.NegativeInfinity)));
     }
 
     [TestMethod]
     public void TestDivide()
     {
-      Assert.AreEqual(5, mathclass.Divide(10, 5)); // 10/5=2
+      Assert.AreEqual(2, mathclass.Divide(10, 5)); // 10/5=2
       Assert.AreEqual(-8, mathclass.Divide(-80, 10)); // (-80)/10=-8
       Assert.AreEqual(-4, mathclass.Divide(40, -10)); // 40/(-10)=-4
       Assert.AreEqual(60, mathclass.Divide(-300, -5)); // (-300)/(-5)=60
@@ -107,7 +107,7 @@ namespace ProjectTesting
 
       Assert.AreEqual(350, mathclass.Multipy(14, 25));  // 14*25=350
       Assert.AreEqual(-112, mathclass.Multipy(-14, 8));  // (-14)*8=-112
-      Assert.AreEqual(-168, mathclass.Multipy(6, -42));  // 6*(-42)=-168
+      Assert.AreEqual(-252, mathclass.Multipy(6, -42));  // 6*(-42)=-252
       Assert.AreEqual(936, mathclass.Multipy(-52, -18));  // (-52)*(-18)=936
 
       Assert.AreEqual(double.PositiveInfinity, mathclass.Multipy(double.PositiveInfinity, double.PositiveInfinity));  // INF*INF=INF
