@@ -59,7 +59,7 @@ namespace ProjectTesting
       Assert.AreEqual(double.PositiveInfinity, mathclass.Subtract(0, double.NegativeInfinity));
       Assert.AreEqual(double.NegativeInfinity, mathclass.Subtract(0, double.PositiveInfinity));
       Assert.IsTrue(double.IsNaN(mathclass.Subtract(double.NaN, 5)));
-      Assert.AreEqual(double.PositiveInfinity, mathclass.Subtract(double.PositiveInfinity, double.NegativeInfinity)));
+      Assert.AreEqual(double.PositiveInfinity, mathclass.Subtract(double.PositiveInfinity, double.NegativeInfinity));
     }
 
     [TestMethod]
