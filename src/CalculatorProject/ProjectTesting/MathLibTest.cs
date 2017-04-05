@@ -90,8 +90,8 @@ namespace ProjectTesting
       Assert.AreEqual(0, mathclass.Divide(5, double.PositiveInfinity)); // 5/INF=0
 
       Assert.IsTrue(double.IsNaN(mathclass.Divide(0,0))); // 0/0=NaN
-      Assert.IsTrue(double.IsNaN(mathclass.Divide(0, 0))); // 0/INF=0
-      Assert.IsTrue(double.IsNaN(mathclass.Divide(0, double.PositiveInfinity))); // INF/0=NaN
+      Assert.AreEqual(0, mathclass.Divide(0, double.PositiveInfinity)); // 0/INF=0
+      Assert.IsTrue(double.IsNaN(mathclass.Divide(double.PositiveInfinity, 0))); // INF/0=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Divide(double.PositiveInfinity, double.PositiveInfinity)));  // INF/INF=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Divide(double.NaN, 5)));  //NaN/5=NaN
     }
@@ -118,10 +118,10 @@ namespace ProjectTesting
       Assert.AreEqual(double.PositiveInfinity, mathclass.Multipy(-3, double.NegativeInfinity));  // (-3)*(-INF)=INF
 
       //Testy maximálního rozsahu
-      Assert.IsTrue(double.IsNaN(mathclass.Multipy(double.MaxValue, double.MaxValue)));
-      Assert.IsTrue(double.IsNaN(mathclass.Multipy(double.MinValue, double.MaxValue)));
-      Assert.IsTrue(double.IsNaN(mathclass.Multipy(double.MaxValue, double.MinValue)));
-      Assert.IsTrue(double.IsNaN(mathclass.Multipy(double.MinValue, double.MinValue)));
+      Assert.IsTrue(double.IsPositiveInfinity(mathclass.Multipy(double.MaxValue, double.MaxValue)));
+      Assert.IsTrue(double.IsNegativeInfinity(mathclass.Multipy(double.MinValue, double.MaxValue)));
+      Assert.IsTrue(double.IsNegativeInfinity(mathclass.Multipy(double.MaxValue, double.MinValue)));
+      Assert.IsTrue(double.IsPositiveInfinity(mathclass.Multipy(double.MinValue, double.MinValue)));
 
       Assert.IsTrue(double.IsNaN(mathclass.Multipy(double.PositiveInfinity, 0))); // INF*0=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Multipy(double.NaN, 5)));  //NaN*5=NaN
