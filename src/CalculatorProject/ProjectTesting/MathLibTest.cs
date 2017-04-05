@@ -90,8 +90,8 @@ namespace ProjectTesting
       Assert.AreEqual(0, mathclass.Divide(5, double.PositiveInfinity)); // 5/INF=0
 
       Assert.IsTrue(double.IsNaN(mathclass.Divide(0,0))); // 0/0=NaN
-      Assert.IsTrue(double.IsNaN(mathclass.Divide(0, 0))); // 0/INF=0
-      Assert.IsTrue(double.IsNaN(mathclass.Divide(0, double.PositiveInfinity))); // INF/0=NaN
+      Assert.AreEqual(0, mathclass.Divide(0, double.PositiveInfinity)); // 0/INF=0
+      Assert.IsTrue(double.IsNaN(mathclass.Divide(double.PositiveInfinity, 0))); // INF/0=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Divide(double.PositiveInfinity, double.PositiveInfinity)));  // INF/INF=NaN
       Assert.IsTrue(double.IsNaN(mathclass.Divide(double.NaN, 5)));  //NaN/5=NaN
     }
