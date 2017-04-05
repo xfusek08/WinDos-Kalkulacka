@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -137,9 +138,11 @@ namespace CalculatorUnit
       get { return s_expression; }
       set
       {
-        // TODO: logika spracovani
         s_expression = PreprocessExpr(value);
-        d_value = EvaluateExpr(value);
+        if (value == "")
+          d_value = double.NaN;
+        else
+          d_value = EvaluateExpr(value);
       }
     }
 
@@ -216,16 +219,25 @@ namespace CalculatorUnit
 
     private double EvaluateExpr(string expr)
     {
-      string workStr = PreprocessExpr("(" + expr + ")");
+      string workStr = PreprocessExpr("(" + expr + ")"); // zavorkujeme aby se spravne zpetne vyhodnotil cely vyraz
+
+      // zasobniky
       Stack<double> operandStack = new Stack<double>();
       Stack<char> operatorStack = new Stack<char>();
 
+      // zpracovavame vyraz po znacich
       for (int i = 0; i < workStr.Length; i++)
       {
-        if (Char.IsDigit(workStr[i]))
+
+        // Zpracovani operandu
+        if (Char.IsDigit(workStr[i]) ||                                   // pokud je cislice
+           (workStr[i] == '-' && i == 0) ||                               // nebo '-' a je to prvni znak v retezci
+           (i > 0 && workStr[i] == '-' && !Char.IsDigit(workStr[i - 1]))) // nebo '-' a predchozi znak neni cislice (operand)
         {
-          string subString = "";
-          while (Char.IsDigit(workStr[i])||workStr[i] == '.')
+          string subString = workStr[i].ToString();
+          double valtmp = double.NaN;
+          i++;
+          while (Char.IsDigit(workStr[i]) || workStr[i] == '.')
           {
             subString += workStr[i];
             i++;
@@ -233,24 +245,43 @@ namespace CalculatorUnit
               break;
           }
           i--;
-          operandStack.Push(double.Parse(subString, System.Globalization.CultureInfo.InvariantCulture));
-        }
-        else if ("!L^@%*/-+(".Contains(workStr[i]))
+          if (!double.TryParse(subString, NumberStyles.Any, CultureInfo.InvariantCulture, out valtmp))
+          {
+            // neni platny double
+            // TODO: specifikace chyby nebo exeption ... 
+            return double.NaN;
+          }
+          else
+            operandStack.Push(valtmp);
+
+        continue;
+        } // Zpracovani operandu
+
+        // zpracovavame operator
+        if ("!L^@%*/-+".Contains(workStr[i]))
         {
+          // pokud je operator mensi priority nez posledni operator na zasobniku, provedem predchozi operaci
           while (
             operatorStack.Count > 0 &&
-            GetOperatorPriority(operatorStack.Peek()) >=
-            GetOperatorPriority(workStr[i])
+            GetOperatorPriority(operatorStack.Peek()) >= GetOperatorPriority(workStr[i])
           )
           {
             operandStack.Push(eval(operandStack.Pop(),
               operandStack.Pop(), operatorStack.Pop()));
           }
+          // ulozime aktualni operand
+          operatorStack.Push(workStr[i]);
+          continue;
+        }
+        // zavorky oteviraci se ukladaji pro skonceni vyhodnoceni podvyrazu
+        else if (workStr[i] == '(')
+        {
           operatorStack.Push(workStr[i]);
         }
+        // uzaviraci zavorka znamena vyhodnot vsechno zpetne az do oteviraci zavorky
         else if (workStr[i] == ')')
         {
-          while(operatorStack.Peek() != '(')
+          while (operatorStack.Peek() != '(')
           {
             //vyhodnoceni - pravý operand je nad levým v zásobníku
             operandStack.Push(eval(operandStack.Pop(),
@@ -258,13 +289,10 @@ namespace CalculatorUnit
           }
           operatorStack.Pop();
         }
-      }
-      while(operatorStack.Count > 0)
-      {
-        operandStack.Push(eval(operandStack.Pop(),
-              operandStack.Pop(), operatorStack.Pop()));
-      }
+      }                                                                             
+      // TODO: zkontrolovat chyby
 
+      // na zasobniku by mela zustat jenom jedna hodnota
       return operandStack.Pop();//double.NaN;
     }
 
