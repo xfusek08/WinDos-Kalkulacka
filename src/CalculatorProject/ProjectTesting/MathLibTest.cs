@@ -16,6 +16,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Globalization;
 using MathLib;
 
 namespace ProjectTesting
@@ -206,7 +207,7 @@ namespace ProjectTesting
       Assert.AreEqual(3628800.0, mathclass.Fact(10)); // 10! = 3628800
       Assert.AreEqual(double.PositiveInfinity, mathclass.Fact(Byte.MaxValue)); // 255! > double.MaxValue
       Assert.AreEqual(double.PositiveInfinity, mathclass.Fact(171)); // 171! > double.MaxValue
-      Assert.AreEqual("7.257E+306", mathclass.Fact(170).ToString("E3")); // 170! = "7.257E+306"
+      Assert.AreEqual("7.257E+306", mathclass.Fact(170).ToString("E3", CultureInfo.InvariantCulture)); // 170! = "7.257E+306"
     }
 
     [TestMethod]
