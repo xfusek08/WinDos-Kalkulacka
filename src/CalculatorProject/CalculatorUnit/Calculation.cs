@@ -280,7 +280,7 @@ namespace CalculatorUnit
             // pokud je na zacatku retezce
             if (i == 0)
               workStr[i] = 'n';
-            else if (!Char.IsDigit(workStr[i - 1]) && workStr[i - 1] != '!')
+            else if (!Char.IsDigit(workStr[i - 1]) && !"!)".Contains(workStr[i - 1]))
             {
               // vyssi priorita pouze v pripadech kdy se jedna o zaporny druhy operand tj. 2^-2, 27@-3
               if ("@^%".Contains(workStr[i - 1]))
