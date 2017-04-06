@@ -12,6 +12,7 @@
 *
 *****************************************************************/
 
+using MathLib;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -78,6 +79,7 @@ namespace CalculatorUnit
     private CalcErrorType t_calcError;
     private string s_errMsg;
     private string s_errSubExpr;
+    private CalcMath o_mathLib;
 
     #region Properties
 
@@ -203,6 +205,7 @@ namespace CalculatorUnit
       t_calcError = CalcErrorType.None;
       s_errMsg = "";
       s_errSubExpr = "";
+      o_mathLib = new CalcMath();
       Expression = expr;
     }
 
@@ -214,12 +217,16 @@ namespace CalculatorUnit
     //privatni metody
     private string PreprocessExpr(string expr)
     {
-      return expr.Replace(" ", "");
+      string resStr = expr.Replace(" ", "");
+
+
+            
+      return "(" + resStr + ")";
     }
 
     private double EvaluateExpr(string expr)
     {
-      string workStr = PreprocessExpr("(" + expr + ")"); // zavorkujeme aby se spravne zpetne vyhodnotil cely vyraz
+      Char[] workStr = PreprocessExpr(expr).ToArray(); // zavorkujeme aby se spravne zpetne vyhodnotil cely vyraz
 
       // zasobniky
       Stack<double> operandStack = new Stack<double>();
@@ -230,9 +237,11 @@ namespace CalculatorUnit
       {
 
         // Zpracovani operandu
-        if (Char.IsDigit(workStr[i]) ||                                   // pokud je cislice
-           (workStr[i] == '-' && i == 0) ||                               // nebo '-' a je to prvni znak v retezci
-           (i > 0 && workStr[i] == '-' && !Char.IsDigit(workStr[i - 1]))) // nebo '-' a predchozi znak neni cislice (operand)
+        if (
+          Char.IsDigit(workStr[i]) //||                                    // pokud je cislice
+          //(workStr[i] == '-' && i == 0) ||                               // nebo '-' a je to prvni znak v retezci
+          //(i > 0 && workStr[i] == '-' && !Char.IsDigit(workStr[i - 1]))  // nebo '-' a predchozi znak neni cislice (operand)
+        ) 
         {
           string subString = workStr[i].ToString();
           double valtmp = double.NaN;
@@ -260,14 +269,37 @@ namespace CalculatorUnit
         // zpracovavame operator
         if ("!L^@%*/-+".Contains(workStr[i]))
         {
+          // minus v nekterych pripadech znamena unarni negaci
+          if (workStr[i] == '-')             
+          {
+            /*
+            negace ma ruznou prioritu z ohledem na pozici ve vyrazu
+            N - vyssi priorita pred @^%
+            n nissi priorita pred *-
+            */
+            // pokud je na zacatku retezce
+            if (i == 0)
+              workStr[i] = 'n';
+            else if (!Char.IsDigit(workStr[i - 1]) && workStr[i - 1] != '!')
+            {
+              // vyssi priorita pouze v pripadech kdy se jedna o zaporny druhy operand tj. 2^-2, 27@-3
+              if ("@^%".Contains(workStr[i - 1]))
+                workStr[i] = 'N';
+              else
+                workStr[i] = 'n';
+            }                   
+          }
           // pokud je operator mensi priority nez posledni operator na zasobniku, provedem predchozi operaci
           while (
             operatorStack.Count > 0 &&
             GetOperatorPriority(operatorStack.Peek()) >= GetOperatorPriority(workStr[i])
           )
           {
-            operandStack.Push(eval(operandStack.Pop(),
-              operandStack.Pop(), operatorStack.Pop()));
+            //vyhodnoceni - pravý operand je nad levým v zásobníku
+            if (IsUnary(operatorStack.Peek())) // pop je jeden operand
+              operandStack.Push(eval(operandStack.Pop(), 0, operatorStack.Pop()));
+            else
+              operandStack.Push(eval(operandStack.Pop(), operandStack.Pop(), operatorStack.Pop()));
           }
           // ulozime aktualni operand
           operatorStack.Push(workStr[i]);
@@ -284,8 +316,10 @@ namespace CalculatorUnit
           while (operatorStack.Peek() != '(')
           {
             //vyhodnoceni - pravý operand je nad levým v zásobníku
-            operandStack.Push(eval(operandStack.Pop(),
-              operandStack.Pop(), operatorStack.Pop()));
+            if (IsUnary(operatorStack.Peek())) // pop je jeden operand
+              operandStack.Push(eval(operandStack.Pop(), 0, operatorStack.Pop()));
+            else
+              operandStack.Push(eval(operandStack.Pop(), operandStack.Pop(), operatorStack.Pop()));
           }
           operatorStack.Pop();
         }
@@ -301,14 +335,18 @@ namespace CalculatorUnit
       switch (oper)
       {
         case '!':
-          return 9;
+          return 11;
         case 'L':
-          return 8;
+          return 10;
+        case 'N':
+          return 9;
         case '^':
-          return 7;
+          return 8;
         case '@':
-          return 6;
+          return 7;
         case '%':
+          return 6;
+        case 'n':
           return 5;
         case '*':
           return 4;
@@ -323,12 +361,14 @@ namespace CalculatorUnit
       }
     }
 
-    private bool isUnary(char op)
+    private bool IsUnary(char op)
     {
       switch (op)
       {
         case '!':
         case 'L':
+        case 'n':
+        case 'N':
           return true;
         case '/':
         case '-':
@@ -348,13 +388,33 @@ namespace CalculatorUnit
       switch (operand)
       {
         case '+':
-          return leftOp + rightOp;
+          return o_mathLib.Add(leftOp, rightOp);
         case '-':
-          return leftOp - rightOp;
+          return o_mathLib.Subtract(leftOp, rightOp);
         case '*':
-          return leftOp * rightOp;
+          return o_mathLib.Multipy(leftOp, rightOp);
         case '/':
-          return leftOp / rightOp;
+          return o_mathLib.Divide(leftOp, rightOp);
+        case '^':
+          return o_mathLib.Pow(leftOp, rightOp);
+        case '@':
+          return o_mathLib.Root(leftOp, rightOp);
+        case '%':
+          return o_mathLib.Modulo(leftOp, rightOp);
+        case 'L':
+          return o_mathLib.Log(rightOp);
+        case 'n':
+        case 'N':
+          return o_mathLib.Multipy(-1, rightOp);
+        case '!':
+          byte byteVal = 0;
+          try { byteVal = Convert.ToByte(rightOp); }
+          catch
+          {
+            // TODO: Chyba
+            return double.NaN;
+          }
+          return o_mathLib.Fact(byteVal);
         default:
           return double.NaN;
       }
