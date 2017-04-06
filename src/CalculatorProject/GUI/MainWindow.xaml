@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="480" Background="#FF303030" MinHeight="550" MinWidth="300">
+        Title="MainWindow" Height="600" Width="580" Background="#FF303030" MinHeight="550" MinWidth="300">
   <Grid Margin="0">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*"/>
@@ -24,7 +24,7 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Button x:Name="button1" Content="log()" Grid.Row="3" Grid.Column="1" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnLog" Content="log(x)" Grid.Row="3" Grid.Column="1" Foreground="White" BorderThickness="0.1" FontSize="20">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2"/>
@@ -45,13 +45,13 @@
         </Style>
       </Button.Style>
     </Button>
-    <TextBox x:Name="textBox" Grid.Row="1" TextWrapping="Wrap" Text="0" Grid.ColumnSpan="5" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White"/>
-    <RadioButton x:Name="radioButton" Content="Hex" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Foreground="White"/>
-    <RadioButton x:Name="radioButton1" Content="Dex" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Foreground="White"/>
-    <RadioButton x:Name="radioButton2" Content="Bin" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="3" Foreground="White"/>
-    <RadioButton x:Name="radioButton3" Content="Oct" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="4" Foreground="White"/>
+    <TextBox x:Name="tbCalculation" Grid.Row="1" TextWrapping="Wrap" Text="0" Grid.ColumnSpan="5" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White"/>
+    <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Foreground="White" IsChecked="True"/>
+    <RadioButton x:Name="rbBin" Content="BIN" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Foreground="White"/>
+    <RadioButton x:Name="rbHex" Content="HEX" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="3" Foreground="White"/>
+    <RadioButton x:Name="rbOct" Content="OCT" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="4" Foreground="White"/>
     <Label x:Name="label" Content="Režim :" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Foreground="White" Padding="0"/>
-    <Button x:Name="button3" Content="DEL" Grid.Row="3" Grid.Column="3" Foreground="White" BorderThickness="0.1" FontSize="22">
+    <Button x:Name="btnDel" Content="DEL" Grid.Row="3" Grid.Column="3" Foreground="White" BorderThickness="0.1" FontSize="22">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFFC107"/>
@@ -72,7 +72,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button4" Content="AC" Grid.Row="3" Grid.Column="4" Foreground="White" BorderThickness="0.1" FontSize="22">
+    <Button x:Name="btnAc" Content="AC" Grid.Row="3" Grid.Column="4" Foreground="White" BorderThickness="0.1" FontSize="22">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFFC107"/>
@@ -93,7 +93,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button6" Content="8" Grid.Row="4" Grid.Column="1" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnEight" Content="8" Grid.Row="4" Grid.Column="1" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -114,7 +114,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button7" Content="9" Grid.Column="2" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnNine" Content="9" Grid.Column="2" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -135,7 +135,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button8" Content="*" Grid.Column="3" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnMultiply" Content="*" Grid.Column="3" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="20">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -156,7 +156,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button9" Content="/" Grid.Column="4" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnDivide" Content="/" Grid.Column="4" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="20">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -177,7 +177,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button10" Content="4" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnFour" Content="4" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -198,7 +198,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button11" Content="5" Grid.Column="1" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnFive" Content="5" Grid.Column="1" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -219,7 +219,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button12" Content="6" Grid.Column="2" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnSix" Content="6" Grid.Column="2" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -240,7 +240,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button13" Content="+" Grid.Column="3" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnPlus" Content="+" Grid.Column="3" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="20">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -261,7 +261,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button14" Content="-" Grid.Column="4" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnMinus" Content="-" Grid.Column="4" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="20">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -282,7 +282,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button15" Content="1" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnOne" Content="1" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -303,7 +303,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button16" Content="2" Grid.Column="1" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnTwo" Content="2" Grid.Column="1" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -324,7 +324,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button17" Content="3" Grid.Column="2" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnThree" Content="3" Grid.Column="2" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -345,7 +345,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button18" Content="moc" Grid.Column="3" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnPow" Content="x" Grid.Column="3" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="20" MouseEnter="btnPow_MouseEnter" MouseLeave="btnPow_MouseLeave">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -366,7 +366,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button20" Content="0" Grid.Row="7" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnZero" Content="0" Grid.Row="7" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -387,7 +387,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button21" Content="," Grid.Column="1" Grid.Row="7" BorderThickness="0.1" Foreground="White" FontSize="24">
+    <Button x:Name="btnDot" Content="," Grid.Column="1" Grid.Row="7" BorderThickness="0.1" Foreground="White" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -408,10 +408,10 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button22" Content="%" Grid.Column="2" Grid.Row="3" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnMod" Content="%" Grid.Column="2" Grid.Row="3" Foreground="White" BorderThickness="0.1" FontSize="20">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
-          <Setter Property="Background" Value="#FF1976D2"/>
+          <Setter Property="Background" Value="#FF1976D2" />
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -429,7 +429,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button23" Content="odmoc" Grid.Column="3" Grid.Row="7" Foreground="White" BorderThickness="0.1" FontSize="20">
+    <Button x:Name="btnRoot" Content="&#8730;a" Grid.Column="4" Grid.Row="6" Foreground="White" Background="#FF3F51B5" BorderThickness="0.1" FontSize="20" MouseEnter="btnRoot_MouseEnter" MouseLeave="btnRoot_MouseLeave">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -450,7 +450,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button24" Content="=" Grid.Column="4" Grid.Row="6" Grid.RowSpan="2" Foreground="White" BorderThickness="0.1" FontSize="36">
+    <Button x:Name="btnCount" Content="=" Grid.Column="4" Grid.Row="7" Foreground="White" BorderThickness="0.1" FontSize="36">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFF9800"/>
@@ -471,7 +471,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="button5" Content="7" Grid.Column="0" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnSeven" Content="7" Grid.Column="0" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="24">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -492,7 +492,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="fact" Content="n!" Grid.Column="0" Grid.Row="3" BorderThickness="0.1" FontSize="20" Foreground="White">
+    <Button x:Name="btnFact" Content="n!" Grid.Column="0" Grid.Row="3" BorderThickness="0.1" FontSize="20" Foreground="White">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2"/>
@@ -513,7 +513,77 @@
         </Style>
       </Button.Style>
     </Button>
-      <Rectangle Fill="#FF212121" Stroke="Black" Grid.ColumnSpan="5"/>
-    <Rectangle Fill="#FF0D47A1" Grid.Row="7" Stroke="Black" StrokeThickness="0" Grid.Column="2"/>
+    <Rectangle Fill="#FF212121" Stroke="Black" Grid.ColumnSpan="5"/>
+    <Button x:Name="btnLeftBracket" Content="(" Grid.Row="7" BorderThickness="0.1" Foreground="White" FontSize="24" Grid.Column="2">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
+    <Button x:Name="btnRightBracket" Content=")" Grid.Row="7" BorderThickness="0.1" Foreground="White" FontSize="24" Grid.Column="3">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
+    <Grid x:Name="grdRootBtn" Grid.Row="6" Grid.Column="4" MouseEnter="grdRootBtn_MouseEnter" MouseLeave="grdRootBtn_MouseLeave">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.5*"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="0.5*"/>
+      </Grid.RowDefinitions>
+      <Label x:Name="lblRootBtn" Content="x    &#x0a;" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White" IsEnabled="False"/>
+      <!--<TextBlock x:Name="lblRootBtn" Panel.ZIndex="200" Text="x    &#x0a;" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" MouseEnter="lblRootBtn_MouseEnter" MouseMove="lblRootBtn_MouseMove"/>-->
+    </Grid>
+
+    <Grid x:Name="grdPowBtn" Grid.Row="6" Grid.Column="3" MouseEnter="grdPowBtn_MouseEnter" MouseLeave="grdPowBtn_MouseLeave">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.5*"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="0.5*"/>
+      </Grid.RowDefinitions>
+      <Label x:Name="lblPowBtn" Content="     y&#x0a;" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White" IsEnabled="False"/>
+      <!--<TextBlock x:Name="lblRootBtn" Panel.ZIndex="200" Text="x    &#x0a;" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" MouseEnter="lblRootBtn_MouseEnter" MouseMove="lblRootBtn_MouseMove"/>-->
+    </Grid>
   </Grid>
 </Window>
