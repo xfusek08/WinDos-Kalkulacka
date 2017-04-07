@@ -5,7 +5,7 @@
 * Datum: 28.03.2017
 * Autor: Jaromír Franěk
 * Naposledy upravil: Petr Fusek
-* Datum poslední změny: 06.04.2017
+* Datum poslední změny: 07.04.2017
 *
 * Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation.
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Jaromír Franěk a Pavel Vosyka.
@@ -80,9 +80,9 @@ namespace ProjectTesting
       Assert.AreEqual(6, calcunit.Value, PRECISION);
       calcunit.Expression = "5!";
       Assert.AreEqual(120, calcunit.Value, PRECISION);
-      calcunit.Expression = "5!";
+      calcunit.Expression = "-5!";
       Assert.AreEqual(-120, calcunit.Value, PRECISION);
-      calcunit.Expression = "l100";
+      calcunit.Expression = "L100";
       Assert.AreEqual(2, calcunit.Value, PRECISION);
       calcunit.Expression = "5^3";
       Assert.AreEqual(125, calcunit.Value, PRECISION);
@@ -113,7 +113,7 @@ namespace ProjectTesting
       calcunit.Expression = "-5%3";
       Assert.AreEqual(-2, calcunit.Value, PRECISION);
       calcunit.Expression = "5%-3";
-      Assert.AreEqual(-2, calcunit.Value, PRECISION);
+      Assert.AreEqual(2, calcunit.Value, PRECISION);
 
     }
 
@@ -127,11 +127,11 @@ namespace ProjectTesting
       calcunit.Expression = "(4 + 8) / 3";
       Assert.AreEqual(4, calcunit.Value, PRECISION);
       calcunit.Expression = "12 / 3 + 4";
-      Assert.AreEqual(4, calcunit.Value, PRECISION);
+      Assert.AreEqual(8, calcunit.Value, PRECISION);
       calcunit.Expression = "12 / (2 + 4)";
-      Assert.AreEqual(6, calcunit.Value, PRECISION);
+      Assert.AreEqual(2, calcunit.Value, PRECISION);
       calcunit.Expression = "-12 / (2 + 4)";
-      Assert.AreEqual(-6, calcunit.Value, PRECISION);
+      Assert.AreEqual(-2, calcunit.Value, PRECISION);
       calcunit.Expression = "8 - 2 * 3";
       Assert.AreEqual(2, calcunit.Value, PRECISION);
       calcunit.Expression = "(8 - 2) * 3";
@@ -182,8 +182,8 @@ namespace ProjectTesting
       calcunit.Expression = "(-16 / (5 - 1)) - ((30 - 3)@(6 - 3) * -1)";
       Assert.AreEqual(-1, calcunit.Value, PRECISION);
       calcunit.Expression = "((7-3)! / (5 + 1)) - ((30 - 3)@(6 - 3) * -1)";
-      Assert.AreEqual(-1, calcunit.Value, PRECISION);
-      calcunit.Expression = "((7-3)! / (5 + 1)) - ((30 - (L(200 - 50 * 2) + 1))@(6 - 3) * -1)";
+      Assert.AreEqual(7, calcunit.Value, PRECISION);
+      calcunit.Expression = "(-(7-3)! / (5 + 1)) - ((30 - (L(200 - 50 * 2) + 1))@(6 - 3) * -1)";
       Assert.AreEqual(-1, calcunit.Value, PRECISION);
     }
 
@@ -192,34 +192,34 @@ namespace ProjectTesting
     {
       calcunit.Expression = "4 + 1";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "8 - 3";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "8 / 3";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "8 * 3";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "8 ^ 3";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "16 @ 2";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "8 * 3";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "8!";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "15 % 5";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "L10";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
-      Assert.AreEqual(double.NaN, calcunit.Value);
+      Assert.IsFalse(double.IsNaN(calcunit.Value));
     }
 
     [TestMethod]
