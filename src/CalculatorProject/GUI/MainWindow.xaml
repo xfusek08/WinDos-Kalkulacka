@@ -45,7 +45,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <TextBox x:Name="tbCalculation" Grid.Row="1" TextWrapping="Wrap" Text="0" Grid.ColumnSpan="5" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White" IsReadOnly="True"/>
+    <TextBox x:Name="tbExpression" Grid.Row="1" TextWrapping="Wrap" Text="0" Grid.ColumnSpan="5" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White" IsReadOnly="True"/>
     <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Foreground="White" IsChecked="True"/>
     <RadioButton x:Name="rbBin" Content="BIN" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Foreground="White"/>
     <RadioButton x:Name="rbHex" Content="HEX" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="3" Foreground="White"/>
