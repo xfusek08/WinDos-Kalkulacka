@@ -2,8 +2,8 @@
 * Název projektu: Výpočetní jednotka určená pro vyhodnocování výrazů
 * Balíček: CalculatorUnit
 * Soubor: Calculation.cs
-* Datum: 03.04.2017
-* Autor: Petr Fusek
+* Datum: 03.04.2017       
+* Autor: Petr Fusek, Pavel Vosyka
 * Naposledy upravil: Pavel Vosyka
 * Datum poslední změny: 07.04.2017
 *
@@ -12,15 +12,28 @@
 *
 *****************************************************************/
 
-using MathLib;
+/**
+ * @brief Modul výpočetní jednotky
+ * @file Calculation.cs
+ * @author Petr Fusek
+ * @author Pavel Vosyka
+ * @date 07.04.2017
+ * @version 0.0
+ */
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MathLib;
 
-
+/**
+ * @brief Modul výpočetní jednotky
+ * @package CalculatorUnit
+ * Modul poskytuje třídu Calculation, která představuje zapouzdření výpočtu matematického výrazu.
+ * Matematické výrazy jsou předávány ve vlastním zjednodušeném výrazovém jazyce, který zahrnuje jen nutné vlastnosti Kalkulačky.
+ * @author Petr Fusek
+ * @author Pavel Vosyka
+ */
 namespace CalculatorUnit
 {
   /// <summary>
@@ -71,14 +84,38 @@ namespace CalculatorUnit
   /// <summary>
   /// Třída objektů představující jeden výpočet.
   /// </summary>
+  /// <description>
+  /// <b>Výrazy</b>
+  ///
+  /// Výrazy jsou klasické řetězce znaků, představující matematický zápis. rozšířený o
+  /// dodatečné operátory, představující další funkce kalkulačky. <br/>
+  /// Příklad složitějšího výrazu:
+  /// \code
+  /// (-(7-3)!/(5+1))-((30-(L(200-50*2)+1))@(6-3)*-1)
+  /// \endcode
+  /// Všechny mezery ve výrazu jsou ignorovány.
+  ///
+  /// <b>Podporováné operátory</b>
+  /// | Operátor | Výraz | Význam | Odpovídající funkce z CalcMath|
+  /// | :---: | :---: | --- | --- |
+  /// | ``!`` | ``x!`` | faktorial x |Fact()|
+  /// | ``L`` | ``Lx`` | logaritmus z x při základu 10 |Log()|
+  /// | ``^`` | ``x^y``| x umocněné na y |Pow()|
+  /// | ``@`` | ``x@y``| y-tá odmocnina z x |Root()|
+  /// | ``%`` | ``x%y``| x modulo y |Modulo()|
+  /// | ``*`` | ``x*y``| x krát y |Multipy()|
+  /// | ``/`` | ``x/y``| x děleno y |Divide()|
+  /// | ``-`` | ``x-y``| x mínus y |Subtract()|
+  /// | ``+`` | ``x+y``| x plus y |Add()|
+  ///
+  /// viz. <see cref="MathLib.CalcMath"/>
+  /// </description>
   public class Calculation
   {
     // privatni atributy
     private double d_value;
     private string s_expression;
     private CalcErrorType t_calcError;
-    private string s_errMsg;
-    private string s_errSubExpr;
     private CalcMath o_mathLib;
     /// <summary>
     /// Konstanta nastavuje maximální počet desetinných míst pro výstup z metody GetAsString().
@@ -96,12 +133,7 @@ namespace CalculatorUnit
     ///   <item>Read-only vlastnost.</item>
     ///   <item>Hodnota se mění pouze v případě změny výrazu a to bezprostředně.</item>
     ///   <item>
-    ///     Hodnota <b>NaN</b> znamená chybu během výpočtu a její specifikace jsou ve vlastnostech:
-    ///     <list>
-    ///       <item><see cref="ErrorType"/> - typ chyby</item>
-    ///       <item><see cref="ErrorSubExpr"/> - část výrazu, ve kterém nastala chyba</item>
-    ///       <item><see cref="ErrorMessage"/> - stručný popis chyby pro uivatele</item>
-    ///     </list>
+    ///     Hodnota <b>NaN</b> znamená chybu během výpočtu a její typ je uložen v <see cref="ErrorType"/>
     ///   </item>
     /// </list>
     /// </description>
@@ -116,10 +148,6 @@ namespace CalculatorUnit
     /// <description>
     /// Atribut objektu udržující řetězec odpovídající matematickému výrazu, který třída vyhodnocuje.
     ///
-    /// Je napsaný v běžném zápisu orzšířeném o operace z matematické knihovny.
-    /// \code ((7-3)!/(5+1))-((30-3)@(6-3)*-1) \endcode
-    /// příklad vis. <a href="https://github.com/xfusek08/IVS-Kalkulacka/wiki/Architektonick%C3%BD-n%C3%A1vrh#form%C3%A1t-matematick%C3%A9ho-%C5%99et%C4%9Bzce">projektová wiki</a>
-    ///
     /// <b>Chování:</b>
     /// <list>
     ///   <item><b>get</b> - vrátí text výrazu</item>
@@ -131,8 +159,6 @@ namespace CalculatorUnit
     ///         <list>
     ///           <item><see cref="Value"/></item>
     ///           <item><see cref="ErrorType"/></item>
-    ///           <item><see cref="ErrorSubExpr"/></item>
-    ///           <item><see cref="ErrorMessage"/></item>
     ///         </list>
     ///       </item>
     ///     </list>
@@ -166,34 +192,6 @@ namespace CalculatorUnit
       get { return t_calcError; }
     }
 
-    /// <summary>
-    /// Stručný popis chyby pro uživatele
-    /// </summary>
-    /// <description>
-    /// <list>
-    ///   <item>Read-only vlastnost.</item>
-    ///   <item>Hodnota se mění pouze v případě chyby.</item>
-    /// </list>
-    /// </description>
-    public string ErrorMessage
-    {
-      get { return s_errMsg; }
-    }
-
-    /// <summary>
-    /// Stručný popis chyby pro uživatele
-    /// </summary>
-    /// <description>
-    /// <list>
-    ///   <item>Read-only vlastnost.</item>
-    ///   <item>Hodnota se mění pouze v případě chyby.</item>
-    /// </list>
-    /// </description>
-    public string ErrorSubExpr
-    {
-      get { return s_errSubExpr; }
-    }
-
     #endregion
 
     // verejne metody
@@ -207,8 +205,6 @@ namespace CalculatorUnit
     {
       d_value = double.NaN;
       t_calcError = CalcErrorType.None;
-      s_errMsg = "";
-      s_errSubExpr = "";
       o_mathLib = new CalcMath();
       Expression = expr;
     }
@@ -231,15 +227,12 @@ namespace CalculatorUnit
     //privatni metody
     private string PreprocessExpr(string expr)
     {
-      string resStr = expr.Replace(" ", "");
-
-
-            
-      return "(" + resStr + ")";
+      return "(" + expr.Replace(" ", "") + ")";
     }
 
     private double EvaluateExpr(string expr)
     {
+      t_calcError = CalcErrorType.None;
       Char[] workStr = PreprocessExpr(expr).ToArray(); // zavorkujeme aby se spravne zpetne vyhodnotil cely vyraz
 
       // zasobniky
@@ -255,7 +248,7 @@ namespace CalculatorUnit
           Char.IsDigit(workStr[i]) //||                                    // pokud je cislice
           //(workStr[i] == '-' && i == 0) ||                               // nebo '-' a je to prvni znak v retezci
           //(i > 0 && workStr[i] == '-' && !Char.IsDigit(workStr[i - 1]))  // nebo '-' a predchozi znak neni cislice (operand)
-        ) 
+        )
         {
           string subString = workStr[i].ToString();
           double valtmp = double.NaN;
@@ -271,7 +264,7 @@ namespace CalculatorUnit
           if (!double.TryParse(subString, NumberStyles.Any, CultureInfo.InvariantCulture, out valtmp))
           {
             // neni platny double
-            // TODO: specifikace chyby nebo exeption ... 
+            // TODO: specifikace chyby nebo exeption ...
             return double.NaN;
           }
           else
@@ -284,7 +277,7 @@ namespace CalculatorUnit
         if ("!L^@%*/-+".Contains(workStr[i]))
         {
           // minus v nekterych pripadech znamena unarni negaci
-          if (workStr[i] == '-')             
+          if (workStr[i] == '-')
           {
             /*
             negace ma ruznou prioritu z ohledem na pozici ve vyrazu
@@ -301,7 +294,7 @@ namespace CalculatorUnit
                 workStr[i] = 'N';
               else
                 workStr[i] = 'n';
-            }                   
+            }
           }
           // pokud je operator mensi priority nez posledni operator na zasobniku, provedem predchozi operaci
           while (
@@ -309,11 +302,9 @@ namespace CalculatorUnit
             GetOperatorPriority(operatorStack.Peek()) >= GetOperatorPriority(workStr[i])
           )
           {
-            //vyhodnoceni - pravý operand je nad levým v zásobníku
-            if (IsUnary(operatorStack.Peek())) // pop je jeden operand
-              operandStack.Push(eval(operandStack.Pop(), 0, operatorStack.Pop()));
-            else
-              operandStack.Push(eval(operandStack.Pop(), operandStack.Pop(), operatorStack.Pop()));
+            // Pokusime se provest operaci na zasobnicich
+            if (!PopOperation(operatorStack, operandStack))
+              return double.NaN;
           }
           // ulozime aktualni operand
           operatorStack.Push(workStr[i]);
@@ -329,19 +320,60 @@ namespace CalculatorUnit
         {
           while (operatorStack.Peek() != '(')
           {
-            //vyhodnoceni - pravý operand je nad levým v zásobníku
-            if (IsUnary(operatorStack.Peek())) // pop je jeden operand
-              operandStack.Push(eval(operandStack.Pop(), 0, operatorStack.Pop()));
-            else
-              operandStack.Push(eval(operandStack.Pop(), operandStack.Pop(), operatorStack.Pop()));
+            // Pokusime se provest operaci na zasobnicich
+            if (!PopOperation(operatorStack, operandStack))
+              return double.NaN;
           }
           operatorStack.Pop();
         }
-      }                                                                             
-      // TODO: zkontrolovat chyby
-
+      }
       // na zasobniku by mela zustat jenom jedna hodnota
+      if (operandStack.Count != 1)
+      {
+        t_calcError = CalcErrorType.ExprFormatError;
+        return double.NaN;
+      }
       return operandStack.Pop();//double.NaN;
+    }
+
+    // Pokusi se provest operaci na vrcholu zasobiku
+    // pokud nesedi pocty operandu nebo operatoru => chyba formatovani
+    // pokud bude chyba ve vypoctu => Domain error
+    private bool PopOperation(Stack<Char> operatorStack, Stack<double> operandStack)
+    {
+      if (operatorStack.Count == 0)
+        return false;
+
+      double tmpVal = double.NaN;
+
+      //vyhodnoceni - pravý operand je nad levým v zásobníku
+      if (IsUnary(operatorStack.Peek())) // pop je jeden operand
+      {
+        if (operandStack.Count < 1)
+        {
+          t_calcError = CalcErrorType.ExprFormatError;
+          return false;
+        }
+        tmpVal = eval(operandStack.Pop(), 0, operatorStack.Pop());
+      }
+      else
+      {
+        if (operandStack.Count < 2)
+        {
+          t_calcError = CalcErrorType.ExprFormatError;
+          return false;
+        }
+        tmpVal = eval(operandStack.Pop(), operandStack.Pop(), operatorStack.Pop());
+      }
+
+      // osetreni chyb behem vypoctu
+      if (double.IsNaN(tmpVal))
+      {
+        t_calcError = CalcErrorType.FuncDomainError;
+        return false;
+      }
+      operandStack.Push(tmpVal);
+      return true;
     }
 
     private int GetOperatorPriority(char oper)
