@@ -25,8 +25,10 @@ namespace MathLib
 
     // Vydělí hodnoty 'a' a 'b'
     public double Divide(double a, double b)
-    {
-      return a / b;
+    {                
+      if (b != 0)
+        return a / b;
+      return Double.NaN;
     }
 
     // Vynásobí hodnoty 'a' a 'b'
