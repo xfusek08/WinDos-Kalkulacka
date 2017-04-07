@@ -54,7 +54,8 @@ namespace GUI
       if (tbExpression.Text == "0")  //V případě, že je obsah oblast pro výraz rovna "0", tak...
       {
         tbExpression.Text = "";  //...smaže oblast pro výraz
-      }else if (lastChar == ")" || lastChar == "!")  //jinak když je poslední znak závorka...
+      }
+      else if (lastChar == ")" || lastChar == "!")  //jinak když je poslední znak závorka...
       {
         tbExpression.Text = tbExpression.Text + unicodeMultiply;  //připojí na konec *
         operatorFlag = true;
@@ -148,10 +149,14 @@ namespace GUI
       int num;
       string lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
 
-      //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
-      if ((int.TryParse(lastChar, out num)) && operatorFlag)
+      if ((int.TryParse(lastChar, out num)) && operatorFlag)  //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
       {
         tbExpression.Text = tbExpression.Text + ",";  //...vytiskne desetinnou čárku
+        operatorFlag = false;
+      }
+      else if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%")  //Pokud je poslední znak operátor, tak...
+      {
+        tbExpression.Text = tbExpression.Text + "0,";  //...vytiskne nulu a desetinnou čárku
         operatorFlag = false;
       }
     }
