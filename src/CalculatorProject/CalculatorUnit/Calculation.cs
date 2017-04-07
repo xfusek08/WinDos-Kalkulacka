@@ -4,8 +4,8 @@
 * Soubor: Calculation.cs
 * Datum: 03.04.2017
 * Autor: Petr Fusek
-* Naposledy upravil: Petr Fusek
-* Datum poslední změny: 04.04.2017
+* Naposledy upravil: Pavel Vosyka
+* Datum poslední změny: 07.04.2017
 *
 * Popis: Třída, která zapouztřuje celý jeden matematický výpočet do jednoho objektu.
 * Vyhodnocuje matematické výrazy pomocí vlastního zjednodušeného jazyka.
@@ -59,13 +59,13 @@ namespace CalculatorUnit
   public enum NumSystem
   {
     /// <summary>Desítková soustava</summary>
-    Dec,
+    Dec = 10,
     /// <summary>Binární soustava</summary>
-    Bin,
+    Bin = 2,
     /// <summary>Šestnáctková soustava</summary>
-    Hex,
+    Hex = 16,
     /// <summary>Osmičková soustava</summary>
-    Oct
+    Oct = 8
   }
 
   /// <summary>
@@ -80,6 +80,10 @@ namespace CalculatorUnit
     private string s_errMsg;
     private string s_errSubExpr;
     private CalcMath o_mathLib;
+    /// <summary>
+    /// Konstanta nastavuje maximální počet desetinných míst pro výstup z metody GetAsString().
+    /// </summary>
+    private const int getAsStringDefaultPrecision = 4;
 
     #region Properties
 
@@ -209,9 +213,19 @@ namespace CalculatorUnit
       Expression = expr;
     }
 
+    /// <summary>
+    /// Vrací Value jako řetězec.
+    /// </summary>
+    /// <description>
+    /// Metoda vrací výsledek výrazu Expression v podobě formátovaného řetězce v zadané číselné soustavě.
+    /// </description>
+    /// <param name="numbase">Číselná soustava ve které bude výsledek vypsán. Definuje se: <see cref="NumSystem"></param>
+    /// <param name="format">Formátovací řetězec, nemá žádný efekt.</param>
+    /// <returns>Výsledný řetězec</returns>
     public string GetAsString(NumSystem numbase, string format)
     {
-      return "";
+      string result = NumberConverter.ToString(Value, (int)numbase, getAsStringDefaultPrecision);
+      return result;
     }
 
     //privatni metody
