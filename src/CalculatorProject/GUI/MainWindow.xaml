@@ -492,7 +492,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnFact" Content="n!" Grid.Column="0" Grid.Row="3" BorderThickness="0.1" FontSize="20" Foreground="White" Click="btnFact_Click">
+    <Button x:Name="btnFact" Content="x!" Grid.Column="0" Grid.Row="3" BorderThickness="0.1" FontSize="20" Foreground="White" Click="btnFact_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2"/>

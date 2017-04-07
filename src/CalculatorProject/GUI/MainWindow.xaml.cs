@@ -54,7 +54,7 @@ namespace GUI
       if (tbExpression.Text == "0")  //V případě, že je obsah oblast pro výraz rovna "0", tak...
       {
         tbExpression.Text = "";  //...smaže oblast pro výraz
-      }else if (lastChar == ")")  //jinak když je poslední znak závorka...
+      }else if (lastChar == ")" || lastChar == "!")  //jinak když je poslední znak závorka...
       {
         tbExpression.Text = tbExpression.Text + unicodeMultiply;  //připojí na konec *
         operatorFlag = true;
@@ -149,7 +149,7 @@ namespace GUI
       string lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
 
       //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
-      if ((int.TryParse(lastChar, out num)) && (operatorFlag))
+      if ((int.TryParse(lastChar, out num)) && operatorFlag)
       {
         tbExpression.Text = tbExpression.Text + ",";  //...vytiskne desetinnou čárku
         operatorFlag = false;
@@ -178,14 +178,15 @@ namespace GUI
       {
         tbExpression.Text = tbExpression.Text + "(";
         leftBracketsCount++;
-      }else if (lastChar == ")" || isLastCharNumber || lastChar == "!")
+      }
+      else if (lastChar == ")" || isLastCharNumber || lastChar == "!")
       {
         tbExpression.Text = tbExpression.Text + unicodeMultiply + "(";  //připojí na konec *(
         leftBracketsCount++;
         operatorFlag = true;
       }
 
-      resetBracketsCounter();
+      resetBracketsCounterIfEqual();
     }
 
     private void printRightBracket()
@@ -201,30 +202,93 @@ namespace GUI
         isLastCharNumber = int.TryParse(lastChar, out num);
       }
 
-      if ((isLastCharNumber || lastChar == ")") && (tbExpression.Text != "0") && (leftBracketsCount > rightBracketsCount))
+      if ((isLastCharNumber || lastChar == ")" || lastChar == "!") && (tbExpression.Text != "0") && (leftBracketsCount > rightBracketsCount))
       {
         tbExpression.Text = tbExpression.Text + ")";
         rightBracketsCount++;
-      }else if (((lastChar == unicodePlus) || (lastChar == unicodeMinus)) && (leftBracketsCount > rightBracketsCount))
+      }
+      else if (((lastChar == unicodePlus) || (lastChar == unicodeMinus)) && (leftBracketsCount > rightBracketsCount))
       {
         tbExpression.Text = tbExpression.Text + "0)";
         rightBracketsCount++;
-      }else if (((lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%")) && (leftBracketsCount > rightBracketsCount))
+      }
+      else if (((lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%")) && (leftBracketsCount > rightBracketsCount))
       {
         tbExpression.Text = tbExpression.Text + "1)";
         rightBracketsCount++;
       }
 
-      resetBracketsCounter();
+      resetBracketsCounterIfEqual();
     }
 
+    private void printLog()
+    {
+      int num;
+      string lastChar = "";
+      bool isLastCharNumber = false;
+
+      if (tbExpression.Text == "0")  //V případě, že je oblast pro výraz rovna "0", tak...
+      {
+        tbExpression.Text = "";  //...smaže oblast pro výraz
+      }
+
+      //Pokud není oblast pro výraz prázdná, tak zjistí poslední znak a to, zda se jedná o číslo
+      if (tbExpression.Text.Length != 0)
+      {
+        lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
+        isLastCharNumber = int.TryParse(lastChar, out num);
+      }
+
+      if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || tbExpression.Text == "" || lastChar == "(")
+      {
+        tbExpression.Text = tbExpression.Text + "log(";
+        leftBracketsCount++;
+      }
+      else if (lastChar == ")" || isLastCharNumber || lastChar == "!")
+      {
+        tbExpression.Text = tbExpression.Text + unicodeMultiply + "log(";  //připojí na konec *log(
+        leftBracketsCount++;
+        operatorFlag = true;
+      }
+
+      resetBracketsCounterIfEqual();
+    }
+
+    private void printFact()
+    {
+      int num;
+      string lastChar = "";
+      bool isLastCharNumber = false;
+
+      if (tbExpression.Text.Length != 0)
+      {
+        lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
+        isLastCharNumber = int.TryParse(lastChar, out num);
+      }
+
+      if ((lastChar == ")") || isLastCharNumber)
+      {
+        tbExpression.Text += "!";
+      }
+    }
+
+
     //===== Pomocné funkce =====
-    private void resetBracketsCounter()
+    private void resetBracketsCounterIfEqual()
     {
       if (leftBracketsCount == rightBracketsCount)
       {
         leftBracketsCount = 0;
         rightBracketsCount = 0;
+      }
+    }
+
+    private void closeBrackets()
+    {
+      while (leftBracketsCount > 0)
+      {
+        tbExpression.Text = tbExpression.Text + ")";
+        leftBracketsCount--;
       }
     }
 
@@ -380,12 +444,12 @@ namespace GUI
 
     private void btnFact_Click(object sender, RoutedEventArgs e)
     {
-
+      printFact();
     }
 
     private void btnLog_Click(object sender, RoutedEventArgs e)
     {
-
+      printLog();
     }
 
     private void btnMod_Click(object sender, RoutedEventArgs e)
