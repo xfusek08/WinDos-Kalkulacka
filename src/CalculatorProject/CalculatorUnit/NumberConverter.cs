@@ -5,7 +5,7 @@
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
 * Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 07.04.2017
+* Datum poslední změny: 08.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -33,7 +33,6 @@ namespace CalculatorUnit
     ///   - Při konverzi do jiné soustavy než desítkové vždy vypisuje desetinnou tečku. 
     ///   - Pokud je desetinná část čísla příliš malá, vypisuje nuly.
     ///     Například: 10.000004 ==> 10.0000
-    ///   - Chybně vypisuje záporná čísla.
     /// </description>
     /// <param name="value">číslo pro konvertování</param>
     /// <param name="numbase">Základ soustavy. Muže být pouze 2, 8, 10 nebo 16</param>
@@ -46,10 +45,16 @@ namespace CalculatorUnit
         value = Math.Round(value, precision);
         return value.ToString(new System.Globalization.CultureInfo("en-US"));
       }
+      string resultstr = "";
+      if (value < 0)
+      {
+        value = Math.Abs(value);
+        resultstr = "-";
+      }
       double intvalue = extractInt(value);
       double fractionalDigits = value - intvalue;
       int digit;
-      string resultstr = Convert.ToString((int)intvalue, numbase);
+      resultstr += Convert.ToString((int)intvalue, numbase);
       resultstr += ".";
       for (int i = 0; i < precision; i++)
       {
