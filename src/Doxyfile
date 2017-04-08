@@ -851,7 +851,8 @@ WARN_LOGFILE           = ../Documentation/Warnlog.log
 # Pouze validní soubory
 
 INPUT                  = "CalculatorProject\MathLib\CalcMath.cs" \
-                         "CalculatorProject\CalculatorUnit\Calculation.cs"
+                         "CalculatorProject\CalculatorUnit\Calculation.cs" \
+                         "CalculatorProject\CalculatorUnit\NumberConverter.cs"
                          #"CalculatorProject\GUI\MainWindows.cs"
 
 
