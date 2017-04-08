@@ -30,7 +30,6 @@ namespace CalculatorUnit
     /// <description>
     /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst.
     /// Známé chyby:
-    ///   - Při konverzi do jiné soustavy než desítkové vždy vypisuje desetinnou tečku. 
     ///   - Pokud je desetinná část čísla příliš malá, vypisuje nuly.
     ///     Například: 10.000004 ==> 10.0000
     /// </description>
@@ -55,7 +54,8 @@ namespace CalculatorUnit
       double fractionalDigits = value - intvalue;
       int digit;
       resultstr += Convert.ToString((int)intvalue, numbase);
-      resultstr += ".";
+      if(fractionalDigits != 0)
+        resultstr += ".";
       for (int i = 0; i < precision; i++)
       {
         fractionalDigits *= numbase;
