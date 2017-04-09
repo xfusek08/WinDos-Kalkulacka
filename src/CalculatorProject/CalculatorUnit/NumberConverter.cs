@@ -5,7 +5,7 @@
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
 * Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 08.04.2017
+* Datum poslední změny: 09.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -39,27 +39,28 @@ namespace CalculatorUnit
     /// <returns>číslo v podobě řetězce</returns>
     public static string ToString(double value, int numbase, int precision)
     {
-      if (numbase == 10)
+      if (numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
       {
         value = Math.Round(value, precision);
         return value.ToString(new System.Globalization.CultureInfo("en-US"));
       }
       string resultstr = "";
-      if (value < 0)
+      if (value < 0) //pokud je číslo záporné, vloží se mínus a zbytek se převede jako kladné
       {
         value = Math.Abs(value);
         resultstr = "-";
       }
-      double intvalue = extractInt(value);
-      double fractionalDigits = value - intvalue;
-      int digit;
-      resultstr += Convert.ToString((int)intvalue, numbase);
+      //převáděné číslo se rozloží na celou část a desetinnou
+      double intvalue = extractInt(value); //celá část
+      double fractionalDigits = value - intvalue; //desetinná část
+      int digit; //proměnná pro mezivýsledky, vždy jeden znak
+      resultstr += Convert.ToString((int)intvalue, numbase); //celá část čísla se převede pomocí standartní metody
       if(fractionalDigits != 0)
-        resultstr += ".";
-      for (int i = 0; i < precision; i++)
+        resultstr += "."; //vložení desetinné tečky
+      for (int i = 0; i < precision; i++) //převod desetinné části s požadovanou přesností
       {
         fractionalDigits *= numbase;
-        if (fractionalDigits == 0)
+        if (fractionalDigits == 0) //pokud je zbytek nulový, není důvod pokračovat
           break;
         digit = (int)extractInt(fractionalDigits);
         resultstr += PrintDigit(digit);
