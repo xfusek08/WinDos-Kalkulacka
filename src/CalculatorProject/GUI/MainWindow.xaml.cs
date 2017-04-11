@@ -41,6 +41,7 @@ namespace GUI
     private string unicodeMinus = "\u2212";
     private string unicodeMultiply = "\u00D7";
     private string unicodeDivision = "\u00F7";
+    private string unicodeRoot = "\u221A";
 
     public MainWindow()
     {
@@ -261,7 +262,7 @@ namespace GUI
 
       if (isLastCharNumber || lastChar == "!" || lastChar == ")")
       {
-        tbExpression.Text += "\u221A";
+        tbExpression.Text += unicodeRoot;
         dotFlag = true;
       }
     }
@@ -280,6 +281,20 @@ namespace GUI
 
     private void removeLastChar()
     {
+      string lastChar = getLastChar();
+
+      //Když je mazaný znak levá závorka, tak sníží počet levých závorek
+      if (lastChar == "(")
+        leftBracketsCount--;
+      //Když je mazaný znak pravá závorka, tak sníží počet pravých závorek
+      if (lastChar == ")")
+        rightBracketsCount--;
+      //Když je mazaný znak +,-,*,/,%, odmocnina nebo mocnina, tak nastaví příznak desetinné čárky na false
+      if ((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%") || (lastChar == unicodeRoot) || (lastChar == "^"))
+        dotFlag = false;
+      //Když je mazaný znak desetinná čárka, tak nastaví příznak desetinné čárky
+      if (lastChar == ",")
+        dotFlag = true;
       tbExpression.Text = tbExpression.Text.Remove(tbExpression.Text.Length - 1);
       if(tbExpression.Text.Length == 0)
       {
