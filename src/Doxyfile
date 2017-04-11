@@ -850,10 +850,9 @@ WARN_LOGFILE           = ../Documentation/Warnlog.log
 
 # Pouze validní soubory
 
-INPUT                  = "CalculatorProject\MathLib\CalcMath.cs" \
-                         "CalculatorProject\CalculatorUnit\Calculation.cs" \
-                         "CalculatorProject\CalculatorUnit\NumberConverter.cs"
-                         #"CalculatorProject\GUI\MainWindows.cs"
+INPUT                  = CalculatorProject\MathLib\         \
+                         CalculatorProject\CalculatorUnit\
+                         #CalculatorProject\GUI\
 
 
 # This tag can be used to specify the character encoding of the source files
