@@ -278,6 +278,15 @@ namespace GUI
       }
     }
 
+    private void removeLastChar()
+    {
+      tbExpression.Text = tbExpression.Text.Remove(tbExpression.Text.Length - 1);
+      if(tbExpression.Text.Length == 0)
+      {
+        tbExpression.Text += "0";
+      }
+    }
+
 
     //===== Pomocné funkce =====
     private string getLastChar()
@@ -481,7 +490,7 @@ namespace GUI
 
     private void btnDel_Click(object sender, RoutedEventArgs e)
     {
-
+      removeLastChar();
     }
 
     private void btnAc_Click(object sender, RoutedEventArgs e)
@@ -494,7 +503,7 @@ namespace GUI
 
     private void btnCount_Click(object sender, RoutedEventArgs e)
     {
-
+      
     }
   }
 }
