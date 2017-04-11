@@ -287,6 +287,14 @@ namespace GUI
       }
     }
 
+    private void resetCalc()
+    {
+      tbExpression.Text = "0";
+      leftBracketsCount = 0;
+      rightBracketsCount = 0;
+      dotFlag = true;
+    }
+
 
     //===== Pomocné funkce =====
     private string getLastChar()
@@ -494,11 +502,8 @@ namespace GUI
     }
 
     private void btnAc_Click(object sender, RoutedEventArgs e)
-    { 
-      tbExpression.Text = "0";
-      leftBracketsCount = 0;
-      rightBracketsCount = 0;
-      dotFlag = true;
+    {
+      resetCalc();
     }
 
     private void btnCount_Click(object sender, RoutedEventArgs e)
