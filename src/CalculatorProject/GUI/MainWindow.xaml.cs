@@ -49,7 +49,7 @@ namespace GUI
 
     private void printNumber(byte number)
     {
-      string lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
+      string lastChar = getLastChar();
 
       if (tbExpression.Text == "0")  //V případě, že je obsah oblast pro výraz rovna "0", tak...
       {
@@ -101,7 +101,7 @@ namespace GUI
 
     private void printMathOperator(string mathOperator)
     {
-      string lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1); //původní poslední znak
+      string lastChar = getLastChar(); //původní poslední znak
       string mountingChar = lastChar; //znak pro připojení k řetězci
       string secondCharFromRight = ""; //proměnná pro předposlední znak
 
@@ -146,10 +146,10 @@ namespace GUI
 
     private void printDot()
     {
-      int num;
-      string lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
+      string lastChar = getLastChar();
+      bool isLastCharNumber = isCharNumber(lastChar);
 
-      if ((int.TryParse(lastChar, out num)) && dotFlag)  //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
+      if (dotFlag && isLastCharNumber)  //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
       {
         tbExpression.Text = tbExpression.Text + ",";  //...vytiskne desetinnou čárku
         dotFlag = false;
@@ -163,21 +163,17 @@ namespace GUI
 
     private void printLeftBracket()
     {
-      int num;
       string lastChar = "";
       bool isLastCharNumber = false;
 
-      if (tbExpression.Text == "0")  //V případě, že je obsah oblast pro výraz rovna "0", tak...
+      if (tbExpression.Text == "0")  //V případě, že je oblast pro výraz rovna "0", tak...
       {
         tbExpression.Text = "";  //...smaže oblast pro výraz
       }
 
-      //Pokud není oblast pro výraz prázdná, tak zjistí poslední znak a to, zda se jedná o číslo
-      if (tbExpression.Text.Length != 0)
-      {
-        lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
-        isLastCharNumber = int.TryParse(lastChar, out num);
-      }
+      //zjistí poslední znak a to, zda se jedná o číslo
+      lastChar = getLastChar();
+      isLastCharNumber = isCharNumber(lastChar);
 
       if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || tbExpression.Text == "" || lastChar == "(")
       {
@@ -196,16 +192,8 @@ namespace GUI
 
     private void printRightBracket()
     {
-      int num;
-      string lastChar = "";
-      bool isLastCharNumber = false;
-
-      //Pokud není oblast pro výraz prázdná, tak zjistí poslední znak a to, zda se jedná o číslo
-      if (tbExpression.Text.Length != 0)
-      {
-        lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
-        isLastCharNumber = int.TryParse(lastChar, out num);
-      }
+      string lastChar = getLastChar();
+      bool isLastCharNumber = isCharNumber(lastChar);
 
       if ((isLastCharNumber || lastChar == ")" || lastChar == "!") && (tbExpression.Text != "0") && (leftBracketsCount > rightBracketsCount))
       {
@@ -228,7 +216,6 @@ namespace GUI
 
     private void printLog()
     {
-      int num;
       string lastChar = "";
       bool isLastCharNumber = false;
 
@@ -237,12 +224,9 @@ namespace GUI
         tbExpression.Text = "";  //...smaže oblast pro výraz
       }
 
-      //Pokud není oblast pro výraz prázdná, tak zjistí poslední znak a to, zda se jedná o číslo
-      if (tbExpression.Text.Length != 0)
-      {
-        lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
-        isLastCharNumber = int.TryParse(lastChar, out num);
-      }
+      //zjistí poslední znak a to, zda se jedná o číslo
+      lastChar = getLastChar();
+      isLastCharNumber = isCharNumber(lastChar);
 
       if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || tbExpression.Text == "" || lastChar == "(")
       {
@@ -261,15 +245,8 @@ namespace GUI
 
     private void printFact()
     {
-      int num;
-      string lastChar = "";
-      bool isLastCharNumber = false;
-
-      if (tbExpression.Text.Length != 0)
-      {
-        lastChar = tbExpression.Text.Substring(tbExpression.Text.Length - 1, 1);
-        isLastCharNumber = int.TryParse(lastChar, out num);
-      }
+      string lastChar = getLastChar();
+      bool isLastCharNumber = isCharNumber(lastChar);
 
       if ((lastChar == ")") || isLastCharNumber)
       {
