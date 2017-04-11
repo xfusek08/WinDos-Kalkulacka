@@ -29,8 +29,9 @@ using MathLib;
 /**
  * @brief Modul výpočetní jednotky
  * @package CalculatorUnit
- * Modul poskytuje třídu Calculation, která představuje zapouzdření výpočtu matematického výrazu.
- * Matematické výrazy jsou předávány ve vlastním zjednodušeném výrazovém jazyce, který zahrnuje jen nutné vlastnosti Kalkulačky.
+ * 
+ * Modul představuje mezivrstvu mezi uživatelským rozhraním a matematickou knihovnou. 
+ * Obsahuje prostředky pro vyhodnocování matematických výrazů, pomocí funkcí z matematické knihovny.
  * @author Petr Fusek
  * @author Pavel Vosyka
  */
@@ -82,7 +83,7 @@ namespace CalculatorUnit
   }
 
   /// <summary>
-  /// Třída objektů představující jeden výpočet.
+  /// Objekt představující jeden výpočet.
   /// </summary>
   /// <description>
   /// <b>Výrazy</b>
@@ -128,7 +129,7 @@ namespace CalculatorUnit
     /// Výsledek výpočtu
     /// </summary>
     /// <description>
-    /// Vrací výslednou hodnotu vehodnoceného matematického výrazu v <see cref="Expresion">Expresion</see>.
+    /// Vrací výslednou hodnotu vyhodnoceného matematického výrazu v <see cref="Expresion">Expresion</see>.
     /// <list>
     ///   <item>Read-only vlastnost.</item>
     ///   <item>Hodnota se mění pouze v případě změny výrazu a to bezprostředně.</item>
@@ -199,8 +200,12 @@ namespace CalculatorUnit
     /// Konstruktor objektu
     /// </summary>
     /// <description>
-    /// Bere jako parametr výraz, který nastavý do vlastnosti <see cref="Expresion">
+    /// Inicializace objektu
     /// </description>
+    /// <param name="expr">
+    ///   matematický výraz, který je nastaven do vlastnosti <see cref="Expression" />, 
+    ///   a jeho vyhodnocení je v <see cref="Value" />
+    /// </param>
     public Calculation(string expr)
     {
       d_value = double.NaN;
@@ -216,6 +221,7 @@ namespace CalculatorUnit
     /// Metoda vrací výsledek výrazu Expression v podobě formátovaného řetězce v zadané číselné soustavě.
     /// </description>
     /// <param name="numbase">Číselná soustava ve které bude výsledek vypsán. Definuje se: <see cref="NumSystem"></param>
+    /// 
     /// <param name="format">Formátovací řetězec, nemá žádný efekt.</param>
     /// <returns>Výsledný řetězec</returns>
     public string GetAsString(NumSystem numbase, string format)
