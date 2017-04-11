@@ -1,21 +1,25 @@
 ﻿/*******************************************************************
-* Název projektu: Výpočetní jednotka určená pro vyhodnocování výrazů
+* Název projektu: IVS-kalkulačka
 * Balíček: CalculatorUnit
 * Soubor: NumberConverter.cs
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
-* Naposledy upravil: Pavel Vosyka
+* Naposledy upravil: Petr Fusek
 * Datum poslední změny: 09.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
 *****************************************************************/
 
+/**
+ * @brief Pomocná statická třída pro konvertování čísla na řetězec.
+ * @file NumberConverter.cs
+ * @author Petr Fusek
+ * @author Pavel Vosyka
+ * @date 11.04.2017
+ */
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CalculatorUnit
 {
@@ -39,6 +43,15 @@ namespace CalculatorUnit
     /// <returns>číslo v podobě řetězce</returns>
     public static string ToString(double value, int numbase, int precision)
     {
+      if (double.IsNaN(value))
+        return "NaN";
+
+      if (double.IsInfinity(value) || double.IsPositiveInfinity(value))
+        return "INF";
+
+      if (double.IsNegativeInfinity(value))
+        return "-INF";
+
       if (numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
       {
         value = Math.Round(value, precision);

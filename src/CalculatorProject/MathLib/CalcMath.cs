@@ -25,7 +25,7 @@ namespace MathLib
 
     // Vydělí hodnoty 'a' a 'b'
     public double Divide(double a, double b)
-    {                
+    {
       if (b != 0)
         return a / b;
       return Double.NaN;
@@ -52,6 +52,8 @@ namespace MathLib
     // Vypočte faktorial z 'x'
     public double Fact(Byte x)
     {
+      if (x > 170)
+        return double.PositiveInfinity;
       double res = 1;
       for (int i = 1; i <= x; i++)
       {
