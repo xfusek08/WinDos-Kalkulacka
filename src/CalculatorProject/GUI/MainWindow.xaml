@@ -558,7 +558,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Grid x:Name="grdRootBtn" Grid.Row="6" Grid.Column="4" MouseEnter="grdRootBtn_MouseEnter" MouseLeave="grdRootBtn_MouseLeave">
+    <Grid x:Name="grdRootBtn" Grid.Row="6" Grid.Column="4" MouseEnter="grdRootBtn_MouseEnter" MouseLeave="grdRootBtn_MouseLeave" MouseLeftButtonUp="grdRootBtn_MouseLeftButtonUp">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
@@ -569,11 +569,11 @@
         <RowDefinition Height="*"/>
         <RowDefinition Height="0.5*"/>
       </Grid.RowDefinitions>
-      <Label x:Name="lblRootBtn" Content="x    &#x0a;" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" PreviewMouseLeftButtonUp="lblRootBtn_PreviewMouseLeftButtonUp"/>
+      <Label x:Name="lblRootBtn" Content="x    &#x0a;" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White" IsEnabled="False"/>
       <!--<TextBlock x:Name="lblRootBtn" Panel.ZIndex="200" Text="x    &#x0a;" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" MouseEnter="lblRootBtn_MouseEnter" MouseMove="lblRootBtn_MouseMove"/>-->
     </Grid>
 
-    <Grid x:Name="grdPowBtn" Grid.Row="6" Grid.Column="3" MouseEnter="grdPowBtn_MouseEnter" MouseLeave="grdPowBtn_MouseLeave" PreviewMouseLeftButtonUp="grdPowBtn_PreviewMouseLeftButtonUp">
+    <Grid x:Name="grdPowBtn" Grid.Row="6" Grid.Column="3" MouseEnter="grdPowBtn_MouseEnter" MouseLeave="grdPowBtn_MouseLeave" MouseLeftButtonUp="grdPowBtn_MouseLeftButtonUp">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>

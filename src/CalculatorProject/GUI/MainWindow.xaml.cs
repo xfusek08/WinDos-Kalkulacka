@@ -449,7 +449,7 @@ namespace GUI
       printPow();
     }
 
-    private void grdPowBtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    private void grdPowBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
       printPow();
     }
@@ -459,7 +459,7 @@ namespace GUI
       printRoot();
     }
 
-    private void lblRootBtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    private void grdRootBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
       printRoot();
     }
