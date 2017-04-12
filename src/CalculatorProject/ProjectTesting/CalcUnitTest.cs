@@ -1,5 +1,5 @@
 /*******************************************************************
-* Název projektu: Testovací třída pro testování funkcí Výpočetní jednotky
+* Název projektu: IVS-kalkulačka
 * Balíček: ProjectTesting
 * Soubor: CalcUnitTest.cs
 * Datum: 28.03.2017
