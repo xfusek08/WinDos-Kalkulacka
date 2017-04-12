@@ -381,6 +381,7 @@ namespace GUI
     /// <param name="numeralSystem">Vyjadřuje číselnou soustavu (0 - DEC, 1 - BIN, 2 - HEX, 3 - OCT)</param>
     private void enable_disableButtons(byte numeralSystem)
     {
+      resetCalc();  //smaže oblast pro výraz při přepnutí do jiné soustavy - aby zde nezůstávali neplatné znaky pro danou soustavu
       switch (numeralSystem)
       {
         case 0: //desitkova soustava
