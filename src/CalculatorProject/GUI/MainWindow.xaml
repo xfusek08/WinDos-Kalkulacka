@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="580" Background="#FF303030" MinHeight="550" MinWidth="350">
+        Title="MainWindow" Height="600" Width="600" Background="#FF303030" MinHeight="550" MinWidth="480">
   <Grid Margin="0">
     <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="*"/>
       <ColumnDefinition Width="*"/>
       <ColumnDefinition Width="*"/>
       <ColumnDefinition Width="*"/>
@@ -24,10 +26,11 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Button x:Name="btnLog" Content="log(x)" Grid.Row="3" Grid.Column="1" Foreground="White" BorderThickness="0.1" FontSize="20" Click="btnLog_Click">
+    <Button x:Name="btnLog" Content="log(x)" Grid.Row="3" Grid.Column="1" BorderThickness="0.1" FontSize="20" Click="btnLog_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -41,22 +44,26 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF1E88E5"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Grid x:Name="grid1" Grid.Row="1" Grid.ColumnSpan="5">
+    <Grid x:Name="grid1" Grid.Row="1" Grid.ColumnSpan="7">
       <TextBox x:Name="tbExpression" TextWrapping="Wrap" Text="0" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White" IsReadOnly="True"/>
     </Grid>
-    <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Foreground="White" IsChecked="True"/>
-    <RadioButton x:Name="rbBin" Content="BIN" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Foreground="White"/>
-    <RadioButton x:Name="rbHex" Content="HEX" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="3" Foreground="White"/>
-    <RadioButton x:Name="rbOct" Content="OCT" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="4" Foreground="White"/>
-    <Label x:Name="label" Content="Režim :" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Foreground="White" Padding="0"/>
-    <Button x:Name="btnDel" Content="DEL" Grid.Row="3" Grid.Column="3" Foreground="White" BorderThickness="0.1" FontSize="22" Click="btnDel_Click">
+    <Label x:Name="label" Content="Režim :" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Foreground="White" Padding="0"/>
+    <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="3" Foreground="White" IsChecked="True" GroupName="rbgNumeralSystem" Click="rbDec_Click"/>
+    <RadioButton x:Name="rbBin" Content="BIN" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="4" Foreground="White" GroupName="rbgNumeralSystem" Click="rbBin_Click"/>
+    <RadioButton x:Name="rbHex" Content="HEX" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="5" Foreground="White" GroupName="rbgNumeralSystem" Click="rbHex_Click"/>
+    <RadioButton x:Name="rbOct" Content="OCT" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="6" Foreground="White" GroupName="rbgNumeralSystem" Click="rbOct_Click"/>
+    <Button x:Name="btnDel" Content="DEL" Grid.Row="3" Grid.Column="3" BorderThickness="0.1" FontSize="22" Click="btnDel_Click" Grid.ColumnSpan="2">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFFC107"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -70,14 +77,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FFFFCA28"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnAc" Content="AC" Grid.Row="3" Grid.Column="4" Foreground="White" BorderThickness="0.1" FontSize="22" Click="btnAc_Click">
+    <Button x:Name="btnAc" Content="AC" Grid.Row="3" Grid.Column="5" BorderThickness="0.1" FontSize="22" Click="btnAc_Click" Grid.ColumnSpan="2">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFFC107"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -91,14 +102,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FFFFCA28"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnEight" Content="8" Grid.Row="4" Grid.Column="1" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnEight_Click">
+    <Button x:Name="btnEight" Content="8" Grid.Row="4" Grid.Column="3" BorderThickness="0.1" FontSize="24" Click="btnEight_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -112,14 +127,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnNine" Content="9" Grid.Column="2" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnNine_Click">
+    <Button x:Name="btnNine" Content="9" Grid.Column="4" Grid.Row="4" BorderThickness="0.1" FontSize="24" Click="btnNine_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -133,14 +152,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnMultiply" Content="&#215;" Grid.Column="3" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="20" Click="btnMultiply_Click">
+    <Button x:Name="btnMultiply" Content="&#215;" Grid.Column="5" Grid.Row="4" BorderThickness="0.1" FontSize="20" Click="btnMultiply_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -154,14 +177,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnDivide" Content="&#247;" Grid.Column="4" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="20" Click="btnDivide_Click">
+    <Button x:Name="btnDivide" Content="&#247;" Grid.Column="6" Grid.Row="4" BorderThickness="0.1" FontSize="20" Click="btnDivide_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -175,14 +202,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnFour" Content="4" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnFour_Click">
+    <Button x:Name="btnFour" Content="4" Grid.Row="5" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnFour_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -196,14 +227,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnFive" Content="5" Grid.Column="1" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnFive_Click">
+    <Button x:Name="btnFive" Content="5" Grid.Column="3" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnFive_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -217,14 +252,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnSix" Content="6" Grid.Column="2" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnSix_Click">
+    <Button x:Name="btnSix" Content="6" Grid.Column="4" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnSix_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -238,14 +277,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnPlus" Content="&#43;" Grid.Column="3" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="20" Click="btnPlus_Click">
+    <Button x:Name="btnPlus" Content="&#43;" Grid.Column="5" Grid.Row="5" BorderThickness="0.1" FontSize="20" Click="btnPlus_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -259,14 +302,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnMinus" Content="&#8722;" Grid.Column="4" Grid.Row="5" Foreground="White" BorderThickness="0.1" FontSize="20" Click="btnMinus_Click">
+    <Button x:Name="btnMinus" Content="&#8722;" Grid.Column="6" Grid.Row="5" BorderThickness="0.1" FontSize="20" Click="btnMinus_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -280,14 +327,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnOne" Content="1" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnOne_Click">
+    <Button x:Name="btnOne" Content="1" Grid.Row="6" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnOne_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -301,14 +352,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnTwo" Content="2" Grid.Column="1" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnTwo_Click">
+    <Button x:Name="btnTwo" Content="2" Grid.Column="3" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnTwo_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -322,14 +377,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnThree" Content="3" Grid.Column="2" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnThree_Click">
+    <Button x:Name="btnThree" Content="3" Grid.Column="4" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnThree_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -343,14 +402,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnPow" Content="x" Grid.Column="3" Grid.Row="6" Foreground="White" BorderThickness="0.1" FontSize="20" MouseEnter="btnPow_MouseEnter" MouseLeave="btnPow_MouseLeave" Click="btnPow_Click">
+    <Button x:Name="btnPow" Content="x" Grid.Column="5" Grid.Row="6" BorderThickness="0.1" FontSize="20" MouseEnter="btnPow_MouseEnter" MouseLeave="btnPow_MouseLeave" Click="btnPow_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -364,14 +427,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnZero" Content="0" Grid.Row="7" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnZero_Click">
+    <Button x:Name="btnZero" Content="0" Grid.Row="7" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnZero_Click" Grid.ColumnSpan="2">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -385,14 +452,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnDot" Content="," Grid.Column="1" Grid.Row="7" BorderThickness="0.1" Foreground="White" FontSize="24" Click="btnDot_Click">
+    <Button x:Name="btnDot" Content="," Grid.Column="4" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnDot_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -406,14 +477,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnMod" Content="%" Grid.Column="2" Grid.Row="3" Foreground="White" BorderThickness="0.1" FontSize="20" Click="btnMod_Click">
+    <Button x:Name="btnMod" Content="%" Grid.Column="2" Grid.Row="3" BorderThickness="0.1" FontSize="20" Click="btnMod_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2" />
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -427,14 +502,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF1E88E5"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnRoot" Content="&#8730;a" Grid.Column="4" Grid.Row="6" Foreground="White" Background="#FF3F51B5" BorderThickness="0.1" FontSize="20" MouseEnter="btnRoot_MouseEnter" MouseLeave="btnRoot_MouseLeave" Click="btnRoot_Click">
+    <Button x:Name="btnRoot" Content="&#8730;a" Grid.Column="6" Grid.Row="6" Background="#FF3F51B5" BorderThickness="0.1" FontSize="20" MouseEnter="btnRoot_MouseEnter" MouseLeave="btnRoot_MouseLeave" Click="btnRoot_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -448,14 +527,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnCount" Content="=" Grid.Column="4" Grid.Row="7" Foreground="White" BorderThickness="0.1" FontSize="36" Click="btnCount_Click">
+    <Button x:Name="btnCount" Content="=" Grid.Column="5" Grid.Row="7" BorderThickness="0.1" FontSize="36" Click="btnCount_Click" Grid.ColumnSpan="2">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFF9800"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -469,14 +552,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FFFFA726"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnSeven" Content="7" Grid.Column="0" Grid.Row="4" Foreground="White" BorderThickness="0.1" FontSize="24" Click="btnSeven_Click">
+    <Button x:Name="btnSeven" Content="7" Grid.Column="2" Grid.Row="4" BorderThickness="0.1" FontSize="24" Click="btnSeven_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -490,14 +577,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnFact" Content="x!" Grid.Column="0" Grid.Row="3" BorderThickness="0.1" FontSize="20" Foreground="White" Click="btnFact_Click">
+    <Button x:Name="btnFact" Content="x!" Grid.Column="0" Grid.Row="3" BorderThickness="0.1" FontSize="20" Click="btnFact_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -511,15 +602,19 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#FF1E88E5"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Rectangle Fill="#FF212121" Stroke="Black" Grid.ColumnSpan="5"/>
-    <Button x:Name="btnLeftBracket" Content="(" Grid.Row="7" BorderThickness="0.1" Foreground="White" FontSize="24" Grid.Column="2" Click="btnLeftBracket_Click">
+    <Rectangle Fill="#FF212121" Stroke="Black" Grid.ColumnSpan="7"/>
+    <Button x:Name="btnLeftBracket" Content="(" Grid.Row="7" BorderThickness="0.1" FontSize="24" Grid.Column="0" Click="btnLeftBracket_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -533,14 +628,18 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnRightBracket" Content=")" Grid.Row="7" BorderThickness="0.1" Foreground="White" FontSize="24" Grid.Column="3" Click="btnRightBracket_Click">
+    <Button x:Name="btnRightBracket" Content=")" Grid.Row="7" BorderThickness="0.1" FontSize="24" Grid.Column="1" Click="btnRightBracket_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
           <Setter Property="Template">
             <Setter.Value>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -554,11 +653,14 @@
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Background" Value="#1565C0"/>
             </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
           </Style.Triggers>
         </Style>
       </Button.Style>
     </Button>
-    <Grid x:Name="grdRootBtn" Grid.Row="6" Grid.Column="4" MouseEnter="grdRootBtn_MouseEnter" MouseLeave="grdRootBtn_MouseLeave" MouseLeftButtonUp="grdRootBtn_MouseLeftButtonUp">
+    <Grid x:Name="grdRootBtn" Grid.Row="6" Grid.Column="6" MouseEnter="grdRootBtn_MouseEnter" MouseLeave="grdRootBtn_MouseLeave" MouseLeftButtonUp="grdRootBtn_MouseLeftButtonUp">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
@@ -569,11 +671,31 @@
         <RowDefinition Height="*"/>
         <RowDefinition Height="0.5*"/>
       </Grid.RowDefinitions>
-      <Label x:Name="lblRootBtn" Content="x    &#x0a;" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White" IsEnabled="False"/>
+      <Label x:Name="lblRootBtn" Content="x    &#x0a;" Grid.Column="1" Grid.Row="1" Padding="0">
+        <Label.Style>
+          <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                  <Border Background="{TemplateBinding Background}">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+              <Trigger Property="IsEnabled"  Value="False">
+                <Setter Property="Foreground" Value="#757575"/>
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </Label.Style>
+      </Label>
       <!--<TextBlock x:Name="lblRootBtn" Panel.ZIndex="200" Text="x    &#x0a;" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" MouseEnter="lblRootBtn_MouseEnter" MouseMove="lblRootBtn_MouseMove"/>-->
     </Grid>
 
-    <Grid x:Name="grdPowBtn" Grid.Row="6" Grid.Column="3" MouseEnter="grdPowBtn_MouseEnter" MouseLeave="grdPowBtn_MouseLeave" MouseLeftButtonUp="grdPowBtn_MouseLeftButtonUp">
+    <Grid x:Name="grdPowBtn" Grid.Row="6" Grid.Column="5" MouseEnter="grdPowBtn_MouseEnter" MouseLeave="grdPowBtn_MouseLeave" MouseLeftButtonUp="grdPowBtn_MouseLeftButtonUp">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
@@ -584,8 +706,184 @@
         <RowDefinition Height="*"/>
         <RowDefinition Height="0.5*"/>
       </Grid.RowDefinitions>
-      <Label x:Name="lblPowBtn" Content="     y&#x0a;" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White" IsEnabled="False"/>
+      <Label x:Name="lblPowBtn" Content="     y&#x0a;" Grid.Column="1" Grid.Row="1" Padding="0">
+        <Label.Style>
+          <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                  <Border Background="{TemplateBinding Background}">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+              <Trigger Property="IsEnabled"  Value="False">
+                <Setter Property="Foreground" Value="#757575"/>
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </Label.Style>
+      </Label>
       <!--<TextBlock x:Name="lblRootBtn" Panel.ZIndex="200" Text="x    &#x0a;" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" MouseEnter="lblRootBtn_MouseEnter" MouseMove="lblRootBtn_MouseMove"/>-->
     </Grid>
+
+    <Button x:Name="btnA" Content="A" Grid.Column="0" Grid.Row="4" BorderThickness="0.1" FontSize="24">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
+
+    <Button x:Name="btnB" Content="B" Grid.Column="1" Grid.Row="4" BorderThickness="0.1" FontSize="24">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
+
+    <Button x:Name="btnC" Content="C" Grid.Column="0" Grid.Row="5" BorderThickness="0.1" FontSize="24">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
+
+    <Button x:Name="btnD" Content="D" Grid.Column="1" Grid.Row="5" BorderThickness="0.1" FontSize="24">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
+
+    <Button x:Name="btnE" Content="E" Grid.Column="0" Grid.Row="6" BorderThickness="0.1" FontSize="24">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
+
+    <Button x:Name="btnF" Content="F" Grid.Column="1" Grid.Row="6" BorderThickness="0.1" FontSize="24">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF0D47A1"/>
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#1565C0"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#757575"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
   </Grid>
 </Window>
