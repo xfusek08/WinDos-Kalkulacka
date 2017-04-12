@@ -5,7 +5,7 @@
 * Datum: 05.04.2017
 * Autor: Radim Blaha
 * Naposledy upravil: Radim Blaha
-* Datum poslední změny: 07.04.2017
+* Datum poslední změny: 12.04.2017
 *
 * Popis: Třída, která ovládá grafické prvky hlavního okna aplikace a
 *        reaguje na příchozí uživatelské události.
@@ -49,6 +49,7 @@ namespace GUI
       enable_disableButtons(0); //spuštění v režimu desítkové soustavy
     }
 
+    //===== Funkce pro tisk znaků =====
     private void printNumber(byte number)
     {
       string lastChar = getLastChar();
@@ -298,38 +299,6 @@ namespace GUI
       }
     }
 
-    private void removeLastChar()
-    {
-      string lastChar = getLastChar();
-
-      //Když je mazaný znak levá závorka, tak sníží počet levých závorek
-      if (lastChar == "(")
-        leftBracketsCount--;
-      //Když je mazaný znak pravá závorka, tak sníží počet pravých závorek
-      if (lastChar == ")")
-        rightBracketsCount--;
-      //Když je mazaný znak +,-,*,/,%, odmocnina nebo mocnina, tak nastaví příznak desetinné čárky na false
-      if ((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%") || (lastChar == unicodeRoot) || (lastChar == "^"))
-        dotFlag = false;
-      //Když je mazaný znak desetinná čárka, tak nastaví příznak desetinné čárky
-      if (lastChar == ",")
-        dotFlag = true;
-      tbExpression.Text = tbExpression.Text.Remove(tbExpression.Text.Length - 1);
-      if(tbExpression.Text.Length == 0)
-      {
-        tbExpression.Text += "0";
-      }
-    }
-
-    private void resetCalc()
-    {
-      tbExpression.Text = "0";
-      leftBracketsCount = 0;
-      rightBracketsCount = 0;
-      dotFlag = true;
-    }
-
-
     //===== Pomocné funkce =====
     private string getLastChar()
     {
@@ -374,7 +343,42 @@ namespace GUI
       }
     }
 
-    //===== Funkce pro ovládání přepínání mezi soustavami =====
+    //===== Ostatní funkce =====
+    private void removeLastChar()
+    {
+      string lastChar = getLastChar();
+
+      //Když je mazaný znak levá závorka, tak sníží počet levých závorek
+      if (lastChar == "(")
+        leftBracketsCount--;
+      //Když je mazaný znak pravá závorka, tak sníží počet pravých závorek
+      if (lastChar == ")")
+        rightBracketsCount--;
+      //Když je mazaný znak +,-,*,/,%, odmocnina nebo mocnina, tak nastaví příznak desetinné čárky na false
+      if ((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%") || (lastChar == unicodeRoot) || (lastChar == "^"))
+        dotFlag = false;
+      //Když je mazaný znak desetinná čárka, tak nastaví příznak desetinné čárky
+      if (lastChar == ",")
+        dotFlag = true;
+      tbExpression.Text = tbExpression.Text.Remove(tbExpression.Text.Length - 1);
+      if (tbExpression.Text.Length == 0)
+      {
+        tbExpression.Text += "0";
+      }
+    }
+
+    private void resetCalc()
+    {
+      tbExpression.Text = "0";
+      leftBracketsCount = 0;
+      rightBracketsCount = 0;
+      dotFlag = true;
+    }
+
+    /// <summary>
+    /// Funkce pro ovládání přepínání mezi soustavami
+    /// </summary>
+    /// <param name="numeralSystem">Vyjadřuje číselnou soustavu (0 - DEC, 1 - BIN, 2 - HEX, 3 - OCT)</param>
     private void enable_disableButtons(byte numeralSystem)
     {
       switch (numeralSystem)
@@ -656,113 +660,7 @@ namespace GUI
       printNumber(9);
     }
 
-    //===== Události spouštějící se při kliknutí na tlačítko desetinné čárky (tečky) =====
-    private void btnDot_Click(object sender, RoutedEventArgs e)
-    {
-      printDot();
-    }
-
-    //===== Události spouštějící se při kliknutí na tlačítka závorek =====
-    private void btnLeftBracket_Click(object sender, RoutedEventArgs e)
-    {
-      printLeftBracket();
-    }
-
-    private void btnRightBracket_Click(object sender, RoutedEventArgs e)
-    {
-      printRightBracket();
-    }
-
-    private void btnMultiply_Click(object sender, RoutedEventArgs e)
-    {
-      printMathOperator(unicodeMultiply);
-    }
-
-    private void btnDivide_Click(object sender, RoutedEventArgs e)
-    {
-      printMathOperator(unicodeDivision);
-    }
-
-    private void btnPlus_Click(object sender, RoutedEventArgs e)
-    {
-      printMathOperator(unicodePlus);
-    }
-
-    private void btnMinus_Click(object sender, RoutedEventArgs e)
-    {
-      printMathOperator(unicodeMinus);
-    }
-
-    private void btnPow_Click(object sender, RoutedEventArgs e)
-    {
-      printPow();
-    }
-
-    private void grdPowBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-    {
-      printPow();
-    }
-
-    private void btnRoot_Click(object sender, RoutedEventArgs e)
-    {
-      printRoot();
-    }
-
-    private void grdRootBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-    {
-      printRoot();
-    }
-
-    private void btnFact_Click(object sender, RoutedEventArgs e)
-    {
-      printFact();
-    }
-
-    private void btnLog_Click(object sender, RoutedEventArgs e)
-    {
-      printLog();
-    }
-
-    private void btnMod_Click(object sender, RoutedEventArgs e)
-    {
-      printMathOperator("%");
-    }
-
-    private void btnDel_Click(object sender, RoutedEventArgs e)
-    {
-      removeLastChar();
-    }
-
-    private void btnAc_Click(object sender, RoutedEventArgs e)
-    {
-      resetCalc();
-    }
-
-    private void btnCount_Click(object sender, RoutedEventArgs e)
-    {
-      closeBrackets();
-    }
-
-    private void rbDec_Click(object sender, RoutedEventArgs e)
-    {
-      enable_disableButtons(0);
-    }
-
-    private void rbBin_Click(object sender, RoutedEventArgs e)
-    {
-      enable_disableButtons(1);
-    }
-
-    private void rbHex_Click(object sender, RoutedEventArgs e)
-    {
-      enable_disableButtons(2);
-    }
-
-    private void rbOct_Click(object sender, RoutedEventArgs e)
-    {
-      enable_disableButtons(3);
-    }
-
+    //===== Události spouštějící se při kliknutí na tlačítka A-F =====
     private void btnA_Click(object sender, RoutedEventArgs e)
     {
       printNumber(10);
@@ -791,6 +689,118 @@ namespace GUI
     private void btnF_Click(object sender, RoutedEventArgs e)
     {
       printNumber(15);
+    }
+
+    //===== Události spouštějící se při kliknutí na tlačítko desetinné čárky (tečky) =====
+    private void btnDot_Click(object sender, RoutedEventArgs e)
+    {
+      printDot();
+    }
+
+    //===== Události spouštějící se při kliknutí na tlačítka závorek =====
+    private void btnLeftBracket_Click(object sender, RoutedEventArgs e)
+    {
+      printLeftBracket();
+    }
+
+    private void btnRightBracket_Click(object sender, RoutedEventArgs e)
+    {
+      printRightBracket();
+    }
+
+    //===== Události spouštějící se při kliknutí na tlačítka operátorů =====
+    private void btnMultiply_Click(object sender, RoutedEventArgs e)
+    {
+      printMathOperator(unicodeMultiply);
+    }
+
+    private void btnDivide_Click(object sender, RoutedEventArgs e)
+    {
+      printMathOperator(unicodeDivision);
+    }
+
+    private void btnPlus_Click(object sender, RoutedEventArgs e)
+    {
+      printMathOperator(unicodePlus);
+    }
+
+    private void btnMinus_Click(object sender, RoutedEventArgs e)
+    {
+      printMathOperator(unicodeMinus);
+    }
+
+    private void btnMod_Click(object sender, RoutedEventArgs e)
+    {
+      printMathOperator("%");
+    }
+
+    //===== Události spouštějící se při kliknutí na tlačítka mocniny a odmocniny =====
+    private void btnPow_Click(object sender, RoutedEventArgs e)
+    {
+      printPow();
+    }
+
+    private void grdPowBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+      printPow();
+    }
+
+    private void btnRoot_Click(object sender, RoutedEventArgs e)
+    {
+      printRoot();
+    }
+
+    private void grdRootBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+      printRoot();
+    }
+
+    //===== Události spouštějící se při kliknutí na tlačítka faktoriálu a logaritmu =====
+    private void btnFact_Click(object sender, RoutedEventArgs e)
+    {
+      printFact();
+    }
+
+    private void btnLog_Click(object sender, RoutedEventArgs e)
+    {
+      printLog();
+    }
+
+    //===== Události spouštějící se při kliknutí na tlačítka DEL, AC a "=" =====
+    private void btnDel_Click(object sender, RoutedEventArgs e)
+    {
+      removeLastChar();
+    }
+
+    private void btnAc_Click(object sender, RoutedEventArgs e)
+    {
+      resetCalc();
+    }
+
+    private void btnCount_Click(object sender, RoutedEventArgs e)
+    {
+      closeBrackets();
+    }
+
+    //===== Události spouštějící se při kliknutí na přepínače pro změnu soutstavy =====
+    private void rbDec_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(0);
+    }
+
+    private void rbBin_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(1);
+    }
+
+    private void rbHex_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(2);
+    }
+
+    private void rbOct_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(3);
     }
   }
 }
