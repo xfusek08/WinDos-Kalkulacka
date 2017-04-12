@@ -46,6 +46,7 @@ namespace GUI
     public MainWindow()
     {
       InitializeComponent();
+      enable_disableButtons(0); //spuštění v režimu desítkové soustavy
     }
 
     private void printNumber(byte number)
@@ -355,6 +356,195 @@ namespace GUI
       }
     }
 
+    //===== Funkce pro ovládání přepínání mezi soustavami =====
+    private void enable_disableButtons(byte numeralSystem)
+    {
+      switch (numeralSystem)
+      {
+        case 0: //desitkova soustava
+          //tlačítka A-F
+          btnA.IsEnabled = false;
+          btnB.IsEnabled = false;
+          btnC.IsEnabled = false;
+          btnD.IsEnabled = false;
+          btnE.IsEnabled = false;
+          btnF.IsEnabled = false;
+          //tlačítka 0-9
+          btnZero.IsEnabled = true;
+          btnOne.IsEnabled = true;
+          btnTwo.IsEnabled = true;
+          btnThree.IsEnabled = true;
+          btnFour.IsEnabled = true;
+          btnFive.IsEnabled = true;
+          btnSix.IsEnabled = true;
+          btnSeven.IsEnabled = true;
+          btnEight.IsEnabled = true;
+          btnNine.IsEnabled = true;
+          //tlačítka závorek
+          btnLeftBracket.IsEnabled = true;
+          btnRightBracket.IsEnabled = true;
+          //tačítko desetinné tečka
+          btnDot.IsEnabled = true;
+          //tlačítka operací
+          btnMultiply.IsEnabled = true;
+          btnDivide.IsEnabled = true;
+          btnPlus.IsEnabled = true;
+          btnMinus.IsEnabled = true;
+          btnMod.IsEnabled = true;
+          //tlačítka faktoriálu a logaritmu
+          btnFact.IsEnabled = true;
+          btnLog.IsEnabled = true;
+          //tlačítka mocniny a odmocniny
+          btnPow.IsEnabled = true;
+          grdPowBtn.IsEnabled = true;
+          lblPowBtn.IsEnabled = true;
+          btnRoot.IsEnabled = true;
+          grdRootBtn.IsEnabled = true;
+          lblRootBtn.IsEnabled = true;
+          grdRootBtn.IsEnabled = true;
+          //tlačítka DEL, AC a "="
+          btnDel.IsEnabled = true;
+          btnAc.IsEnabled = true;
+          btnCount.IsEnabled = true;
+          break;
+        case 1: //binarni soustava
+          //tlačítka A-F
+          btnA.IsEnabled = false;
+          btnB.IsEnabled = false;
+          btnC.IsEnabled = false;
+          btnD.IsEnabled = false;
+          btnE.IsEnabled = false;
+          btnF.IsEnabled = false;
+          //tlačítka 0-9
+          btnZero.IsEnabled = true;
+          btnOne.IsEnabled = true;
+          btnTwo.IsEnabled = false;
+          btnThree.IsEnabled = false;
+          btnFour.IsEnabled = false;
+          btnFive.IsEnabled = false;
+          btnSix.IsEnabled = false;
+          btnSeven.IsEnabled = false;
+          btnEight.IsEnabled = false;
+          btnNine.IsEnabled = false;
+          //tlačítka závorek
+          btnLeftBracket.IsEnabled = false;
+          btnRightBracket.IsEnabled = false;
+          //tačítko desetinné tečka
+          btnDot.IsEnabled = false;
+          //tlačítka operací
+          btnMultiply.IsEnabled = false;
+          btnDivide.IsEnabled = false;
+          btnPlus.IsEnabled = false;
+          btnMinus.IsEnabled = false;
+          btnMod.IsEnabled = false;
+          //tlačítka faktoriálu a logaritmu
+          btnFact.IsEnabled = false;
+          btnLog.IsEnabled = false;
+          //tlačítka mocniny a odmocniny
+          btnPow.IsEnabled = false;
+          grdPowBtn.IsEnabled = false;
+          lblPowBtn.IsEnabled = false;
+          btnRoot.IsEnabled = false;
+          grdRootBtn.IsEnabled = false;
+          lblRootBtn.IsEnabled = false;
+          //tlačítka DEL, AC a "="
+          btnDel.IsEnabled = true;
+          btnAc.IsEnabled = true;
+          btnCount.IsEnabled = true;
+          break;
+        case 2: //hexadecimalni soustava
+          //tlačítka A-F
+          btnA.IsEnabled = true;
+          btnB.IsEnabled = true;
+          btnC.IsEnabled = true;
+          btnD.IsEnabled = true;
+          btnE.IsEnabled = true;
+          btnF.IsEnabled = true;
+          //tlačítka 0-9
+          btnZero.IsEnabled = true;
+          btnOne.IsEnabled = true;
+          btnTwo.IsEnabled = true;
+          btnThree.IsEnabled = true;
+          btnFour.IsEnabled = true;
+          btnFive.IsEnabled = true;
+          btnSix.IsEnabled = true;
+          btnSeven.IsEnabled = true;
+          btnEight.IsEnabled = true;
+          btnNine.IsEnabled = true;
+          //tlačítka závorek
+          btnLeftBracket.IsEnabled = false;
+          btnRightBracket.IsEnabled = false;
+          //tačítko desetinné tečka
+          btnDot.IsEnabled = false;
+          //tlačítka operací
+          btnMultiply.IsEnabled = false;
+          btnDivide.IsEnabled = false;
+          btnPlus.IsEnabled = false;
+          btnMinus.IsEnabled = false;
+          btnMod.IsEnabled = false;
+          //tlačítka faktoriálu a logaritmu
+          btnFact.IsEnabled = false;
+          btnLog.IsEnabled = false;
+          //tlačítka mocniny a odmocniny
+          btnPow.IsEnabled = false;
+          grdPowBtn.IsEnabled = false;
+          lblPowBtn.IsEnabled = false;
+          btnRoot.IsEnabled = false;
+          grdRootBtn.IsEnabled = false;
+          lblRootBtn.IsEnabled = false;
+          //tlačítka DEL, AC a "="
+          btnDel.IsEnabled = true;
+          btnAc.IsEnabled = true;
+          btnCount.IsEnabled = true;
+          break;
+        case 3: //osmičková soustava
+          //tlačítka A-F
+          btnA.IsEnabled = false;
+          btnB.IsEnabled = false;
+          btnC.IsEnabled = false;
+          btnD.IsEnabled = false;
+          btnE.IsEnabled = false;
+          btnF.IsEnabled = false;
+          //tlačítka 0-9
+          btnZero.IsEnabled = true;
+          btnOne.IsEnabled = true;
+          btnTwo.IsEnabled = true;
+          btnThree.IsEnabled = true;
+          btnFour.IsEnabled = true;
+          btnFive.IsEnabled = true;
+          btnSix.IsEnabled = true;
+          btnSeven.IsEnabled = true;
+          btnEight.IsEnabled = false;
+          btnNine.IsEnabled = false;
+          //tlačítka závorek
+          btnLeftBracket.IsEnabled = false;
+          btnRightBracket.IsEnabled = false;
+          //tačítko desetinné tečka
+          btnDot.IsEnabled = false;
+          //tlačítka operací
+          btnMultiply.IsEnabled = false;
+          btnDivide.IsEnabled = false;
+          btnPlus.IsEnabled = false;
+          btnMinus.IsEnabled = false;
+          btnMod.IsEnabled = false;
+          //tlačítka faktoriálu a logaritmu
+          btnFact.IsEnabled = false;
+          btnLog.IsEnabled = false;
+          //tlačítka mocniny a odmocniny
+          btnPow.IsEnabled = false;
+          grdPowBtn.IsEnabled = false;
+          lblPowBtn.IsEnabled = false;
+          btnRoot.IsEnabled = false;
+          grdRootBtn.IsEnabled = false;
+          lblRootBtn.IsEnabled = false;
+          //tlačítka DEL, AC a "="
+          btnDel.IsEnabled = true;
+          btnAc.IsEnabled = true;
+          btnCount.IsEnabled = true;
+          break;
+      }
+    }
+
     //===== Události spouštějící se při najetí a opuštění tlačítka odmocniny =====
     private void grdRootBtn_MouseEnter(object sender, MouseEventArgs e)
     {
@@ -533,6 +723,26 @@ namespace GUI
     private void btnCount_Click(object sender, RoutedEventArgs e)
     {
       closeBrackets();
+    }
+
+    private void rbDec_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(0);
+    }
+
+    private void rbBin_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(1);
+    }
+
+    private void rbHex_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(2);
+    }
+
+    private void rbOct_Click(object sender, RoutedEventArgs e)
+    {
+      enable_disableButtons(3);
     }
   }
 }
