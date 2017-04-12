@@ -339,10 +339,19 @@ namespace GUI
 
     private void closeBrackets()
     {
-      while (leftBracketsCount > 0)
+      string lastChar = getLastChar();
+
+      //Doplnění nuly, když je poslední znak "("
+      if (lastChar == "(")
+      {
+        tbExpression.Text = tbExpression.Text + "0";
+      }
+
+      //Uzavírá závorky
+      while (rightBracketsCount < leftBracketsCount)
       {
         tbExpression.Text = tbExpression.Text + ")";
-        leftBracketsCount--;
+        rightBracketsCount++;
       }
     }
 
@@ -523,7 +532,7 @@ namespace GUI
 
     private void btnCount_Click(object sender, RoutedEventArgs e)
     {
-      
+      closeBrackets();
     }
   }
 }
