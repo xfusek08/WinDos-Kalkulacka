@@ -730,7 +730,7 @@
       <!--<TextBlock x:Name="lblRootBtn" Panel.ZIndex="200" Text="x    &#x0a;" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" MouseEnter="lblRootBtn_MouseEnter" MouseMove="lblRootBtn_MouseMove"/>-->
     </Grid>
 
-    <Button x:Name="btnA" Content="A" Grid.Column="0" Grid.Row="4" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnA" Content="A" Grid.Column="0" Grid.Row="4" BorderThickness="0.1" FontSize="24" Click="btnA_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -756,7 +756,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnB" Content="B" Grid.Column="1" Grid.Row="4" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnB" Content="B" Grid.Column="1" Grid.Row="4" BorderThickness="0.1" FontSize="24" Click="btnB_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -782,7 +782,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnC" Content="C" Grid.Column="0" Grid.Row="5" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnC" Content="C" Grid.Column="0" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnC_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -808,7 +808,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnD" Content="D" Grid.Column="1" Grid.Row="5" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnD" Content="D" Grid.Column="1" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnD_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -834,7 +834,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnE" Content="E" Grid.Column="0" Grid.Row="6" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnE" Content="E" Grid.Column="0" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnE_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -860,7 +860,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnF" Content="F" Grid.Column="1" Grid.Row="6" BorderThickness="0.1" FontSize="24">
+    <Button x:Name="btnF" Content="F" Grid.Column="1" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnF_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>

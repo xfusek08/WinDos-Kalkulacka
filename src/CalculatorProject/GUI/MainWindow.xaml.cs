@@ -98,6 +98,24 @@ namespace GUI
         case 9:
           tbExpression.Text = tbExpression.Text + "9";
           break;
+        case 10:
+          tbExpression.Text = tbExpression.Text + "A";
+          break;
+        case 11:
+          tbExpression.Text = tbExpression.Text + "B";
+          break;
+        case 12:
+          tbExpression.Text = tbExpression.Text + "C";
+          break;
+        case 13:
+          tbExpression.Text = tbExpression.Text + "D";
+          break;
+        case 14:
+          tbExpression.Text = tbExpression.Text + "E";
+          break;
+        case 15:
+          tbExpression.Text = tbExpression.Text + "F";
+          break;
       }
     }
 
@@ -743,6 +761,36 @@ namespace GUI
     private void rbOct_Click(object sender, RoutedEventArgs e)
     {
       enable_disableButtons(3);
+    }
+
+    private void btnA_Click(object sender, RoutedEventArgs e)
+    {
+      printNumber(10);
+    }
+
+    private void btnB_Click(object sender, RoutedEventArgs e)
+    {
+      printNumber(11);
+    }
+
+    private void btnC_Click(object sender, RoutedEventArgs e)
+    {
+      printNumber(12);
+    }
+
+    private void btnD_Click(object sender, RoutedEventArgs e)
+    {
+      printNumber(13);
+    }
+
+    private void btnE_Click(object sender, RoutedEventArgs e)
+    {
+      printNumber(14);
+    }
+
+    private void btnF_Click(object sender, RoutedEventArgs e)
+    {
+      printNumber(15);
     }
   }
 }
