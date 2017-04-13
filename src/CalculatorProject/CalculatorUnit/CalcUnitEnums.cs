@@ -1,7 +1,7 @@
 ﻿/*******************************************************************
 * Název projektu: IVS-kalkulačka
 * Balíček: CalculatorUnit
-* Soubor: Calculation.cs
+* Soubor: CalcUnitEnums.cs
 * Datum: 03.04.2017
 * Autor: Petr Fusek
 * Naposledy upravil: Petr Fusek

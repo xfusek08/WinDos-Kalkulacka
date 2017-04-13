@@ -4,8 +4,8 @@
 * Soubor: NumberConverter.cs
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
-* Naposledy upravil: Petr Fusek
-* Datum poslední změny: 09.04.2017
+* Naposledy upravil: Pavel Vosyka
+* Datum poslední změny: 13.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -58,8 +58,6 @@ namespace CalculatorUnit
     ///   </list>
     /// </param>
     /// <returns>číslo v podobě řetězce</returns>
-    /// \bug Pokud je desetinná část čísla příliš malá, vypisuje nuly:<br/>10.000004 ==> 10.0000.
-    ///
     /// \bug Pokud je hodnota příliš velká, tak vypisuje nesmyslné hodnoty
     public static string ToString(double value, int numbase, string format)
     {
@@ -98,8 +96,11 @@ namespace CalculatorUnit
       double fractionalDigits = value - intvalue; //desetinná část
       int digit; //proměnná pro mezivýsledky, vždy jeden znak
       resultstr += Convert.ToString((int)intvalue, numbase); //celá část čísla se převede pomocí standartní metody
-      if(fractionalDigits != 0)
-        resultstr += "."; //vložení desetinné tečky
+      if (fractionalDigits == 0)
+      {
+        return resultstr;
+      }
+      resultstr += "."; //vložení desetinné tečky
       for (int i = 0; i < c_stringDefaultPrecision; i++) //převod desetinné části s požadovanou přesností
       {
         fractionalDigits *= numbase;
@@ -109,7 +110,27 @@ namespace CalculatorUnit
         resultstr += PrintDigit(digit);
         fractionalDigits -= digit;
       }
-      return resultstr;
+      return postprocessStr(resultstr);
+    }
+
+    /// <summary>
+    /// Odstraní nuly na konci v desetinných číslech, případně desetinnou tečku.
+    /// <param name="input">desetinné číslo</param>
+    /// </summary>
+    /// <returns></returns>
+    private static string postprocessStr(string input)
+    {
+      int end = input.Length - 1;
+      for(; end>0; end--)
+      {
+        if(input[end] != '0')
+        {
+          break;
+        }
+      }
+      if (input[end] == '.')
+        end--;
+      return input.Remove(end+1, input.Length-end-1);
     }
 
     /// <summary>
