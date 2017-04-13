@@ -1,5 +1,5 @@
 /*******************************************************************
-* Název projektu: Testovací třída pro testování funkcí matematické knihovny
+* Název projektu: IVS-kalkulačka
 * Balíček: ProjectTesting
 * Soubor: MathLibTest.cs
 * Datum: 21.03.2017

@@ -93,13 +93,13 @@ namespace ProjectTesting
       Assert.AreEqual(-8, calcunit.Value, PRECISION);
       calcunit.Expression = "-2^-3";
       Assert.AreEqual(-0.125, calcunit.Value, PRECISION);
-      calcunit.Expression = "27@3";
+      calcunit.Expression = "3@27";
       Assert.AreEqual(3, calcunit.Value, PRECISION);
-      calcunit.Expression = "-27@3";
+      calcunit.Expression = "-3@27";
       Assert.AreEqual(-3, calcunit.Value, PRECISION);
-      calcunit.Expression = "1000@-3";
+      calcunit.Expression = "(-3)@1000";
       Assert.AreEqual(0.1, calcunit.Value, PRECISION);
-      calcunit.Expression = "-1000@-3";
+      calcunit.Expression = "-(-3)@1000";
       Assert.AreEqual(-0.1, calcunit.Value, PRECISION);
       calcunit.Expression = "6%3";
       Assert.AreEqual(0, calcunit.Value, PRECISION);
@@ -169,7 +169,7 @@ namespace ProjectTesting
       Assert.AreEqual(2, calcunit.Value, PRECISION);
       calcunit.Expression = "(6 - 1)^(3 * 1)";
       Assert.AreEqual(125, calcunit.Value, PRECISION);
-      calcunit.Expression = "(30 - 3)@(6 - 3)";
+      calcunit.Expression = "(6 - 3)@(30 - 3)";
       Assert.AreEqual(3, calcunit.Value, PRECISION);
     }
 
@@ -180,11 +180,11 @@ namespace ProjectTesting
       Assert.AreEqual(-1, calcunit.Value, PRECISION);
       calcunit.Expression = "(2*8 - (8 + 4)) + (12 / 3)";
       Assert.AreEqual(8, calcunit.Value, PRECISION);
-      calcunit.Expression = "(-16 / (5 - 1)) - ((30 - 3)@(6 - 3) * -1)";
+      calcunit.Expression = "(-16 / (5 - 1)) - ((6 - 3)@(30 - 3) * -1)";
       Assert.AreEqual(-1, calcunit.Value, PRECISION);
-      calcunit.Expression = "((7-3)! / (5 + 1)) - ((30 - 3)@(6 - 3) * -1)";
+      calcunit.Expression = "((7-3)! / (5 + 1)) - ((6 - 3)@(30 - 3) * -1)";
       Assert.AreEqual(7, calcunit.Value, PRECISION);
-      calcunit.Expression = "(-(7-3)! / (5 + 1)) - ((30 - (L(200 - 50 * 2) + 1))@(6 - 3) * -1)";
+      calcunit.Expression = "(-(7-3)! / (5 + 1)) - ((6 - 3)@(30 - (L(200 - 50 * 2) + 1)) * -1)";
       Assert.AreEqual(-1, calcunit.Value, PRECISION);
     }
 
@@ -206,7 +206,7 @@ namespace ProjectTesting
       calcunit.Expression = "8 ^ 3";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
       Assert.IsFalse(double.IsNaN(calcunit.Value));
-      calcunit.Expression = "16 @ 2";
+      calcunit.Expression = "2 @ 16";
       Assert.AreEqual(CalcErrorType.None, calcunit.ErrorType);
       Assert.IsFalse(double.IsNaN(calcunit.Value));
       calcunit.Expression = "8 * 3";
@@ -232,7 +232,7 @@ namespace ProjectTesting
       calcunit.Expression = "0 /0";
       Assert.AreEqual(CalcErrorType.FuncDomainError, calcunit.ErrorType);
       Assert.IsTrue(double.IsNaN(calcunit.Value));
-      calcunit.Expression = "(-1) @ 3";
+      calcunit.Expression = "3 @ (-1)";
       Assert.AreEqual(CalcErrorType.FuncDomainError, calcunit.ErrorType);
       Assert.IsTrue(double.IsNaN(calcunit.Value));
       calcunit.Expression = "(-20)!";
@@ -299,13 +299,13 @@ namespace ProjectTesting
       calcunit.Expression = "5^^3";
       Assert.AreEqual(CalcErrorType.ExprFormatError, calcunit.ErrorType);
       Assert.AreEqual(double.NaN, calcunit.Value);
-      calcunit.Expression = "5 @ ";
+      calcunit.Expression = "@ 5";
       Assert.AreEqual(CalcErrorType.ExprFormatError, calcunit.ErrorType);
       Assert.AreEqual(double.NaN, calcunit.Value);
-      calcunit.Expression = "@5";
+      calcunit.Expression = "5 @";
       Assert.AreEqual(CalcErrorType.ExprFormatError, calcunit.ErrorType);
       Assert.AreEqual(double.NaN, calcunit.Value);
-      calcunit.Expression = "5 @@ 1";
+      calcunit.Expression = "1 @@ 5";
       Assert.AreEqual(CalcErrorType.ExprFormatError, calcunit.ErrorType);
       Assert.AreEqual(double.NaN, calcunit.Value);
       calcunit.Expression = "!";
