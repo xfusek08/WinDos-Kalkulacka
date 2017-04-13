@@ -16,7 +16,7 @@
  * @file NumberConverter.cs
  * @author Petr Fusek
  * @author Pavel Vosyka
- * @date 11.04.2017
+ * @date 13.04.2017
  */
 
 using System;

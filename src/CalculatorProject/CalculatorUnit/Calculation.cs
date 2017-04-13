@@ -5,7 +5,7 @@
 * Datum: 03.04.2017
 * Autor: Petr Fusek
 * Naposledy upravil: Petr Fusek
-* Datum poslední změny: 11.04.2017
+* Datum poslední změny: 13.04.2017
 *
 * Popis: Třída, která zapouztřuje celý jeden matematický výpočet do jednoho objektu.
 * Vyhodnocuje matematické výrazy pomocí vlastního zjednodušeného jazyka.
@@ -17,7 +17,7 @@
  * @file Calculation.cs
  * @author Petr Fusek
  * @author Pavel Vosyka
- * @date 11.04.2017
+ * @date 13.04.2017
  */
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace CalculatorUnit
   /// dodatečné operátory, představující další funkce kalkulačky. <br/>
   /// Příklad složitějšího výrazu:
   /// \code
-  /// (-(7-3)!/(5+1))-((30-(L(200-50*2)+1))@(6-3)*-1)
+  /// (-(7-3)!/(5+1))-((6-3)@(30-(L(200-50*2)+1))*-1)
   /// \endcode
   /// Všechny mezery ve výrazu jsou ignorovány.
   ///
@@ -58,7 +58,7 @@ namespace CalculatorUnit
   /// | ``!`` | ``x!`` | faktorial x |Fact()|
   /// | ``L`` | ``Lx`` | logaritmus z x při základu 10 |Log()|
   /// | ``^`` | ``x^y``| x umocněné na y |Pow()|
-  /// | ``@`` | ``x@y``| y-tá odmocnina z x |Root()|
+  /// | ``@`` | ``x@y``| x-tá odmocnina z y |Root()|
   /// | ``%`` | ``x%y``| x modulo y |Modulo()|
   /// | ``*`` | ``x*y``| x krát y |Multipy()|
   /// | ``/`` | ``x/y``| x děleno y |Divide()|
@@ -517,7 +517,7 @@ namespace CalculatorUnit
         case '^':
           return o_mathLib.Pow(leftOp, rightOp);
         case '@':
-          return o_mathLib.Root(leftOp, rightOp);
+          return o_mathLib.Root(rightOp, leftOp);
         case '%':
           return o_mathLib.Modulo(leftOp, rightOp);
         case 'L':
