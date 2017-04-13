@@ -149,12 +149,12 @@ namespace GUI
 
       if (isDotPrintable && isLastCharNumber)  //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
       {
-        tbExpression.Text = tbExpression.Text + ",";  //...vytiskne desetinnou čárku
+        tbExpression.Text = tbExpression.Text + ".";  //...vytiskne desetinnou čárku
         isDotPrintable = false;
       }
       else if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%")  //Pokud je poslední znak operátor, tak...
       {
-        tbExpression.Text = tbExpression.Text + "0,";  //...vytiskne nulu a desetinnou čárku
+        tbExpression.Text = tbExpression.Text + "0.";  //...vytiskne nulu a desetinnou čárku
         isDotPrintable = false;
       }
     }
@@ -375,7 +375,7 @@ namespace GUI
       if ((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%") || (lastChar == unicodeRoot) || (lastChar == "^"))
         isDotPrintable = false;
       //Když je mazaný znak desetinná čárka, tak nastaví příznak desetinné čárky
-      if (lastChar == ",")
+      if (lastChar == ".")
         isDotPrintable = true;
       tbExpression.Text = tbExpression.Text.Remove(tbExpression.Text.Length - 1);
       if (tbExpression.Text.Length == 0)
@@ -704,7 +704,7 @@ namespace GUI
         grdRootBtn.IsEnabled = false;
         lblRootBtn.IsEnabled = false;
       }
-      else if (lastChar == ",")
+      else if (lastChar == ".")
       {
         //tlačítka závorek
         btnLeftBracket.IsEnabled = false;

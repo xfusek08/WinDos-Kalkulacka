@@ -56,7 +56,7 @@
       <TextBox x:Name="tbExpression" TextWrapping="Wrap" Text="" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White" IsReadOnly="True" BorderThickness="1,1,1,0" TextChanged="tbExpression_TextChanged"/>
     </Grid>
     <Grid x:Name="grid2" Grid.Row="2" Grid.ColumnSpan="7">
-      <TextBox x:Name="tbResult" TextWrapping="Wrap" Text="20" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="#FFC107" IsReadOnly="True" BorderThickness="1,0,1,1"/>
+      <TextBox x:Name="tbResult" TextWrapping="Wrap" Text="" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="#FFC107" IsReadOnly="True" BorderThickness="1,0,1,1"/>
     </Grid>
     <Label x:Name="label" Content="Režim :" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" Foreground="White" Padding="0"/>
     <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="3" Foreground="White" IsChecked="True" GroupName="rbgNumeralSystem" Click="rbDec_Click"/>
@@ -463,7 +463,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnDot" Content="," Grid.Column="4" Grid.Row="8" BorderThickness="0.1" FontSize="24" Click="btnDot_Click">
+    <Button x:Name="btnDot" Content="." Grid.Column="4" Grid.Row="8" BorderThickness="0.1" FontSize="24" Click="btnDot_Click">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
