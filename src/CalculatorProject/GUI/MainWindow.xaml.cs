@@ -26,6 +26,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CalculatorUnit;
 
 namespace GUI
 {
@@ -42,6 +43,7 @@ namespace GUI
     private string unicodeMultiply = "\u00D7";
     private string unicodeDivision = "\u00F7";
     private string unicodeRoot = "\u221A";
+    private NumSystem currentNumSys = NumSystem.Dec; //výchozí číselná soustava je desitkova
 
     public MainWindow()
     {
@@ -343,6 +345,34 @@ namespace GUI
       }
     }
 
+    private void countExpr()
+    {
+      Calculation calc;
+
+      closeBrackets();  //uzavření závorek, aby nevznikla chyba
+
+      calc = new Calculation(tbExpression.Text);
+
+      switch (calc.ErrorType)
+      {
+        case CalcErrorType.None:
+          tbResult.Text = calc.GetAsString(currentNumSys, "");
+          break;
+        case CalcErrorType.FuncDomainError:
+          tbResult.Text = "Chybný definiční obor funkce.";
+          break;
+        case CalcErrorType.DataTypeOwerflow:
+          tbResult.Text = "Přetečení.";
+          break;
+        case CalcErrorType.ExprFormatError:
+          tbResult.Text = "Chybný výraz.";
+          break;
+        case CalcErrorType.UnknownError:
+          tbResult.Text = "Nespecifikovaná chyba.";
+          break;
+      }
+    }
+
     //===== Ostatní funkce =====
     private void removeLastChar()
     {
@@ -375,6 +405,16 @@ namespace GUI
       dotFlag = true;
     }
 
+    private void convertResult(NumSystem numSys)
+    {
+      if (tbResult.Text != "")  //Pokud má co převádět, tak převede
+      {
+        Calculation calc;
+        calc = new Calculation(tbResult.Text);
+        tbResult.Text = calc.GetAsString(numSys, "");
+      }
+    }
+
     /// <summary>
     /// Funkce pro ovládání přepínání mezi soustavami
     /// </summary>
@@ -384,7 +424,9 @@ namespace GUI
       resetCalc();  //smaže oblast pro výraz při přepnutí do jiné soustavy - aby zde nezůstávali neplatné znaky pro danou soustavu
       switch (numeralSystem)
       {
-        case 0: //desitkova soustava
+        case 0: //desítkova soustava
+          currentNumSys = NumSystem.Dec;  //současná soustava je desítková
+          convertResult(NumSystem.Dec);
           //tlačítka A-F
           btnA.IsEnabled = false;
           btnB.IsEnabled = false;
@@ -431,6 +473,8 @@ namespace GUI
           btnCount.IsEnabled = true;
           break;
         case 1: //binarni soustava
+          currentNumSys = NumSystem.Bin;  //současná soustava je dvojková
+          convertResult(NumSystem.Bin);
           //tlačítka A-F
           btnA.IsEnabled = false;
           btnB.IsEnabled = false;
@@ -476,6 +520,8 @@ namespace GUI
           btnCount.IsEnabled = true;
           break;
         case 2: //hexadecimalni soustava
+          currentNumSys = NumSystem.Hex;  //současná soustava je hexadecimální
+          convertResult(NumSystem.Hex);
           //tlačítka A-F
           btnA.IsEnabled = true;
           btnB.IsEnabled = true;
@@ -521,6 +567,8 @@ namespace GUI
           btnCount.IsEnabled = true;
           break;
         case 3: //osmičková soustava
+          currentNumSys = NumSystem.Oct;  //současná soustava je osmičková
+          convertResult(NumSystem.Oct);
           //tlačítka A-F
           btnA.IsEnabled = false;
           btnB.IsEnabled = false;
@@ -780,7 +828,7 @@ namespace GUI
 
     private void btnCount_Click(object sender, RoutedEventArgs e)
     {
-      closeBrackets();
+      countExpr();
     }
 
     //===== Události spouštějící se při kliknutí na přepínače pro změnu soutstavy =====
