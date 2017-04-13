@@ -5,13 +5,19 @@
 * Datum: 06.04.2017
 * Autor: Jaromír Franěk
 * Naposledy upravil: Jaromír Franěk
-* Datum poslední změny: 11.04.2017
+* Datum poslední změny: 13.04.2017
 *
 * Popis: Matematická knihovna MathLib.
 * Odpovědný za projekt je Jaromír Franěk.
 *
 *****************************************************************/
 
+/**
+ * @brief Matematická knihovna
+ * @file CalcMath.cs
+ * @author Jaromír Franěk
+ * @date 13.04.3017
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +25,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 
+/**
+  * @brief Matematická knihovna
+  * @package MathLib
+  *  
+  * Matematická knihovna pro výpočet základních matematických operací
+  * @author  Jaromír Franěk
+  */
 namespace MathLib
 {
-  /// <summary>
-  /// Matematická knihovna
-  /// </summary>
+  /// <summary>Matematická knihovna</summary>
+  /// <description>Třída obsahující metody základních matematických operací</description>
   public class CalcMath
   {
     /// <summary>Sčítání</summary>
@@ -71,7 +83,7 @@ namespace MathLib
     }
 
     /// <summary>Mocnina</summary>
-    /// <description>Umocní argument x argumentem y</description>
+    /// <description>Obecná y-tá mocnina z "x"</description>
     /// <param name="x">Předá základ typu double</param>
     /// <param name="y">Předá exponent typu double</param>
     /// <returns>Vrací y-tou mocninu argumentu x</returns>
@@ -104,7 +116,7 @@ namespace MathLib
     }
 
     /// <summary>Odmocnina</summary>
-    /// <description>Odmocní argument a argumentem x</description>
+    /// <description>Obecná x-tá odmocnina z "a"</description>
     /// <param name="a">Předá základ typu double</param>
     /// <param name="x">Předá exponent typu double</param>
     /// <returns>Vrací x-tou odmocninu argumentu a</returns>
