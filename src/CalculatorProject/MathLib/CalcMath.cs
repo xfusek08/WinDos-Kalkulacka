@@ -165,7 +165,7 @@ namespace MathLib
     /// <summary>Logaritmus</summary>
     /// <description>Logarmitmus při základu 10 argumentu x </description>
     /// <param name="x">Předá hodnotu typu double, ze které bude logaritmus vypočítán</param>
-    /// <returns>Vrací výpočet logaritmu z čísla a o základu 10</returns>
+    /// <returns>Vrací výpočet logaritmu z čísla x o základu 10</returns>
     public double Log(double x)
     {
       if (x == 0)
