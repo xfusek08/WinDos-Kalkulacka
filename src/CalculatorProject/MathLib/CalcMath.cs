@@ -16,7 +16,7 @@
  * @brief Matematická knihovna
  * @file CalcMath.cs
  * @author Jaromír Franěk
- * @date 13.04.3017
+ * @date 13.04.2017
  */
 using System;
 using System.Collections.Generic;
@@ -130,7 +130,7 @@ namespace MathLib
     }
 
     /// <summary>Factorial</summary>
-    /// <description>Factorial z čísla x</description>
+    /// <description>Factorial z čísla x, o maximální hodnotě 170</description>
     /// <param name="b">Předá hodnotu factorialu typu byte</param>
     /// <returns>Vrací factorial z čísla x</returns>
     public double Fact(Byte x)
