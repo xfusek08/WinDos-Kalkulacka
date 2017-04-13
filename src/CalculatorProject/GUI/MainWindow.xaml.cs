@@ -31,7 +31,7 @@ using CalculatorUnit;
 namespace GUI
 {
   /// <summary>
-  /// Interaction logic for MainWindow.xaml
+  /// Interakční logika pro MainWindow.xaml
   /// </summary>
   public partial class MainWindow : Window
   {
@@ -43,15 +43,20 @@ namespace GUI
     private string unicodeMultiply = "\u00D7";
     private string unicodeDivision = "\u00F7";
     private string unicodeRoot = "\u221A";
-    private NumSystem currentNumSys = NumSystem.Dec; //výchozí číselná soustava je desitkova
+    private NumSystem currentNumSys = NumSystem.Dec; //výchozí číselná soustava je desítková
 
     public MainWindow()
     {
       InitializeComponent();
-      enable_disableButtons(0); //spuštění v režimu desítkové soustavy
+      switchNumeralSystem(0); //spuštění v režimu desítkové soustavy
     }
 
     //===== Funkce pro tisk znaků =====
+
+    /// <summary>
+    /// Funkce, která tiskne znaky
+    /// </summary>
+    /// <param name="number">Znak pro vytisknutí.</param>
     private void printNumber(byte number)
     {
       string lastChar = getLastChar();
@@ -302,6 +307,10 @@ namespace GUI
     }
 
     //===== Pomocné funkce =====
+    /// <summary>
+    /// Funkce, která vrací poslední znak v oblasti pro výraz
+    /// </summary>
+    /// <returns>Poslední znak v oblasti pro výraz.</returns>
     private string getLastChar()
     {
       if (tbExpression.Text.Length > 0)
@@ -312,6 +321,11 @@ namespace GUI
       return "";
     }
 
+    /// <summary>
+    /// Funkce, která zjišťuje, zda je znak číslo
+    /// </summary>
+    /// <param name="c">Znak pro test konverze na cislo</param>
+    /// <returns>Vrací true, když je znak číslo a false, když znak není číslo.</returns>
     private bool isCharNumber(string c)
     {
       int num;
@@ -327,6 +341,12 @@ namespace GUI
       }
     }
 
+    /// <summary>
+    /// Funkce uzavírající závorky
+    /// </summary>
+    /// <description>
+    /// Podle počtu otevíracích závorek doplní počet závorek uzavíracích.
+    /// </description>
     private void closeBrackets()
     {
       string lastChar = getLastChar();
@@ -345,6 +365,13 @@ namespace GUI
       }
     }
 
+    /// <summary>
+    /// Funkce, která vypočítá výraz
+    /// </summary>
+    /// <description>
+    /// Založí instanci objektu Calculation, která vypočítá výraz a hodnotu uloží
+    /// do textboxu určeného pro výsledek.
+    /// </description>
     private void countExpr()
     {
       Calculation calc;
@@ -374,6 +401,14 @@ namespace GUI
     }
 
     //===== Ostatní funkce =====
+
+    /// <summary>
+    /// Funkce odstraňující poslední znak
+    /// </summary>
+    /// <description>
+    /// Odstraňuje poslední znak a zároveň nastavuje příznak desetinné tečky a mění proměnnou početu závorek,
+    /// kvůli korektnímu opakovanému tisku znaků.
+    /// </description>
     private void removeLastChar()
     {
       string lastChar = getLastChar();
@@ -397,14 +432,27 @@ namespace GUI
       }
     }
 
-    private void resetCalc()
+    /// <summary>
+    /// Funkce, která nastavuje kalkulačku do výchozího stavu.
+    /// </summary>
+    /// <param name="all">Resetuje i oblast pro výsledek.</param>
+    private void resetCalc(bool all)
     {
       tbExpression.Text = "0";
       leftBracketsCount = 0;
       rightBracketsCount = 0;
       dotFlag = true;
+      if (all == true)
+        tbResult.Text = "";
     }
 
+    /// <summary>
+    /// Funkce pro konverzi výsledku
+    /// </summary>
+    /// <description>
+    /// Pomocí třídy Calculation konvertuje výsledek.
+    /// </description>
+    /// <param name="numSys">Soustava, do které se má převádět.</param>
     private void convertResult(NumSystem numSys)
     {
       if (tbResult.Text != "")  //Pokud má co převádět, tak převede
@@ -418,10 +466,14 @@ namespace GUI
     /// <summary>
     /// Funkce pro ovládání přepínání mezi soustavami
     /// </summary>
+    /// <desctiption>
+    /// Zakazuje a povoluje tlačítka pro počítání v dané soustavě.
+    /// Konvertuje výsledek. Nastavuje aktuální číselnou soustavu.
+    /// </desctiption>
     /// <param name="numeralSystem">Vyjadřuje číselnou soustavu (0 - DEC, 1 - BIN, 2 - HEX, 3 - OCT)</param>
-    private void enable_disableButtons(byte numeralSystem)
+    private void switchNumeralSystem(byte numeralSystem)
     {
-      resetCalc();  //smaže oblast pro výraz při přepnutí do jiné soustavy - aby zde nezůstávali neplatné znaky pro danou soustavu
+      resetCalc(false);  //smaže oblast pro výraz při přepnutí do jiné soustavy - aby zde nezůstávali neplatné znaky pro danou soustavu
       switch (numeralSystem)
       {
         case 0: //desítkova soustava
@@ -823,7 +875,7 @@ namespace GUI
 
     private void btnAc_Click(object sender, RoutedEventArgs e)
     {
-      resetCalc();
+      resetCalc(true);  //smaže i oblast pro výsledek
     }
 
     private void btnCount_Click(object sender, RoutedEventArgs e)
@@ -834,22 +886,22 @@ namespace GUI
     //===== Události spouštějící se při kliknutí na přepínače pro změnu soutstavy =====
     private void rbDec_Click(object sender, RoutedEventArgs e)
     {
-      enable_disableButtons(0);
+      switchNumeralSystem(0);
     }
 
     private void rbBin_Click(object sender, RoutedEventArgs e)
     {
-      enable_disableButtons(1);
+      switchNumeralSystem(1);
     }
 
     private void rbHex_Click(object sender, RoutedEventArgs e)
     {
-      enable_disableButtons(2);
+      switchNumeralSystem(2);
     }
 
     private void rbOct_Click(object sender, RoutedEventArgs e)
     {
-      enable_disableButtons(3);
+      switchNumeralSystem(3);
     }
   }
 }
