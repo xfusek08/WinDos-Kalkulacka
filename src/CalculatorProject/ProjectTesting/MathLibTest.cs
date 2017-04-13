@@ -1,4 +1,4 @@
-/*******************************************************************
+﻿/*******************************************************************
 * Název projektu: Testovací třída pro testování funkcí matematické knihovny
 * Balíček: ProjectTesting
 * Soubor: MathLibTest.cs
@@ -16,8 +16,8 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MathLib;
 using System.Globalization;
+using MathLib;
 
 namespace ProjectTesting
 {
