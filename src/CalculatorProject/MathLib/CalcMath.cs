@@ -19,10 +19,6 @@
  * @date 13.04.2017
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Globalization;
 
 /**
@@ -132,7 +128,7 @@ namespace MathLib
     /// <summary>Factorial</summary>
     /// <description>Factorial z čísla x, o maximální hodnotě 170</description>
     /// <param name="b">Předá hodnotu factorialu typu byte</param>
-    /// <returns>Vrací factorial z čísla x</returns>
+    /// <returns>Pokud je x < 170, vrací factorial z čísla x, pokud je x > 170, vrací PositiveInfinity.</returns>
     public double Fact(Byte x)
     {
       if (x <= 1)
