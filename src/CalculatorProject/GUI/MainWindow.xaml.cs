@@ -5,7 +5,7 @@
 * Datum: 05.04.2017
 * Autor: Radim Blaha
 * Naposledy upravil: Radim Blaha
-* Datum poslední změny: 12.04.2017
+* Datum poslední změny: 14.04.2017
 *
 * Popis: Třída, která ovládá grafické prvky hlavního okna aplikace a
 *        reaguje na příchozí uživatelské události.
@@ -1091,6 +1091,213 @@ namespace GUI
     private void tbExpression_TextChanged(object sender, TextChangedEventArgs e)
     {
       enable_disableButtons();
+    }
+
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+      //MessageBox.Show(e.Key.ToString());
+      if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.Key == Key.D6)  //SHIFT + D6 --> ^
+      {
+        if (btnPow.IsEnabled)
+          btnPow.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.Key == Key.D2) //SHIFT + D2 --> @
+      {
+        if (btnRoot.IsEnabled)
+          btnRoot.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.Key == Key.D8) //SHIFT + D8 --> *
+      {
+        if (btnMultiply.IsEnabled)
+          btnMultiply.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.Key == Key.D5) //SHIFT + D5 --> %
+      {
+        if (btnMod.IsEnabled)
+          btnMod.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.Key == Key.D9) //SHIFT + D9 --> (
+      {
+        if (btnLeftBracket.IsEnabled)
+          btnLeftBracket.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.Key == Key.D0) //SHIFT + D0 --> )
+      {
+        if (btnRightBracket.IsEnabled)
+          btnRightBracket.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.Key == Key.D1) //SHIFT + D1 --> !
+      {
+        if (btnFact.IsEnabled)
+          btnFact.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && e.Key == Key.D) //CTRL + D --> DEC
+      {
+        if (rbDec.IsEnabled)
+        {
+          rbDec.RaiseEvent(new RoutedEventArgs(RadioButton.ClickEvent));
+          rbDec.IsChecked = true;
+        }
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && e.Key == Key.B) //CTRL + B --> BIN
+      {
+        if (rbBin.IsEnabled)
+        {
+          rbBin.RaiseEvent(new RoutedEventArgs(RadioButton.ClickEvent));
+          rbBin.IsChecked = true;
+        }
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && e.Key == Key.H) //CTRL + H --> HEX
+      {
+        if (rbHex.IsEnabled)
+        {
+          rbHex.RaiseEvent(new RoutedEventArgs(RadioButton.ClickEvent));
+          rbHex.IsChecked = true;
+        }
+      }
+      else if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && e.Key == Key.O) //CTRL + O --> OCT
+      {
+        if (rbOct.IsEnabled)
+        {
+          rbOct.RaiseEvent(new RoutedEventArgs(RadioButton.ClickEvent));
+          rbOct.IsChecked = true;
+        }
+      }
+      else if (e.Key == Key.OemQuestion) // /
+      {
+        if (btnDivide.IsEnabled)
+          btnDivide.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.OemPlus) // +
+      {
+        if (btnPlus.IsEnabled)
+          btnPlus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.OemMinus) // -
+      {
+        if (btnMinus.IsEnabled)
+          btnMinus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad0 || e.Key == Key.D0) // 0
+      {
+        if (btnZero.IsEnabled)
+          btnZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad1 || e.Key == Key.D1) { // 1
+        if (btnOne.IsEnabled)
+          btnOne.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad2 || e.Key == Key.D2) // 2
+      {
+        if (btnTwo.IsEnabled)
+          btnTwo.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad3 || e.Key == Key.D3) // 3
+      {
+        if (btnThree.IsEnabled)
+          btnThree.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad4 || e.Key == Key.D4) // 4
+      {
+        if (btnFour.IsEnabled)
+          btnFour.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad5 || e.Key == Key.D5) // 5
+      {
+        if (btnFive.IsEnabled)
+          btnFive.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad6 || e.Key == Key.D6) // 6
+      {
+        if (btnSix.IsEnabled)
+          btnSix.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad7 || e.Key == Key.D7) // 7
+      {
+        if (btnSeven.IsEnabled)
+          btnSeven.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad8 || e.Key == Key.D8) // 8
+      {
+        if (btnEight.IsEnabled)
+          btnEight.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.NumPad9 || e.Key == Key.D9) // 9
+      {
+        if (btnNine.IsEnabled)
+          btnNine.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.A)  // A
+      {
+        if (btnA.IsEnabled)
+          btnA.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.B)  // B
+      {
+        if (btnB.IsEnabled)
+          btnB.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.C)  // C
+      {
+        if (btnC.IsEnabled)
+          btnC.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.D)  // D
+      {
+        if (btnD.IsEnabled)
+          btnD.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.E)  // E
+      {
+        if (btnE.IsEnabled)
+          btnE.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.F)  // F
+      {
+        if (btnF.IsEnabled)
+          btnF.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if(e.Key == Key.Multiply){ // *
+        if (btnMultiply.IsEnabled)
+          btnMultiply.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if(e.Key == Key.Divide){ // /
+        if (btnDivide.IsEnabled)
+          btnDivide.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if(e.Key == Key.Add){  // +
+        if (btnPlus.IsEnabled)
+          btnPlus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if(e.Key == Key.Subtract){ // -
+        if (btnMinus.IsEnabled)
+          btnMinus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.OemPeriod || e.Key == Key.Decimal)  // .
+      {
+        if (btnLog.IsEnabled)
+          btnLog.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.L)  // log(
+      {
+        if (btnLog.IsEnabled)
+          btnLog.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.Back)  // DEL
+      {
+        if (btnDel.IsEnabled)
+          btnDel.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((e.Key == Key.Delete) || (e.Key == Key.Escape))  // AC
+      {
+        if (btnAc.IsEnabled)
+          btnAc.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if (e.Key == Key.Enter)  // Enter
+      {
+        if (btnCount.IsEnabled)
+          btnCount.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
     }
   }
 }
