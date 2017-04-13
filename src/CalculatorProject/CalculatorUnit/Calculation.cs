@@ -40,6 +40,8 @@ namespace CalculatorUnit
   /// Objekt představující jeden výpočet.
   /// </summary>
   /// <description>
+  /// Příjmá matematický výraz, který implicitně vyhodnotí a změní stav svých vlastností podle výsledku operace.
+  ///
   /// <b>Výrazy</b>
   ///
   /// Výrazy jsou klasické řetězce znaků, představující matematický zápis. rozšířený o
@@ -75,7 +77,6 @@ namespace CalculatorUnit
     /// <summary>
     /// Konstanta nastavuje maximální počet desetinných míst pro výstup z metody GetAsString().
     /// </summary>
-    private const int getAsStringDefaultPrecision = 4;
 
     #region Properties
 
@@ -184,11 +185,14 @@ namespace CalculatorUnit
     /// </description>
     /// <param name="numbase">Číselná soustava ve které bude výsledek vypsán. Definuje se: <see cref="NumSystem"></param>
     ///
-    /// <param name="format">Formátovací řetězec, nemá žádný efekt.</param>
+    /// <param name="format">Formátovací řetězec
+    ///  * Odpovídá parametru format v <see cref="NumberConverter.ToString"/>
+    /// </param>
+    ///
     /// <returns>Výsledný řetězec</returns>
     public string GetAsString(NumSystem numbase, string format)
     {
-      string result = NumberConverter.ToString(Value, (int)numbase, getAsStringDefaultPrecision);
+      string result = NumberConverter.ToString(Value, (int)numbase, format);
       return result;
     }
 

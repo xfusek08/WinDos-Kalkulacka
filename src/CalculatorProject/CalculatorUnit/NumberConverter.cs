@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Globalization;
 
 namespace CalculatorUnit
 {
@@ -28,20 +29,39 @@ namespace CalculatorUnit
   /// </summary>
   static class NumberConverter
   {
+
+    private const int c_stringDefaultPrecision = 4;
+
     /// <summary>
     /// Konvertuje číslo na řetězec.
     /// </summary>
     /// <description>
     /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst.
-    /// Známé chyby:
-    ///   - Pokud je desetinná část čísla příliš malá, vypisuje nuly.
-    ///     Například: 10.000004 ==> 10.0000
+    // /// Známé chyby:
     /// </description>
     /// <param name="value">číslo pro konvertování</param>
     /// <param name="numbase">Základ soustavy. Muže být pouze 2, 8, 10 nebo 16</param>
-    /// <param name="precision">Maximální počet desetinných míst na která se číslo výpíše.</param>
+    /// <param name="format">
+    ///   Formátovací řetězec
+    ///   <list>
+    ///     <item>Výchozí nastavení formátu je na 4 desetinná místa.</item>
+    ///     <item>
+    ///       numbase je '10'
+    ///       * Očekává formátovací řetězec dle standardu <a href="https://msdn.microsoft.com/en-us//library/dwhawy9k(v=vs.110).aspx">.net</a>
+    ///       * Pokud je prázdný řetězec použije se výchozí nastavení.
+    ///     </item>
+    ///     <item>
+    ///       numbase je různá od '10'
+    ///       * Očekává číslo, které představuje počet desetinných míst.
+    ///       * Pokud nebude validní, použije se výchozí nastavení.
+    ///     </item>
+    ///   </list>
+    /// </param>
     /// <returns>číslo v podobě řetězce</returns>
-    public static string ToString(double value, int numbase, int precision)
+    /// \bug Pokud je desetinná část čísla příliš malá, vypisuje nuly:<br/>10.000004 ==> 10.0000.
+    ///
+    /// \bug Pokud je hodnota příliš velká, tak vypisuje nesmyslné hodnoty
+    public static string ToString(double value, int numbase, string format)
     {
       if (double.IsNaN(value))
         return "NaN";
@@ -52,10 +72,20 @@ namespace CalculatorUnit
       if (double.IsNegativeInfinity(value))
         return "-INF";
 
+      NumberFormatInfo f = new NumberFormatInfo();
+      f.NumberGroupSeparator = "";
+
       if (numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
       {
-        value = Math.Round(value, precision);
+        if (format != "")
+          return value.ToString(format, f);
+        else
+          return value.ToString(f);
+
+        /*
+        value = Math.Round(value, c_stringDefaultPrecision);
         return value.ToString(new System.Globalization.CultureInfo("en-US"));
+        */
       }
       string resultstr = "";
       if (value < 0) //pokud je číslo záporné, vloží se mínus a zbytek se převede jako kladné
@@ -70,7 +100,7 @@ namespace CalculatorUnit
       resultstr += Convert.ToString((int)intvalue, numbase); //celá část čísla se převede pomocí standartní metody
       if(fractionalDigits != 0)
         resultstr += "."; //vložení desetinné tečky
-      for (int i = 0; i < precision; i++) //převod desetinné části s požadovanou přesností
+      for (int i = 0; i < c_stringDefaultPrecision; i++) //převod desetinné části s požadovanou přesností
       {
         fractionalDigits *= numbase;
         if (fractionalDigits == 0) //pokud je zbytek nulový, není důvod pokračovat
@@ -120,7 +150,9 @@ namespace CalculatorUnit
       if (value >= 0)
       {
         return Math.Floor(value);
-      }else{
+      }
+      else
+      {
         return Math.Ceiling(value);
       }
     }
