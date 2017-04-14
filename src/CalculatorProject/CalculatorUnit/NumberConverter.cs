@@ -5,7 +5,7 @@
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
 * Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 13.04.2017
+* Datum poslední změny: 14.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -27,10 +27,44 @@ namespace CalculatorUnit
   /// <summary>
   /// Třída poskytující metody pro konverzi čísel na řetezece
   /// </summary>
-  static class NumberConverter
+  public static class NumberConverter
   {
 
     private const int c_stringDefaultPrecision = 4;
+
+    /// <summary>
+    /// Konvertuje řetězec na číslo s pohyblivou desetinnou čárkou.
+    /// </summary>
+    /// <param name="input">Řetězec obsahující číslo ve specifikované číselné soustavě</param>
+    /// <param name="numsystem">Číselná soustava ve které je řetězec zapsán<see cref="NumSystem"></param>
+    /// <returns>Převedené číslo</returns>
+    public static double ToDouble(string input, NumSystem numsystem)
+    {
+      double result = 0;
+      int charVal;
+      int dotPos = input.IndexOf('.');
+      int power;
+      if (dotPos != -1)
+      {
+        power = dotPos - 1;
+      }
+      else
+      {
+        power = input.Length-1;
+      }
+      for (int i = 0; i < input.Length; i++)
+      {
+        if (i == dotPos)
+          continue;
+        if (!digitToInt(input[i], out charVal, (int)numsystem))
+        {
+          throw new ArgumentException("Argument neobsahuje validní znaky", "input");
+        }
+        result += charVal * Math.Pow((int)numsystem, power);
+        power--;
+      }
+      return result;
+    }
 
     /// <summary>
     /// Konvertuje číslo na řetězec.
@@ -121,16 +155,60 @@ namespace CalculatorUnit
     private static string postprocessStr(string input)
     {
       int end = input.Length - 1;
-      for(; end>0; end--)
+      for (; end > 0; end--)
       {
-        if(input[end] != '0')
+        if (input[end] != '0')
         {
           break;
         }
       }
       if (input[end] == '.')
         end--;
-      return input.Remove(end+1, input.Length-end-1);
+      return input.Remove(end + 1, input.Length - end - 1);
+    }
+
+    private static bool digitToInt(char digit, out int value, int numberSystem)
+    {
+      if (int.TryParse(digit.ToString(), out value))
+      {
+        if (value >= numberSystem)
+        {
+          return false;
+        }
+        return true;
+      }
+      switch (digit)
+      {
+        case 'a':
+          value = 10;
+          break;
+        case 'b':
+          value = 11;
+          break;
+        case 'c':
+          value = 12;
+          break;
+        case 'd':
+          value = 13;
+          break;
+        case 'e':
+          value = 14;
+          break;
+        case 'f':
+          value = 15;
+          break;
+        default:
+          return false;
+      }
+      if (value >= numberSystem)
+      {
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+
     }
 
     /// <summary>
