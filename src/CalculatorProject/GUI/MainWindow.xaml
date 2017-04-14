@@ -53,10 +53,10 @@
       </Button.Style>
     </Button>
     <Grid x:Name="grid1" Grid.Row="1" Grid.ColumnSpan="7">
-      <TextBox x:Name="tbExpression" TextWrapping="Wrap" Text="" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White" IsReadOnly="True" BorderThickness="1,1,1,0" TextChanged="tbExpression_TextChanged"/>
+      <TextBox x:Name="tbExpression" TextWrapping="Wrap" Text="" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="White" IsReadOnly="True" BorderThickness="1,1,1,0" TextChanged="tbExpression_TextChanged" IsTabStop="False" VerticalScrollBarVisibility="Auto" IsHitTestVisible="True" IsUndoEnabled="True" KeyUp="tbExpression_KeyUp"/>
     </Grid>
     <Grid x:Name="grid2" Grid.Row="2" Grid.ColumnSpan="7">
-      <TextBox x:Name="tbResult" TextWrapping="Wrap" Text="" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="#FFC107" IsReadOnly="True" BorderThickness="1,0,1,1"/>
+      <TextBox x:Name="tbResult" TextWrapping="Wrap" Text="" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="#FFC107" IsReadOnly="True" BorderThickness="1,0,1,1" IsTabStop="False" VerticalScrollBarVisibility="Auto" KeyUp="tbResult_KeyUp"/>
     </Grid>
     <Label x:Name="label" Content="Režim :" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" Foreground="White" Padding="0"/>
     <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="3" Foreground="White" IsChecked="True" GroupName="rbgNumeralSystem" Click="rbDec_Click"/>
