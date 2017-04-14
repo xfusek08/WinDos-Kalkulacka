@@ -132,14 +132,14 @@ namespace GUI
     private void printMathOperator(string mathOperator)
     {
       string lastChar = getLastChar(); //původní poslední znak
-      
+
       //Smaže poslední znak v případě, že nějaký operátor už na posledním místě výrazu existuje
       if ((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%"))
       {
         removeFromBack();
       }
-        isDotPrintable = true;
-        tbExpression.Text = tbExpression.Text + mathOperator;
+      isDotPrintable = true;
+      tbExpression.Text = tbExpression.Text + mathOperator;
     }
 
     private void printDot()
@@ -308,7 +308,8 @@ namespace GUI
       if (lastChar == "(" || lastChar == unicodePlus || lastChar == unicodeMinus)
       {
         tbExpression.Text = tbExpression.Text + "0";
-      }else if(lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || lastChar == unicodeRoot || lastChar == "^")
+      }
+      else if (lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || lastChar == unicodeRoot || lastChar == "^")
       {
         tbExpression.Text = tbExpression.Text + "1";
       }
@@ -331,10 +332,13 @@ namespace GUI
     private void countExpr()
     {
       Calculation calc;
+      string expr;
 
       closeExpr();  //uzavření závorek, aby nevznikla chyba
 
-      calc = new Calculation(tbExpression.Text);
+      expr = formatExpr(); //správně zformátuje řetezec pro použití ve výpočetní jednotce
+
+      calc = new Calculation(expr);
 
       switch (calc.ErrorType)
       {
@@ -344,7 +348,7 @@ namespace GUI
         case CalcErrorType.FuncDomainError:
           tbResult.Text = "Chybný definiční obor funkce.";
           break;
-        case CalcErrorType.DataTypeOwerflow:
+        case CalcErrorType.DataTypeOverflow:
           tbResult.Text = "Přetečení.";
           break;
         case CalcErrorType.ExprFormatError:
@@ -425,6 +429,21 @@ namespace GUI
         calc = new Calculation(tbResult.Text);
         tbResult.Text = calc.GetAsString(numSys, "");
       }
+    }
+
+    /// <summary>
+    /// Funkce, která nahradí unicode znaky +, -, *, / a odmocnina za ASCII znaky a log za L,
+    /// z důvodu správného vyhodnocení výpočetní jednotkou.
+    /// </summary>
+    /// <returns>Vrací řetezec s výrazem ve formátu požadovaném výpočetní jednotkou.</returns>
+    private string formatExpr()
+    {
+      string expr = tbExpression.Text;
+
+      expr = expr.Replace(unicodePlus, "+").Replace(unicodeMinus, "-").Replace(unicodeMultiply, "*").Replace(unicodeDivision, "/");
+      expr = expr.Replace(unicodeRoot, "@").Replace("log", "L");
+
+      return expr;
     }
 
     /// <summary>
@@ -685,7 +704,7 @@ namespace GUI
         btnZero.IsEnabled = true;
       }
 
-        if (lastChar == "(")
+      if (lastChar == "(")
       {
         //tlačítka závorek
         btnLeftBracket.IsEnabled = true;
@@ -1243,7 +1262,8 @@ namespace GUI
         if (btnZero.IsEnabled)
           btnZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if (e.Key == Key.NumPad1 || e.Key == Key.D1) { // 1
+      else if (e.Key == Key.NumPad1 || e.Key == Key.D1)
+      { // 1
         if (btnOne.IsEnabled)
           btnOne.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
@@ -1317,19 +1337,23 @@ namespace GUI
         if (btnF.IsEnabled)
           btnF.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if(e.Key == Key.Multiply){ // *
+      else if (e.Key == Key.Multiply) // *
+      {
         if (btnMultiply.IsEnabled)
           btnMultiply.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if(e.Key == Key.Divide){ // /
+      else if (e.Key == Key.Divide) // /
+      {
         if (btnDivide.IsEnabled)
           btnDivide.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if(e.Key == Key.Add){  // +
+      else if (e.Key == Key.Add)  // +
+      {
         if (btnPlus.IsEnabled)
           btnPlus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if(e.Key == Key.Subtract){ // -
+      else if (e.Key == Key.Subtract) // -
+      {
         if (btnMinus.IsEnabled)
           btnMinus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
