@@ -4,8 +4,8 @@
 * Soubor: Calculation.cs
 * Datum: 03.04.2017
 * Autor: Petr Fusek
-* Naposledy upravil: Petr Fusek
-* Datum poslední změny: 13.04.2017
+* Naposledy upravil: Pavel Vosyka
+* Datum poslední změny: 14.04.2017
 *
 * Popis: Třída, která zapouztřuje celý jeden matematický výpočet do jednoho objektu.
 * Vyhodnocuje matematické výrazy pomocí vlastního zjednodušeného jazyka.
