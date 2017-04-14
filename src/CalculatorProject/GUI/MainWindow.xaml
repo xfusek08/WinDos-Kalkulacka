@@ -46,7 +46,7 @@
               <Setter Property="Background" Value="#FF1E88E5"/>
             </Trigger>
             <Trigger Property="IsEnabled"  Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -182,7 +182,7 @@
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
             <Trigger Property="IsEnabled"  Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -207,7 +207,7 @@
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
             <Trigger Property="IsEnabled"  Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -307,7 +307,7 @@
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
             <Trigger Property="IsEnabled"  Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -332,7 +332,7 @@
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
             <Trigger Property="IsEnabled"  Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -432,7 +432,7 @@
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -507,7 +507,7 @@
               <Setter Property="Background" Value="#FF1E88E5"/>
             </Trigger>
             <Trigger Property="IsEnabled"  Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -532,7 +532,7 @@
               <Setter Property="Background" Value="#FF5C6BC0"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -607,7 +607,7 @@
               <Setter Property="Background" Value="#FF1E88E5"/>
             </Trigger>
             <Trigger Property="IsEnabled"  Value="False">
-              <Setter Property="Foreground" Value="#757575"/>
+              <Setter Property="Foreground" Value="#9E9E9E"/>
             </Trigger>
           </Style.Triggers>
         </Style>
@@ -690,7 +690,7 @@
             </Setter>
             <Style.Triggers>
               <Trigger Property="IsEnabled"  Value="False">
-                <Setter Property="Foreground" Value="#757575"/>
+                <Setter Property="Foreground" Value="#9E9E9E"/>
               </Trigger>
             </Style.Triggers>
           </Style>
@@ -725,7 +725,7 @@
             </Setter>
             <Style.Triggers>
               <Trigger Property="IsEnabled"  Value="False">
-                <Setter Property="Foreground" Value="#757575"/>
+                <Setter Property="Foreground" Value="#9E9E9E"/>
               </Trigger>
             </Style.Triggers>
           </Style>

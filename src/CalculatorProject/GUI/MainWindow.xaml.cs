@@ -69,8 +69,8 @@ namespace GUI
       }
       else if (lastChar == ")" || lastChar == "!")  //jinak když je poslední znak závorka...
       {
-        tbExpression.Text = tbExpression.Text + unicodeMultiply;  //připojí na konec *
         isDotPrintable = true;
+        tbExpression.Text = tbExpression.Text + unicodeMultiply;  //připojí na konec *
       }
 
       switch (number)
@@ -136,10 +136,10 @@ namespace GUI
       //Smaže poslední znak v případě, že nějaký operátor už na posledním místě výrazu existuje
       if ((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%"))
       {
-        removeLastChar();
+        removeFromBack();
       }
-        tbExpression.Text = tbExpression.Text + mathOperator;
         isDotPrintable = true;
+        tbExpression.Text = tbExpression.Text + mathOperator;
     }
 
     private void printDot()
@@ -149,13 +149,13 @@ namespace GUI
 
       if (isDotPrintable && isLastCharNumber)  //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
       {
-        tbExpression.Text = tbExpression.Text + ".";  //...vytiskne desetinnou čárku
         isDotPrintable = false;
+        tbExpression.Text = tbExpression.Text + ".";  //...vytiskne desetinnou čárku
       }
       else if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%")  //Pokud je poslední znak operátor, tak...
       {
-        tbExpression.Text = tbExpression.Text + "0.";  //...vytiskne nulu a desetinnou čárku
         isDotPrintable = false;
+        tbExpression.Text = tbExpression.Text + "0.";  //...vytiskne nulu a desetinnou čárku
       }
     }
 
@@ -181,8 +181,8 @@ namespace GUI
       else if (lastChar == ")" || isLastCharNumber || lastChar == "!")
       {
         leftBracketsCount++;
-        tbExpression.Text = tbExpression.Text + unicodeMultiply + "(";  //připojí na konec *(
         isDotPrintable = true;
+        tbExpression.Text = tbExpression.Text + unicodeMultiply + "(";  //připojí na konec *(
       }
 
       resetBracketsCounterIfEqual();
@@ -198,7 +198,7 @@ namespace GUI
         rightBracketsCount++;
         tbExpression.Text = tbExpression.Text + ")";
       }
-      else if (((lastChar == unicodePlus) || (lastChar == unicodeMinus)))
+      else if (((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == "(")))
       {
         rightBracketsCount++;
         tbExpression.Text = tbExpression.Text + "0)";
@@ -234,8 +234,8 @@ namespace GUI
       else if (lastChar == ")" || isLastCharNumber || lastChar == "!")
       {
         leftBracketsCount++;
-        tbExpression.Text = tbExpression.Text + unicodeMultiply + "log(";  //připojí na konec *log(
         isDotPrintable = true;
+        tbExpression.Text = tbExpression.Text + unicodeMultiply + "log(";  //připojí na konec *log(
       }
 
       resetBracketsCounterIfEqual();
@@ -248,14 +248,14 @@ namespace GUI
 
     private void printRoot()
     {
-      tbExpression.Text += unicodeRoot;
       isDotPrintable = true;
+      tbExpression.Text += unicodeRoot;
     }
 
     private void printPow()
     {
-      tbExpression.Text += "^";
       isDotPrintable = true;
+      tbExpression.Text += "^";
     }
 
     //===== Pomocné funkce =====
@@ -294,19 +294,23 @@ namespace GUI
     }
 
     /// <summary>
-    /// Funkce uzavírající závorky
+    /// Funkce, která správně ukončuje výraz
     /// </summary>
     /// <description>
     /// Podle počtu otevíracích závorek doplní počet závorek uzavíracích.
+    /// V případě, že je na konci operátor, vhodně výraz doplní.
     /// </description>
-    private void closeBrackets()
+    private void closeExpr()
     {
       string lastChar = getLastChar();
 
       //Doplnění nuly, když je poslední znak "("
-      if (lastChar == "(")
+      if (lastChar == "(" || lastChar == unicodePlus || lastChar == unicodeMinus)
       {
         tbExpression.Text = tbExpression.Text + "0";
+      }else if(lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || lastChar == unicodeRoot || lastChar == "^")
+      {
+        tbExpression.Text = tbExpression.Text + "1";
       }
 
       //Uzavírá závorky
@@ -328,7 +332,7 @@ namespace GUI
     {
       Calculation calc;
 
-      closeBrackets();  //uzavření závorek, aby nevznikla chyba
+      closeExpr();  //uzavření závorek, aby nevznikla chyba
 
       calc = new Calculation(tbExpression.Text);
 
@@ -355,15 +359,23 @@ namespace GUI
     //===== Ostatní funkce =====
 
     /// <summary>
-    /// Funkce odstraňující poslední znak
+    /// Funkce odstraňující znaky od konce
     /// </summary>
     /// <description>
-    /// Odstraňuje poslední znak a zároveň nastavuje příznak desetinné tečky a mění proměnnou početu závorek,
+    /// Odstraňuje znaky z konce a zároveň nastavuje příznak desetinné tečky a mění proměnnou početu závorek,
     /// kvůli korektnímu opakovanému tisku znaků.
     /// </description>
-    private void removeLastChar()
+    private void removeFromBack()
     {
       string lastChar = getLastChar();
+
+      if (tbExpression.Text.Length > 3)
+      {
+        if (tbExpression.Text.Substring(tbExpression.Text.Length - 4, 4) == "log(")
+        {
+          tbExpression.Text = tbExpression.Text.Remove(tbExpression.Text.Length - 3); // !!!čtvrtý znak se smaže ve funkci později!!!
+        }
+      }
 
       //Když je mazaný znak levá závorka, tak sníží počet levých závorek
       if (lastChar == "(")
@@ -390,10 +402,10 @@ namespace GUI
     /// <param name="all">Resetuje i oblast pro výsledek.</param>
     private void resetCalc(bool all)
     {
-      tbExpression.Text = "0";
+      isDotPrintable = true;
       leftBracketsCount = 0;
       rightBracketsCount = 0;
-      isDotPrintable = true;
+      tbExpression.Text = "0";
       if (all == true)
         tbResult.Text = "";
     }
@@ -451,7 +463,16 @@ namespace GUI
           btnNine.IsEnabled = true;
           //tlačítka závorek
           btnLeftBracket.IsEnabled = true;
-          btnRightBracket.IsEnabled = true;
+
+          if (leftBracketsCount > rightBracketsCount)
+          {
+            btnRightBracket.IsEnabled = true;
+          }
+          else
+          {
+            btnRightBracket.IsEnabled = false;
+          }
+
           //tačítko desetinné tečka
           btnDot.IsEnabled = true;
           //tlačítka operací
@@ -655,12 +676,20 @@ namespace GUI
       btnRoot.IsEnabled = false;
       grdRootBtn.IsEnabled = false;
       lblRootBtn.IsEnabled = false;
+      //tlačítko 0
+      btnZero.IsEnabled = false;
 
-      if (lastChar == "(")
+      //Zajišťuje povolení stisku tlačítka 0 ve správné situaci
+      if (!isDotPrintable || (isCharNumber(secondCharFromRight) && isCharNumber(lastChar)) || (!isCharNumber(secondCharFromRight) && isCharNumber(lastChar) && lastChar != "0") || !isCharNumber(lastChar))
+      {
+        btnZero.IsEnabled = true;
+      }
+
+        if (lastChar == "(")
       {
         //tlačítka závorek
         btnLeftBracket.IsEnabled = true;
-        btnRightBracket.IsEnabled = false;
+        btnRightBracket.IsEnabled = true;
         //tačítko desetinné tečky
         btnDot.IsEnabled = false;
         //tlačítka operací
@@ -680,7 +709,7 @@ namespace GUI
         grdRootBtn.IsEnabled = false;
         lblRootBtn.IsEnabled = false;
       }
-      else if (secondCharFromRight == "(" && (lastChar == unicodePlus || lastChar == unicodeMinus))
+      else if ((secondCharFromRight == "(" || secondCharFromRight == unicodeRoot || secondCharFromRight == "^") && (lastChar == unicodePlus || lastChar == unicodeMinus))
       {
         //tlačítka závorek
         btnLeftBracket.IsEnabled = true;
@@ -776,7 +805,10 @@ namespace GUI
         }
 
         //tačítko desetinné tečky
-        btnDot.IsEnabled = true;
+
+        if (isDotPrintable)
+          btnDot.IsEnabled = true;
+
         //tlačítka operací
         btnMultiply.IsEnabled = true;
         btnDivide.IsEnabled = true;
@@ -826,7 +858,35 @@ namespace GUI
         btnRoot.IsEnabled = true;
         grdRootBtn.IsEnabled = true;
         lblRootBtn.IsEnabled = true;
-      }else if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%")
+      }
+      else if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%")
+      {
+        //tlačítka závorek
+        btnLeftBracket.IsEnabled = true;
+        btnRightBracket.IsEnabled = false;
+        //tačítko desetinné tečky
+
+        if (isDotPrintable)
+          btnDot.IsEnabled = true;
+
+        //tlačítka operací
+        btnMultiply.IsEnabled = true;
+        btnDivide.IsEnabled = true;
+        btnPlus.IsEnabled = true;
+        btnMinus.IsEnabled = true;
+        btnMod.IsEnabled = true;
+        //tlačítka faktoriálu a logaritmu
+        btnFact.IsEnabled = false;
+        btnLog.IsEnabled = true;
+        //tlačítka mocniny a odmocniny
+        btnPow.IsEnabled = false;
+        grdPowBtn.IsEnabled = false;
+        lblPowBtn.IsEnabled = false;
+        btnRoot.IsEnabled = false;
+        grdRootBtn.IsEnabled = false;
+        lblRootBtn.IsEnabled = false;
+      }
+      else if (lastChar == unicodeRoot || lastChar == "^")
       {
         //tlačítka závorek
         btnLeftBracket.IsEnabled = true;
@@ -834,11 +894,11 @@ namespace GUI
         //tačítko desetinné tečky
         btnDot.IsEnabled = false;
         //tlačítka operací
-        btnMultiply.IsEnabled = true;
-        btnDivide.IsEnabled = true;
+        btnMultiply.IsEnabled = false;
+        btnDivide.IsEnabled = false;
         btnPlus.IsEnabled = true;
         btnMinus.IsEnabled = true;
-        btnMod.IsEnabled = true;
+        btnMod.IsEnabled = false;
         //tlačítka faktoriálu a logaritmu
         btnFact.IsEnabled = false;
         btnLog.IsEnabled = true;
@@ -1054,7 +1114,7 @@ namespace GUI
     //===== Události spouštějící se při kliknutí na tlačítka DEL, AC a "=" =====
     private void btnDel_Click(object sender, RoutedEventArgs e)
     {
-      removeLastChar();
+      removeFromBack();
     }
 
     private void btnAc_Click(object sender, RoutedEventArgs e)
@@ -1275,8 +1335,8 @@ namespace GUI
       }
       else if (e.Key == Key.OemPeriod || e.Key == Key.Decimal)  // .
       {
-        if (btnLog.IsEnabled)
-          btnLog.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        if (btnDot.IsEnabled)
+          btnDot.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
       else if (e.Key == Key.L)  // log(
       {
