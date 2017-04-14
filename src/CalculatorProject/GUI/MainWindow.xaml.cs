@@ -1169,9 +1169,14 @@ namespace GUI
 
     private void tbExpression_TextChanged(object sender, TextChangedEventArgs e)
     {
-      enable_disableButtons();
+      // v případě, že se nejedná o desítkovou soustavu, tak budou povolena pouze tlačítka vybranéné soustavy
+      if (currentNumSys == NumSystem.Dec)
+      {
+        enable_disableButtons();
+      }
     }
 
+    //===== Obsluha událostí po kliknutí na klávesy =====
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
       //MessageBox.Show(e.Key.ToString());
@@ -1337,22 +1342,22 @@ namespace GUI
         if (btnF.IsEnabled)
           btnF.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if (e.Key == Key.Multiply) // *
+      else if (e.Key == Key.Multiply)  // *
       {
         if (btnMultiply.IsEnabled)
           btnMultiply.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if (e.Key == Key.Divide) // /
+      else if (e.Key == Key.Divide)  // /
       {
         if (btnDivide.IsEnabled)
           btnDivide.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if (e.Key == Key.Add)  // +
+      else if (e.Key == Key.Add) // +
       {
         if (btnPlus.IsEnabled)
           btnPlus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
-      else if (e.Key == Key.Subtract) // -
+      else if (e.Key == Key.Subtract)  // -
       {
         if (btnMinus.IsEnabled)
           btnMinus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -1381,6 +1386,34 @@ namespace GUI
       {
         if (btnCount.IsEnabled)
           btnCount.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+    }
+
+    private void tbExpression_KeyUp(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Back)  // DEL
+      {
+        if (btnDel.IsEnabled)
+          btnDel.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((e.Key == Key.Delete) || (e.Key == Key.Escape))  // AC
+      {
+        if (btnAc.IsEnabled)
+          btnAc.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+    }
+
+    private void tbResult_KeyUp(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Back)  // DEL
+      {
+        if (btnDel.IsEnabled)
+          btnDel.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
+      else if ((e.Key == Key.Delete) || (e.Key == Key.Escape))  // AC
+      {
+        if (btnAc.IsEnabled)
+          btnAc.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
     }
   }
