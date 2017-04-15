@@ -889,5 +889,30 @@
         </Style>
       </Button.Style>
     </Button>
+    <Button x:Name="btnhelp" Content="Nápověda" Grid.Column="6" FontWeight="Bold" Click="btnhelp_Click">
+      <Button.Style>
+        <Style TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="#FF303030" />
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="{TemplateBinding Background}">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#FF424242"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+              <Setter Property="Foreground" Value="#9E9E9E"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </Button>
   </Grid>
 </Window>

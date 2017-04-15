@@ -1416,5 +1416,12 @@ namespace GUI
           btnAc.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
     }
+
+    //===== Otevření okna s nápovědou =====
+    private void btnhelp_Click(object sender, RoutedEventArgs e)
+    {
+      help window = new help();
+      window.Show();
+    }
   }
 }
