@@ -49,6 +49,7 @@ namespace GUI
     public MainWindow()
     {
       InitializeComponent();
+      this.Title = "Kalkulačka";
       switchNumeralSystem(0); //spuštění v režimu desítkové soustavy
       enable_disableButtons();
     }
