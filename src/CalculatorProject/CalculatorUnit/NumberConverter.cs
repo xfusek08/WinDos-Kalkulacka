@@ -180,21 +180,27 @@ namespace CalculatorUnit
       switch (digit)
       {
         case 'a':
+        case 'A':
           value = 10;
           break;
         case 'b':
+        case 'B':
           value = 11;
           break;
         case 'c':
+        case 'C':
           value = 12;
           break;
         case 'd':
+        case 'D':
           value = 13;
           break;
         case 'e':
+        case 'E':
           value = 14;
           break;
         case 'f':
+        case 'F':
           value = 15;
           break;
         default:
@@ -224,7 +230,7 @@ namespace CalculatorUnit
       {
         case 10:
           return "a";
-        case 11:
+        case 11:  
           return "b";
         case 12:
           return "c";
@@ -232,7 +238,7 @@ namespace CalculatorUnit
           return "d";
         case 14:
           return "e";
-        case 15:
+        case 15: 
           return "f";
         default:
           return "";
