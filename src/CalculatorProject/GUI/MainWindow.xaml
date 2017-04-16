@@ -27,7 +27,7 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Button x:Name="btnLog" Content="log(x)" Grid.Row="4" Grid.Column="1" BorderThickness="0.1" FontSize="20" Click="btnLog_Click">
+    <Button x:Name="btnLog" Content="log(x)" Grid.Row="4" Grid.Column="1" BorderThickness="0.1" FontSize="20" Click="btnLog_Click" TabIndex="70">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2"/>
@@ -59,11 +59,11 @@
       <TextBox x:Name="tbResult" TextWrapping="Wrap" Text="" FontSize="36" TextAlignment="Right" Background="#FF164253" Foreground="#FFC107" IsReadOnly="True" BorderThickness="1,0,1,1" IsTabStop="False" VerticalScrollBarVisibility="Auto" KeyUp="tbResult_KeyUp"/>
     </Grid>
     <Label x:Name="label" Content="Režim :" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" Foreground="White" Padding="0"/>
-    <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="3" Foreground="White" IsChecked="True" GroupName="rbgNumeralSystem" Click="rbDec_Click"/>
-    <RadioButton x:Name="rbBin" Content="BIN" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="4" Foreground="White" GroupName="rbgNumeralSystem" Click="rbBin_Click"/>
-    <RadioButton x:Name="rbHex" Content="HEX" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="5" Foreground="White" GroupName="rbgNumeralSystem" Click="rbHex_Click"/>
-    <RadioButton x:Name="rbOct" Content="OCT" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="6" Foreground="White" GroupName="rbgNumeralSystem" Click="rbOct_Click"/>
-    <Button x:Name="btnDel" Content="DEL" Grid.Row="4" Grid.Column="3" BorderThickness="0.1" FontSize="22" Click="btnDel_Click" Grid.ColumnSpan="2">
+    <RadioButton x:Name="rbDec" Content="DEC" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="3" Foreground="White" IsChecked="True" GroupName="rbgNumeralSystem" Click="rbDec_Click" TabIndex="20"/>
+    <RadioButton x:Name="rbBin" Content="BIN" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="4" Foreground="White" GroupName="rbgNumeralSystem" Click="rbBin_Click" TabIndex="30"/>
+    <RadioButton x:Name="rbHex" Content="HEX" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="5" Foreground="White" GroupName="rbgNumeralSystem" Click="rbHex_Click" TabIndex="40"/>
+    <RadioButton x:Name="rbOct" Content="OCT" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="6" Foreground="White" GroupName="rbgNumeralSystem" Click="rbOct_Click" TabIndex="50"/>
+    <Button x:Name="btnDel" Content="DEL" Grid.Row="4" Grid.Column="3" BorderThickness="0.1" FontSize="22" Click="btnDel_Click" Grid.ColumnSpan="2" TabIndex="90">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFFC107"/>
@@ -88,7 +88,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnAc" Content="AC" Grid.Row="4" Grid.Column="5" BorderThickness="0.1" FontSize="22" Click="btnAc_Click" Grid.ColumnSpan="2">
+    <Button x:Name="btnAc" Content="AC" Grid.Row="4" Grid.Column="5" BorderThickness="0.1" FontSize="22" Click="btnAc_Click" Grid.ColumnSpan="2" TabIndex="100">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFFC107"/>
@@ -113,7 +113,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnEight" Content="8" Grid.Row="5" Grid.Column="3" BorderThickness="0.1" FontSize="24" Click="btnEight_Click">
+    <Button x:Name="btnEight" Content="8" Grid.Row="5" Grid.Column="3" BorderThickness="0.1" FontSize="24" Click="btnEight_Click" TabIndex="140">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -138,7 +138,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnNine" Content="9" Grid.Column="4" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnNine_Click">
+    <Button x:Name="btnNine" Content="9" Grid.Column="4" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnNine_Click" TabIndex="150">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -163,7 +163,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnMultiply" Content="&#215;" Grid.Column="5" Grid.Row="5" BorderThickness="0.1" FontSize="20" Click="btnMultiply_Click">
+    <Button x:Name="btnMultiply" Content="&#215;" Grid.Column="5" Grid.Row="5" BorderThickness="0.1" FontSize="20" Click="btnMultiply_Click" TabIndex="160">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -188,7 +188,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnDivide" Content="&#247;" Grid.Column="6" Grid.Row="5" BorderThickness="0.1" FontSize="20" Click="btnDivide_Click">
+    <Button x:Name="btnDivide" Content="&#247;" Grid.Column="6" Grid.Row="5" BorderThickness="0.1" FontSize="20" Click="btnDivide_Click" TabIndex="170">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -213,7 +213,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnFour" Content="4" Grid.Row="6" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnFour_Click">
+    <Button x:Name="btnFour" Content="4" Grid.Row="6" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnFour_Click" TabIndex="200">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -238,7 +238,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnFive" Content="5" Grid.Column="3" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnFive_Click">
+    <Button x:Name="btnFive" Content="5" Grid.Column="3" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnFive_Click" TabIndex="210">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -263,7 +263,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnSix" Content="6" Grid.Column="4" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnSix_Click">
+    <Button x:Name="btnSix" Content="6" Grid.Column="4" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnSix_Click" TabIndex="220">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -288,7 +288,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnPlus" Content="&#43;" Grid.Column="5" Grid.Row="6" BorderThickness="0.1" FontSize="20" Click="btnPlus_Click">
+    <Button x:Name="btnPlus" Content="&#43;" Grid.Column="5" Grid.Row="6" BorderThickness="0.1" FontSize="20" Click="btnPlus_Click" TabIndex="230">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -313,7 +313,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnMinus" Content="&#8722;" Grid.Column="6" Grid.Row="6" BorderThickness="0.1" FontSize="20" Click="btnMinus_Click">
+    <Button x:Name="btnMinus" Content="&#8722;" Grid.Column="6" Grid.Row="6" BorderThickness="0.1" FontSize="20" Click="btnMinus_Click" TabIndex="240">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -338,7 +338,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnOne" Content="1" Grid.Row="7" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnOne_Click">
+    <Button x:Name="btnOne" Content="1" Grid.Row="7" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnOne_Click" TabIndex="270">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -363,7 +363,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnTwo" Content="2" Grid.Column="3" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnTwo_Click">
+    <Button x:Name="btnTwo" Content="2" Grid.Column="3" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnTwo_Click" TabIndex="280">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -388,7 +388,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnThree" Content="3" Grid.Column="4" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnThree_Click">
+    <Button x:Name="btnThree" Content="3" Grid.Column="4" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnThree_Click" TabIndex="290">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -413,7 +413,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnPow" Content="x" Grid.Column="5" Grid.Row="7" BorderThickness="0.1" FontSize="20" MouseEnter="btnPow_MouseEnter" MouseLeave="btnPow_MouseLeave" Click="btnPow_Click">
+    <Button x:Name="btnPow" Content="x" Grid.Column="5" Grid.Row="7" BorderThickness="0.1" FontSize="20" MouseEnter="btnPow_MouseEnter" MouseLeave="btnPow_MouseLeave" Click="btnPow_Click" TabIndex="300">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -438,7 +438,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnZero" Content="0" Grid.Row="8" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnZero_Click" Grid.ColumnSpan="2">
+    <Button x:Name="btnZero" Content="0" Grid.Row="8" Grid.Column="2" BorderThickness="0.1" FontSize="24" Click="btnZero_Click" Grid.ColumnSpan="2" TabIndex="340">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -463,7 +463,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnDot" Content="." Grid.Column="4" Grid.Row="8" BorderThickness="0.1" FontSize="24" Click="btnDot_Click">
+    <Button x:Name="btnDot" Content="." Grid.Column="4" Grid.Row="8" BorderThickness="0.1" FontSize="24" Click="btnDot_Click" TabIndex="350">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -488,7 +488,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnMod" Content="%" Grid.Column="2" Grid.Row="4" BorderThickness="0.1" FontSize="20" Click="btnMod_Click">
+    <Button x:Name="btnMod" Content="%" Grid.Column="2" Grid.Row="4" BorderThickness="0.1" FontSize="20" Click="btnMod_Click" TabIndex="80">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2" />
@@ -513,7 +513,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnRoot" Content="&#8730;a" Grid.Column="6" Grid.Row="7" Background="#FF3F51B5" BorderThickness="0.1" FontSize="20" MouseEnter="btnRoot_MouseEnter" MouseLeave="btnRoot_MouseLeave" Click="btnRoot_Click">
+    <Button x:Name="btnRoot" Content="&#8730;a" Grid.Column="6" Grid.Row="7" Background="#FF3F51B5" BorderThickness="0.1" FontSize="20" MouseEnter="btnRoot_MouseEnter" MouseLeave="btnRoot_MouseLeave" Click="btnRoot_Click" TabIndex="310">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF3F51B5"/>
@@ -538,7 +538,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnCount" Content="=" Grid.Column="5" Grid.Row="8" BorderThickness="0.1" FontSize="36" Click="btnCount_Click" Grid.ColumnSpan="2">
+    <Button x:Name="btnCount" Content="=" Grid.Column="5" Grid.Row="8" BorderThickness="0.1" FontSize="36" Click="btnCount_Click" Grid.ColumnSpan="2" TabIndex="360">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FFFF9800"/>
@@ -563,7 +563,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnSeven" Content="7" Grid.Column="2" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnSeven_Click">
+    <Button x:Name="btnSeven" Content="7" Grid.Column="2" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnSeven_Click" TabIndex="130">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -588,7 +588,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnFact" Content="x!" Grid.Column="0" Grid.Row="4" BorderThickness="0.1" FontSize="20" Click="btnFact_Click">
+    <Button x:Name="btnFact" Content="x!" Grid.Column="0" Grid.Row="4" BorderThickness="0.1" FontSize="20" Click="btnFact_Click" TabIndex="60">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF1976D2"/>
@@ -614,7 +614,7 @@
       </Button.Style>
     </Button>
     <Rectangle Fill="#FF212121" Stroke="Black" Grid.ColumnSpan="7"/>
-    <Button x:Name="btnLeftBracket" Content="(" Grid.Row="8" BorderThickness="0.1" FontSize="24" Grid.Column="0" Click="btnLeftBracket_Click">
+    <Button x:Name="btnLeftBracket" Content="(" Grid.Row="8" BorderThickness="0.1" FontSize="24" Grid.Column="0" Click="btnLeftBracket_Click" TabIndex="320">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -639,7 +639,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnRightBracket" Content=")" Grid.Row="8" BorderThickness="0.1" FontSize="24" Grid.Column="1" Click="btnRightBracket_Click">
+    <Button x:Name="btnRightBracket" Content=")" Grid.Row="8" BorderThickness="0.1" FontSize="24" Grid.Column="1" Click="btnRightBracket_Click" TabIndex="330">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -734,7 +734,7 @@
       <!--<TextBlock x:Name="lblRootBtn" Panel.ZIndex="200" Text="x    &#x0a;" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Padding="0" Foreground="White" IsEnabled="False" MouseEnter="lblRootBtn_MouseEnter" MouseMove="lblRootBtn_MouseMove"/>-->
     </Grid>
 
-    <Button x:Name="btnA" Content="A" Grid.Column="0" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnA_Click">
+    <Button x:Name="btnA" Content="A" Grid.Column="0" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnA_Click" TabIndex="110">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -760,7 +760,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnB" Content="B" Grid.Column="1" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnB_Click">
+    <Button x:Name="btnB" Content="B" Grid.Column="1" Grid.Row="5" BorderThickness="0.1" FontSize="24" Click="btnB_Click" TabIndex="120">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -786,7 +786,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnC" Content="C" Grid.Column="0" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnC_Click">
+    <Button x:Name="btnC" Content="C" Grid.Column="0" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnC_Click" TabIndex="180">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -812,7 +812,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnD" Content="D" Grid.Column="1" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnD_Click">
+    <Button x:Name="btnD" Content="D" Grid.Column="1" Grid.Row="6" BorderThickness="0.1" FontSize="24" Click="btnD_Click" TabIndex="190">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -838,7 +838,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnE" Content="E" Grid.Column="0" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnE_Click">
+    <Button x:Name="btnE" Content="E" Grid.Column="0" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnE_Click" TabIndex="250">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -864,7 +864,7 @@
       </Button.Style>
     </Button>
 
-    <Button x:Name="btnF" Content="F" Grid.Column="1" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnF_Click">
+    <Button x:Name="btnF" Content="F" Grid.Column="1" Grid.Row="7" BorderThickness="0.1" FontSize="24" Click="btnF_Click" TabIndex="260">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF0D47A1"/>
@@ -889,7 +889,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnhelp" Content="Nápověda" Grid.Column="6" FontWeight="Bold" Click="btnhelp_Click">
+    <Button x:Name="btnhelp" Content="Nápověda" Grid.Column="6" FontWeight="Bold" Click="btnhelp_Click" TabIndex="10">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF303030" />
