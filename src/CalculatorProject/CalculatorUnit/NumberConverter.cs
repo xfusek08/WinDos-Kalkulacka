@@ -93,7 +93,7 @@ namespace CalculatorUnit
     /// </param>
     /// <returns>číslo v podobě řetězce</returns>
     /// \bug Pokud je hodnota příliš velká, tak vypisuje nesmyslné hodnoty
-    public static string ToString(double value, int numbase, string format)
+    public static string ToString(double value, NumSystem numbase, string format)
     {
       if (double.IsNaN(value))
         return "NaN";
@@ -107,7 +107,7 @@ namespace CalculatorUnit
       NumberFormatInfo f = new NumberFormatInfo();
       f.NumberGroupSeparator = "";
 
-      if (numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
+      if ((int)numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
       {
         if (format != "")
           return value.ToString(format, f);
@@ -129,7 +129,7 @@ namespace CalculatorUnit
       double intvalue = extractInt(value); //celá část
       double fractionalDigits = value - intvalue; //desetinná část
       int digit; //proměnná pro mezivýsledky, vždy jeden znak
-      resultstr += Convert.ToString((int)intvalue, numbase); //celá část čísla se převede pomocí standartní metody
+      resultstr += Convert.ToString((int)intvalue, (int)numbase); //celá část čísla se převede pomocí standartní metody
       if (fractionalDigits == 0)
       {
         return resultstr;
@@ -137,7 +137,7 @@ namespace CalculatorUnit
       resultstr += "."; //vložení desetinné tečky
       for (int i = 0; i < c_stringDefaultPrecision; i++) //převod desetinné části s požadovanou přesností
       {
-        fractionalDigits *= numbase;
+        fractionalDigits *= (int)numbase;
         if (fractionalDigits == 0) //pokud je zbytek nulový, není důvod pokračovat
           break;
         digit = (int)extractInt(fractionalDigits);

@@ -193,7 +193,7 @@ namespace CalculatorUnit
     [Obsolete("Bylo rozhodnuto o odstranění této metody. Použijte Calculation.Value popř. NumberConverter")]
     public string GetAsString(NumSystem numbase, string format)
     {
-      string result = NumberConverter.ToString(Value, (int)numbase, format);
+      string result = NumberConverter.ToString(Value, numbase, format);
       return result;
     }
 
