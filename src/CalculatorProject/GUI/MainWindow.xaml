@@ -889,7 +889,7 @@
         </Style>
       </Button.Style>
     </Button>
-    <Button x:Name="btnhelp" Content="Nápověda" Grid.Column="6" FontWeight="Bold" Click="btnhelp_Click" TabIndex="10">
+    <Button x:Name="btnHelp" Content="Nápověda" Grid.Column="6" FontWeight="Bold" Click="btnHelp_Click" TabIndex="10">
       <Button.Style>
         <Style TargetType="{x:Type Button}">
           <Setter Property="Background" Value="#FF303030" />

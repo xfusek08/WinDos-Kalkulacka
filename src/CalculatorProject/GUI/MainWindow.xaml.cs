@@ -1395,6 +1395,11 @@ namespace GUI
         if (btnCount.IsEnabled)
           btnCount.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
       }
+      else if (e.Key == Key.F1) // F1
+      {
+        if (btnHelp.IsEnabled)
+          btnHelp.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+      }
     }
 
     private void tbExpression_KeyUp(object sender, KeyEventArgs e)
@@ -1426,7 +1431,7 @@ namespace GUI
     }
 
     //===== Otevření okna s nápovědou =====
-    private void btnhelp_Click(object sender, RoutedEventArgs e)
+    private void btnHelp_Click(object sender, RoutedEventArgs e)
     {
       help window = new help();
       window.Show();
