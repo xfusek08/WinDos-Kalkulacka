@@ -5,7 +5,7 @@
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
 * Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 14.04.2017
+* Datum poslední změny: 16.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -74,7 +74,7 @@ namespace CalculatorUnit
     // /// Známé chyby:
     /// </description>
     /// <param name="value">číslo pro konvertování</param>
-    /// <param name="numbase">Základ soustavy. Muže být pouze 2, 8, 10 nebo 16</param>
+    /// <param name="numbase">Základ soustavy ve které se vypíše viz. <see cref="NumSystem"></param>
     /// <param name="format">
     ///   Formátovací řetězec
     ///   <list>
