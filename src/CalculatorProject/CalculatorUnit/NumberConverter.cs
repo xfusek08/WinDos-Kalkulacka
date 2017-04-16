@@ -36,10 +36,18 @@ namespace CalculatorUnit
     /// Konvertuje řetězec na číslo s pohyblivou desetinnou čárkou.
     /// </summary>
     /// <param name="input">Řetězec obsahující číslo ve specifikované číselné soustavě</param>
-    /// <param name="numsystem">Číselná soustava ve které je řetězec zapsán<see cref="NumSystem"></param>
-    /// <returns>Převedené číslo</returns>
+    /// <param name="numsystem">Číselná soustava ve které je řetězec zapsán <see cref="NumSystem"></param>
+    /// <returns>Vrací převedené číslo. Pokud je řetězec roven "NaN" vrací NaN, pokud je "INF" nebo "-INF" vrací double.PositiveInfinity nebo double.NegativeInfinity.</returns>
+    /// <exception cref="ArgumentException">Vyjímka je vyhozena, pokud vstupní řetězec obsahuje nepovolené znaky v dané soustavě. Metoda přijímá desetinnou tečku ".", nikoliv čárku ",".</exception>
     public static double ToDouble(string input, NumSystem numsystem)
     {
+      if (input == "NaN")
+        return double.NaN;
+      if (input == "INF")
+        return double.PositiveInfinity;
+      if (input == "-INF")
+        return double.NegativeInfinity;
+
       double result = 0;
       int charVal;
       int dotPos = input.IndexOf('.');
@@ -70,8 +78,7 @@ namespace CalculatorUnit
     /// Konvertuje číslo na řetězec.
     /// </summary>
     /// <description>
-    /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst.
-    // /// Známé chyby:
+    /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst. Převod je limitován velikostí integer, v takovém případě vrací "NaN".
     /// </description>
     /// <param name="value">číslo pro konvertování</param>
     /// <param name="numbase">Základ soustavy ve které se vypíše viz. <see cref="NumSystem"></param>
@@ -103,6 +110,9 @@ namespace CalculatorUnit
 
       if (double.IsNegativeInfinity(value))
         return "-INF";
+
+      if (value > int.MaxValue || value < int.MinValue)
+        return "NaN";
 
       NumberFormatInfo f = new NumberFormatInfo();
       f.NumberGroupSeparator = "";
