@@ -45,6 +45,7 @@ namespace GUI
     private string unicodeDivision = "\u00F7";
     private string unicodeRoot = "\u221A";
     private NumSystem currentNumSys = NumSystem.Dec; //výchozí číselná soustava je desítková
+    private string lastResult;  //Proměnná pro uložení posledního výsledku
 
     public MainWindow()
     {
@@ -327,7 +328,7 @@ namespace GUI
     /// Funkce, která vypočítá výraz
     /// </summary>
     /// <description>
-    /// Založí instanci objektu Calculation, která vypočítá výraz a hodnotu uloží
+    /// Založí instanci objektu Calculation, která za pomoci NumberConvertor vypočítá výraz a hodnotu uloží
     /// do textboxu určeného pro výsledek.
     /// </description>
     private void countExpr()
@@ -339,12 +340,19 @@ namespace GUI
 
       expr = formatExpr(); //správně zformátuje řetezec pro použití ve výpočetní jednotce
 
+      //Pokud se nejedná o desítkovou soustavu, tak zkonvertuje na desítkovou
+      if (currentNumSys != NumSystem.Dec)
+      {
+        expr = NumberConverter.ToString(NumberConverter.ToDouble(expr, currentNumSys), NumSystem.Dec, "");
+      }
+
       calc = new Calculation(expr);
 
       switch (calc.ErrorType)
       {
         case CalcErrorType.None:
-          tbResult.Text = calc.GetAsString(currentNumSys, "");
+          lastResult = NumberConverter.ToString(calc.Value, currentNumSys, "");
+          tbResult.Text = lastResult;
           break;
         case CalcErrorType.FuncDomainError:
           tbResult.Text = "Chybný definiční obor funkce.";
@@ -419,16 +427,15 @@ namespace GUI
     /// Funkce pro konverzi výsledku
     /// </summary>
     /// <description>
-    /// Pomocí třídy Calculation konvertuje výsledek.
+    /// Pomocí třídy NumberConverter konvertuje výsledek.
     /// </description>
     /// <param name="numSys">Soustava, do které se má převádět.</param>
     private void convertResult(NumSystem numSys)
     {
       if (tbResult.Text != "")  //Pokud má co převádět, tak převede
       {
-        Calculation calc;
-        calc = new Calculation(tbResult.Text);
-        tbResult.Text = calc.GetAsString(numSys, "");
+        lastResult = NumberConverter.ToString(NumberConverter.ToDouble(lastResult, currentNumSys), numSys, "");
+        tbResult.Text = lastResult;
       }
     }
 
@@ -461,8 +468,8 @@ namespace GUI
       switch (numeralSystem)
       {
         case 0: //desítkova soustava
-          currentNumSys = NumSystem.Dec;  //současná soustava je desítková
           convertResult(NumSystem.Dec);
+          currentNumSys = NumSystem.Dec;  //současná soustava je desítková
           //tlačítka A-F
           btnA.IsEnabled = false;
           btnB.IsEnabled = false;
@@ -518,8 +525,8 @@ namespace GUI
           btnCount.IsEnabled = true;
           break;
         case 1: //binarni soustava
-          currentNumSys = NumSystem.Bin;  //současná soustava je dvojková
           convertResult(NumSystem.Bin);
+          currentNumSys = NumSystem.Bin;  //současná soustava je dvojková
           //tlačítka A-F
           btnA.IsEnabled = false;
           btnB.IsEnabled = false;
@@ -565,8 +572,8 @@ namespace GUI
           btnCount.IsEnabled = true;
           break;
         case 2: //hexadecimalni soustava
-          currentNumSys = NumSystem.Hex;  //současná soustava je hexadecimální
           convertResult(NumSystem.Hex);
+          currentNumSys = NumSystem.Hex;  //současná soustava je hexadecimální
           //tlačítka A-F
           btnA.IsEnabled = true;
           btnB.IsEnabled = true;
@@ -612,8 +619,8 @@ namespace GUI
           btnCount.IsEnabled = true;
           break;
         case 3: //osmičková soustava
-          currentNumSys = NumSystem.Oct;  //současná soustava je osmičková
           convertResult(NumSystem.Oct);
+          currentNumSys = NumSystem.Oct;  //současná soustava je osmičková
           //tlačítka A-F
           btnA.IsEnabled = false;
           btnB.IsEnabled = false;
