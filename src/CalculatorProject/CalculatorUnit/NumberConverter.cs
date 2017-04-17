@@ -5,7 +5,7 @@
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
 * Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 16.04.2017
+* Datum poslední změny: 17.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -52,6 +52,7 @@ namespace CalculatorUnit
       int charVal;
       int dotPos = input.IndexOf('.');
       int power;
+      bool negativFlag = false;
       if (dotPos != -1)
       {
         power = dotPos - 1;
@@ -60,7 +61,12 @@ namespace CalculatorUnit
       {
         power = input.Length-1;
       }
-      for (int i = 0; i < input.Length; i++)
+      if(input[0] == '-')//pokud je cislo zaporne je nastaven flag a power aby se spravne umocnovalo
+      {
+        negativFlag = true;
+        power--;
+      }
+      for (int i = negativFlag ? 1 : 0; i < input.Length; i++)
       {
         if (i == dotPos)
           continue;
@@ -71,6 +77,8 @@ namespace CalculatorUnit
         result += charVal * Math.Pow((int)numsystem, power);
         power--;
       }
+      if (negativFlag)//pokud byl flag nastaven vraci se vysledek zaporny
+        return -result;
       return result;
     }
 
