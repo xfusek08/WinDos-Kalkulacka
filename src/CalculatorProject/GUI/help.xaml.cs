@@ -1,5 +1,5 @@
 ﻿/*******************************************************************
-* Název projektu: Nápověda pro GUI
+* Název projektu: IVS-Kalkulačka
 * Balíček: GUI
 * Soubor: help.xaml.cs
 * Datum: 15.04.2017
@@ -18,19 +18,8 @@
  * @date 15.04.2017
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GUI
 {
