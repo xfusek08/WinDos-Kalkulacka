@@ -1,3 +1,4 @@
+
 /*******************************************************************
 * Název projektu: IVS-Kalkulačka
 * Balíček: ProjectTesting
@@ -14,8 +15,8 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MathLib;
 using System.Globalization;
+using MathLib;
 
 namespace ProjectTesting
 {
