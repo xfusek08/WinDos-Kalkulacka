@@ -5,7 +5,7 @@
 * Datum: 03.04.2017
 * Autor: Petr Fusek
 * Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 17.04.2017
+* Datum poslední změny: 18.04.2017
 *
 * Popis: Třída, která zapouztřuje celý jeden matematický výpočet do jednoho objektu.
 * Vyhodnocuje matematické výrazy pomocí vlastního zjednodušeného jazyka.
@@ -17,7 +17,7 @@
  * @file Calculation.cs
  * @author Petr Fusek
  * @author Pavel Vosyka
- * @date 13.04.2017
+ * @date 18.04.2017
  */
 using System;
 using System.Collections.Generic;
