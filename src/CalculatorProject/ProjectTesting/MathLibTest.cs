@@ -1,5 +1,5 @@
 /*******************************************************************
-* Název projektu: IVS-kalkulačka
+* Název projektu: IVS-Kalkulačka
 * Balíček: ProjectTesting
 * Soubor: MathLibTest.cs
 * Datum: 21.03.2017
@@ -13,8 +13,6 @@
 *****************************************************************/
 
 using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MathLib;
 using System.Globalization;

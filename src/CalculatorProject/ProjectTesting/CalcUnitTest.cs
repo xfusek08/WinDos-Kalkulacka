@@ -1,5 +1,5 @@
 /*******************************************************************
-* Název projektu: Testovací třída pro testování funkcí Výpočetní jednotky
+* Název projektu: IVS-Kalkulačka
 * Balíček: ProjectTesting
 * Soubor: CalcUnitTest.cs
 * Datum: 28.03.2017
@@ -7,14 +7,12 @@
 * Naposledy upravil: Petr Fusek
 * Datum poslední změny: 11.04.2017
 *
-* Popis: Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation.
+* Popis: Testovací třída pro testování funkcí Výpočetní jednotky
+* Třída testuje správnost funkcí výpočetní jednotky CalculatorUnit.Calculation.
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Jaromír Franěk a Pavel Vosyka.
 *
 *****************************************************************/
 
-using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CalculatorUnit;
 using System.Globalization;
