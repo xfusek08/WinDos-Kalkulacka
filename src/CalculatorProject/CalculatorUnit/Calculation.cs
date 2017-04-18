@@ -385,6 +385,10 @@ namespace CalculatorUnit
         }
         else if (!Char.IsDigit(expr[index - 1]) && !"!)".Contains(expr[index - 1]))
         {
+          if(index>=2 && "+-".Contains(expr[index - 2])) // dvě unární plus/minus nemohou být za sebou
+          {
+            return false;
+          }
           // vyssi priorita pouze v pripadech kdy se jedna o zaporny druhy operand tj. 2^-2, 27@-3
           if ("@^%".Contains(expr[index - 1]))
           {
