@@ -110,21 +110,6 @@ namespace CalculatorUnit
     /// \bug Pokud je hodnota příliš velká, tak vypisuje nesmyslné hodnoty
     public static string ToString(double value, NumSystem numbase, string format)
     {
-      NumberFormatInfo f = new NumberFormatInfo();
-      f.NumberGroupSeparator = "";
-      if ((int)numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
-      {
-        if (format != "")
-          return value.ToString(format, f);
-        else
-          return value.ToString(f);
-
-        /*
-        value = Math.Round(value, c_stringDefaultPrecision);
-        return value.ToString(new System.Globalization.CultureInfo("en-US"));
-        */
-      }
-
       if (double.IsNaN(value))
         return "NaN";
 
@@ -133,6 +118,16 @@ namespace CalculatorUnit
 
       if (double.IsNegativeInfinity(value))
         return "-INF";
+
+      NumberFormatInfo f = new NumberFormatInfo();
+      f.NumberGroupSeparator = "";
+      if ((int)numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
+      {
+        if (format != "")
+          return value.ToString(format, f);
+        else
+          return value.ToString(f);
+      }
 
       if (value > int.MaxValue || value < int.MinValue)
         return "NaN";
