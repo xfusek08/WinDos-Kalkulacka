@@ -74,9 +74,6 @@ namespace CalculatorUnit
     private string s_expression;
     private CalcErrorType t_calcError;
     private CalcMath o_mathLib;
-    /// <summary>
-    /// Konstanta nastavuje maximální počet desetinných míst pro výstup z metody GetAsString().
-    /// </summary>
 
     #region Properties
 

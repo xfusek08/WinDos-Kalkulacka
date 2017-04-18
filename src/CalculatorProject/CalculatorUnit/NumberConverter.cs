@@ -25,7 +25,7 @@ using System.Globalization;
 namespace CalculatorUnit
 {
   /// <summary>
-  /// Třída poskytující metody pro konverzi čísel na řetezece
+  /// Třída poskytující metody pro konverzi čísel na řetezce a naopak. Podporuje také převody mezi soustavami o základu 2, 8, 10, 16.
   /// </summary>
   public static class NumberConverter
   {
@@ -37,7 +37,9 @@ namespace CalculatorUnit
     /// </summary>
     /// <param name="input">Řetězec obsahující číslo ve specifikované číselné soustavě</param>
     /// <param name="numsystem">Číselná soustava ve které je řetězec zapsán <see cref="NumSystem"></param>
+    /// 
     /// <returns>Vrací převedené číslo. Pokud je řetězec roven "NaN" vrací NaN, pokud je "INF" nebo "-INF" vrací double.PositiveInfinity nebo double.NegativeInfinity.</returns>
+    /// 
     /// <exception cref="ArgumentException">Vyjímka je vyhozena, pokud vstupní řetězec obsahuje nepovolené znaky v dané soustavě. Metoda přijímá desetinnou tečku ".", nikoliv čárku ",".</exception>
     public static double ToDouble(string input, NumSystem numsystem)
     {
@@ -90,6 +92,7 @@ namespace CalculatorUnit
     /// </description>
     /// <param name="value">číslo pro konvertování</param>
     /// <param name="numbase">Základ soustavy ve které se vypíše viz. <see cref="NumSystem"></param>
+    /// 
     /// <param name="format">
     ///   Formátovací řetězec
     ///   <list>
@@ -106,6 +109,7 @@ namespace CalculatorUnit
     ///     </item>
     ///   </list>
     /// </param>
+    /// 
     /// <returns>číslo v podobě řetězce</returns>
     /// \bug Pokud je hodnota příliš velká, tak vypisuje nesmyslné hodnoty
     public static string ToString(double value, NumSystem numbase, string format)
