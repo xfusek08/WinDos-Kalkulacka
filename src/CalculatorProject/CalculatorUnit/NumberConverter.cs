@@ -110,21 +110,8 @@ namespace CalculatorUnit
     /// \bug Pokud je hodnota příliš velká, tak vypisuje nesmyslné hodnoty
     public static string ToString(double value, NumSystem numbase, string format)
     {
-      if (double.IsNaN(value))
-        return "NaN";
-
-      if (double.IsInfinity(value) || double.IsPositiveInfinity(value))
-        return "INF";
-
-      if (double.IsNegativeInfinity(value))
-        return "-INF";
-
-      if (value > int.MaxValue || value < int.MinValue)
-        return "NaN";
-
       NumberFormatInfo f = new NumberFormatInfo();
       f.NumberGroupSeparator = "";
-
       if ((int)numbase == 10) //v případě, že je soustava desítková, lze vypsat hodnotu přes standartní metodu
       {
         if (format != "")
@@ -137,6 +124,19 @@ namespace CalculatorUnit
         return value.ToString(new System.Globalization.CultureInfo("en-US"));
         */
       }
+
+      if (double.IsNaN(value))
+        return "NaN";
+
+      if (double.IsInfinity(value) || double.IsPositiveInfinity(value))
+        return "INF";
+
+      if (double.IsNegativeInfinity(value))
+        return "-INF";
+
+      if (value > int.MaxValue || value < int.MinValue)
+        return "NaN";
+
       string resultstr = "";
       if (value < 0) //pokud je číslo záporné, vloží se mínus a zbytek se převede jako kladné
       {
