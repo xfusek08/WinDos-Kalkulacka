@@ -5,7 +5,7 @@
 * Datum: 03.04.2017
 * Autor: Petr Fusek
 * Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 16.04.2017
+* Datum poslední změny: 18.04.2017
 *
 * Popis: Třída, která zapouztřuje celý jeden matematický výpočet do jednoho objektu.
 * Vyhodnocuje matematické výrazy pomocí vlastního zjednodušeného jazyka.
@@ -17,7 +17,7 @@
  * @file Calculation.cs
  * @author Petr Fusek
  * @author Pavel Vosyka
- * @date 13.04.2017
+ * @date 18.04.2017
  */
 using System;
 using System.Collections.Generic;
@@ -361,24 +361,57 @@ namespace CalculatorUnit
       if (GetOperatorPriority(expr[index]) == 0)
         return false;
 
-      // minus v nekterych pripadech znamena unarni negaci
-      if (expr[index] == '-')
+      // minus v nekterych pripadech znamena unarni negaci, ve výrazu se může objevit také unární plus, které by mělo fungovat stejně
+      if (expr[index] == '-' || expr[index] == '+')
       {
         /*
         negace ma ruznou prioritu z ohledem na pozici ve vyrazu
         N - vyssi priorita pred @^%
         n - nissi priorita pred *-
+        stejně pro plus
+        P - vyssi priorita pred @^%
+        p - nissi priorita pred *-
         */
         // pokud je na zacatku retezce
         if (index == 0)
-          expr[index] = 'n';
+        {
+          if(expr[index] == '-')
+          {
+            expr[index] = 'n';
+          }else
+          {
+            expr[index] = 'p';
+          }
+        }
         else if (!Char.IsDigit(expr[index - 1]) && !"!)".Contains(expr[index - 1]))
         {
+          if(index>=2 && "+-".Contains(expr[index - 2])) // dvě unární plus/minus nemohou být za sebou
+          {
+            return false;
+          }
           // vyssi priorita pouze v pripadech kdy se jedna o zaporny druhy operand tj. 2^-2, 27@-3
           if ("@^%".Contains(expr[index - 1]))
-            expr[index] = 'N';
+          {
+            if (expr[index] == '-')
+            {
+              expr[index] = 'N';
+            }
+            else
+            {
+              expr[index] = 'P';
+            }
+          }
           else
-            expr[index] = 'n';
+          {
+            if (expr[index] == '-')
+            {
+              expr[index] = 'n';
+            }
+            else
+            {
+              expr[index] = 'p';
+            }
+          }
         }
       }
       else if (expr[index] == 'L')
@@ -459,6 +492,7 @@ namespace CalculatorUnit
         case 'L':
           return 10;
         case 'N':
+        case 'P':
           return 9;
         case '^':
           return 8;
@@ -467,6 +501,7 @@ namespace CalculatorUnit
         case '%':
           return 6;
         case 'n':
+        case 'p':
           return 5;
         case '*':
           return 4;
@@ -489,6 +524,8 @@ namespace CalculatorUnit
         case 'L':
         case 'n':
         case 'N':
+        case 'p':
+        case 'P':
           return true;
         case '/':
         case '-':
@@ -526,6 +563,9 @@ namespace CalculatorUnit
         case 'n':
         case 'N':
           return o_mathLib.Multipy(-1, rightOp);
+        case 'p':
+        case 'P':
+          return rightOp;
         case '!':
           byte byteVal = 0;
           try { byteVal = Convert.ToByte(rightOp); }
