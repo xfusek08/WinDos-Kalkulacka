@@ -71,15 +71,21 @@ namespace GUI
     {
       string lastChar = getLastChar();
 
+      //Pokud existuje výsledek a zadává se číslo, tak se kalkulačka vymaže
+      if (tbResult.Text.Length > 0)
+      {
+        resetCalc(true);
+      }
+
       if (tbExpression.Text == "0")  //V případě, že je obsah oblast pro výraz rovna "0", tak...
       {
         tbExpression.Text = "";  //...smaže oblast pro výraz
-      }
+      }/*
       else if (lastChar == ")" || lastChar == "!")  //jinak když je poslední znak závorka...
       {
         isDotPrintable = true;
         tbExpression.Text = tbExpression.Text + unicodeMultiply;  //připojí na konec *
-      }
+      }*/
 
       switch (number)
       {
@@ -161,6 +167,12 @@ namespace GUI
     {
       string lastChar = getLastChar();
       bool isLastCharNumber = isCharNumber(lastChar);
+
+      //Pokud existuje výsledek, tak se kalkulačka vymaže
+      if (tbResult.Text.Length > 0)
+      {
+        resetCalc(true);
+      }
 
       if (isDotPrintable && isLastCharNumber)  //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
       {
@@ -398,6 +410,10 @@ namespace GUI
           tbResult.Text = "Nespecifikovaná chyba.";
           break;
       }
+
+      //Po následném zmáčknutí desetinné tečky se výraz maže - povolení zmáčkout tečku a zadat "0."
+      isDotPrintable = true;
+      enable_disableButtons();
     }
 
     //===== Ostatní funkce =====
@@ -443,7 +459,7 @@ namespace GUI
     /// <summary>
     /// Funkce, která nastavuje kalkulačku do výchozího stavu.
     /// </summary>
-    /// <param name="all">Resetuje i oblast pro výsledek.</param>
+    /// <param name="all">Když je true, tak resetuje i oblast pro výsledek.</param>
     private void resetCalc(bool all)
     {
       isDotPrintable = true;
@@ -451,7 +467,15 @@ namespace GUI
       rightBracketsCount = 0;
       tbExpression.Text = "0";
       if (all == true)
-        tbResult.Text = "";
+        resetResult();
+    }
+
+    /// <summary>
+    /// Funkce, která nuluje oblast pro výsledek
+    /// </summary>
+    private void resetResult()
+    {
+      tbResult.Text = "";
     }
 
     /// <summary>
@@ -1015,168 +1039,200 @@ namespace GUI
     //===== Události spouštějící se při kliknutí na tlačítka 0-9 =====
     private void btnZero_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(0);
     }
 
     private void btnOne_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(1);
     }
 
     private void btnTwo_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(2);
     }
 
     private void btnThree_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(3);
     }
 
     private void btnFour_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(4);
     }
 
     private void btnFive_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(5);
     }
 
     private void btnSix_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(6);
     }
 
     private void btnSeven_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(7);
     }
 
     private void btnEight_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(8);
     }
 
     private void btnNine_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(9);
     }
 
     //===== Události spouštějící se při kliknutí na tlačítka A-F =====
     private void btnA_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(10);
     }
 
     private void btnB_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(11);
     }
 
     private void btnC_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(12);
     }
 
     private void btnD_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(13);
     }
 
     private void btnE_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(14);
     }
 
     private void btnF_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printNumber(15);
     }
 
     //===== Události spouštějící se při kliknutí na tlačítko desetinné čárky (tečky) =====
     private void btnDot_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printDot();
     }
 
     //===== Události spouštějící se při kliknutí na tlačítka závorek =====
     private void btnLeftBracket_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printLeftBracket();
     }
 
     private void btnRightBracket_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printRightBracket();
     }
 
     //===== Události spouštějící se při kliknutí na tlačítka operátorů =====
     private void btnMultiply_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printMathOperator(unicodeMultiply);
     }
 
     private void btnDivide_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printMathOperator(unicodeDivision);
     }
 
     private void btnPlus_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printMathOperator(unicodePlus);
     }
 
     private void btnMinus_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printMathOperator(unicodeMinus);
     }
 
     private void btnMod_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printMathOperator("%");
     }
 
     //===== Události spouštějící se při kliknutí na tlačítka mocniny a odmocniny =====
     private void btnPow_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printPow();
     }
 
     private void grdPowBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
+      btnCount.Focus();
       printPow();
     }
 
     private void btnRoot_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printRoot();
     }
 
     private void grdRootBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
+      btnCount.Focus();
       printRoot();
     }
 
     //===== Události spouštějící se při kliknutí na tlačítka faktoriálu a logaritmu =====
     private void btnFact_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printFact();
     }
 
     private void btnLog_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       printLog();
     }
 
     //===== Události spouštějící se při kliknutí na tlačítka DEL, AC a "=" =====
     private void btnDel_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       removeFromBack();
     }
 
     private void btnAc_Click(object sender, RoutedEventArgs e)
     {
+      btnCount.Focus();
       resetCalc(true);  //smaže i oblast pro výsledek
     }
 
@@ -1206,8 +1262,10 @@ namespace GUI
       switchNumeralSystem(3);
     }
 
+    //Při změně textu povoluje a zakazuje tlačítka, která lze a nelze zmáčknout
     private void tbExpression_TextChanged(object sender, TextChangedEventArgs e)
     {
+      resetResult();  //vymaže oblast pro výsledek
       // v případě, že se nejedná o desítkovou soustavu, tak budou povolena pouze tlačítka vybranéné soustavy
       if (currentNumSys == NumSystem.Dec)
       {
