@@ -4,7 +4,7 @@
 * Soubor: Calculation.cs
 * Datum: 03.04.2017
 * Autor: Petr Fusek
-* Naposledy upravil: Pavel Vosyka
+* Naposledy upravil: Petr Fusek
 * Datum poslední změny: 18.04.2017
 *
 * Popis: Třída, která zapouztřuje celý jeden matematický výpočet do jednoho objektu.
@@ -488,27 +488,25 @@ namespace CalculatorUnit
       switch (oper)
       {
         case '!':
-          return 11;
+          return 9;
         case 'L':
-          return 10;
+          return 8;
         case 'N':
         case 'P':
-          return 9;
-        case '^':
-          return 8;
-        case '@':
           return 7;
-        case '%':
+        case '^':
           return 6;
+        case '@':
+          return 5;
+        case '%':
+          return 4;
         case 'n':
         case 'p':
-          return 5;
-        case '*':
-          return 4;
-        case '/':
           return 3;
-        case '-':
+        case '*':
+        case '/':
           return 2;
+        case '-':
         case '+':
           return 1;
         default:
