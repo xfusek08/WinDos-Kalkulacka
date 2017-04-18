@@ -1,5 +1,6 @@
-﻿/*******************************************************************
-* Název projektu: Testovací třída pro testování funkcí matematické knihovny
+
+/*******************************************************************
+* Název projektu: IVS-Kalkulačka
 * Balíček: ProjectTesting
 * Soubor: MathLibTest.cs
 * Datum: 21.03.2017
@@ -13,8 +14,6 @@
 *****************************************************************/
 
 using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
 using MathLib;
