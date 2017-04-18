@@ -5,13 +5,19 @@
 * Datum: 05.04.2017
 * Autor: Radim Blaha
 * Naposledy upravil: Radim Blaha
-* Datum poslední změny: 14.04.2017
+* Datum poslední změny: 18.04.2017
 *
 * Popis: Třída, která ovládá grafické prvky hlavního okna aplikace a
 *        reaguje na příchozí uživatelské události.
 *
 *****************************************************************/
 
+/**
+ * @brief Grafické uživatelské rozhraní
+ * @file MainWindow.xaml.cs
+ * @author Radim Blaha
+ * @date 5.04.2017
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -131,6 +137,10 @@ namespace GUI
       }
     }
 
+    /// <summary>
+    /// Funkce, která tiskne matematický operátor
+    /// </summary>
+    /// <param name="mathOperator">Matematický operátor, který se má vytisknout.</param>
     private void printMathOperator(string mathOperator)
     {
       string lastChar = getLastChar(); //původní poslední znak
@@ -141,9 +151,12 @@ namespace GUI
         removeFromBack();
       }
       isDotPrintable = true;
-      tbExpression.Text = tbExpression.Text + mathOperator;
+      tbExpression.Text = tbExpression.Text + mathOperator; //vytiskne operátor
     }
 
+    /// <summary>
+    /// Funkce, která tiskne desetinnou tečku, pokud je to možné
+    /// </summary>
     private void printDot()
     {
       string lastChar = getLastChar();
@@ -161,6 +174,9 @@ namespace GUI
       }
     }
 
+    /// <summary>
+    /// Funkce, která tiskne levou závorku
+    /// </summary>
     private void printLeftBracket()
     {
       string lastChar = "";
@@ -176,12 +192,12 @@ namespace GUI
       isLastCharNumber = isCharNumber(lastChar);
 
       if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || tbExpression.Text == "" || lastChar == "(" || lastChar == unicodeRoot || lastChar == "^")
-      {
+      { //vytiskne pouze levou závorku
         leftBracketsCount++;
         tbExpression.Text = tbExpression.Text + "(";
       }
       else if (lastChar == ")" || isLastCharNumber || lastChar == "!")
-      {
+      { //vytiskne * a levou závorku
         leftBracketsCount++;
         isDotPrintable = true;
         tbExpression.Text = tbExpression.Text + unicodeMultiply + "(";  //připojí na konec *(
@@ -190,23 +206,26 @@ namespace GUI
       resetBracketsCounterIfEqual();
     }
 
+    /// <summary>
+    /// Funkce, která tiskne pravou závorku
+    /// </summary>
     private void printRightBracket()
     {
       string lastChar = getLastChar();
       bool isLastCharNumber = isCharNumber(lastChar);
 
       if ((isLastCharNumber || lastChar == ")" || lastChar == "!") && (tbExpression.Text != "0"))
-      {
+      { //vytiskne pouze závorku
         rightBracketsCount++;
         tbExpression.Text = tbExpression.Text + ")";
       }
       else if (((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == "(")))
-      {
+      { //vytiskne 0 a závorku
         rightBracketsCount++;
         tbExpression.Text = tbExpression.Text + "0)";
       }
       else if (((lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%")))
-      {
+      { //vytiskne 1 a závorku
         rightBracketsCount++;
         tbExpression.Text = tbExpression.Text + "1)";
       }
@@ -214,6 +233,9 @@ namespace GUI
       resetBracketsCounterIfEqual();
     }
 
+    /// <summary>
+    /// Funkce, která tiskne logaritmus
+    /// </summary>
     private void printLog()
     {
       string lastChar = "";
@@ -229,12 +251,12 @@ namespace GUI
       isLastCharNumber = isCharNumber(lastChar);
 
       if (lastChar == unicodePlus || lastChar == unicodeMinus || lastChar == unicodeMultiply || lastChar == unicodeDivision || lastChar == "%" || lastChar == unicodeRoot || lastChar == "^" || tbExpression.Text == "" || lastChar == "(")
-      {
+      { //tiskne log(
         leftBracketsCount++;
         tbExpression.Text = tbExpression.Text + "log(";
       }
       else if (lastChar == ")" || isLastCharNumber || lastChar == "!")
-      {
+      { //tiskne *log(
         leftBracketsCount++;
         isDotPrintable = true;
         tbExpression.Text = tbExpression.Text + unicodeMultiply + "log(";  //připojí na konec *log(
@@ -243,17 +265,26 @@ namespace GUI
       resetBracketsCounterIfEqual();
     }
 
+    /// <summary>
+    /// Funkce, která vytiskne faktoriál
+    /// </summary>
     private void printFact()
     {
       tbExpression.Text += "!";
     }
 
+    /// <summary>
+    /// Funkce, která tiskne mocninu a nastavuje příznak desetinné tečky
+    /// </summary>
     private void printRoot()
     {
       isDotPrintable = true;
       tbExpression.Text += unicodeRoot;
     }
 
+    /// <summary>
+    /// Funkce, která tiskne odmocninu a nastavuje příznak desetinné tečky
+    /// </summary>
     private void printPow()
     {
       isDotPrintable = true;
