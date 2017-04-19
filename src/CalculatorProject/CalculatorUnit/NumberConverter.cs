@@ -4,8 +4,8 @@
 * Soubor: NumberConverter.cs
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
-* Naposledy upravil: Pavel Vosyka
-* Datum poslední změny: 17.04.2017
+* Naposledy upravil: Petr Fusek
+* Datum poslední změny: 19.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -16,7 +16,7 @@
  * @file NumberConverter.cs
  * @author Petr Fusek
  * @author Pavel Vosyka
- * @date 13.04.2017
+ * @date 19.04.2017
  */
 
 using System;
