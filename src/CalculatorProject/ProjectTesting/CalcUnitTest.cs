@@ -97,6 +97,10 @@ namespace ProjectTesting
       Assert.AreEqual(-3, calcunit.Value, PRECISION);
       calcunit.Expression = "(-3)@1000";
       Assert.AreEqual(0.1, calcunit.Value, PRECISION);
+      calcunit.Expression = "3@-1000";
+      Assert.AreEqual(10, calcunit.Value, PRECISION);
+      calcunit.Expression = "(-3)@-1000";
+      Assert.AreEqual(-0.1, calcunit.Value, PRECISION);
       calcunit.Expression = "-(-3)@1000";
       Assert.AreEqual(-0.1, calcunit.Value, PRECISION);
       calcunit.Expression = "6%3";
@@ -230,7 +234,7 @@ namespace ProjectTesting
       calcunit.Expression = "0 /0";
       Assert.AreEqual(CalcErrorType.FuncDomainError, calcunit.ErrorType);
       Assert.IsTrue(double.IsNaN(calcunit.Value));
-      calcunit.Expression = "3 @ (-1)";
+      calcunit.Expression = "2 @ (-1)";
       Assert.AreEqual(CalcErrorType.FuncDomainError, calcunit.ErrorType);
       Assert.IsTrue(double.IsNaN(calcunit.Value));
       calcunit.Expression = "(-20)!";

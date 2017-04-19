@@ -190,6 +190,9 @@ namespace ProjectTesting
       Assert.AreEqual(-19, mathclass.Root(-6859, 3), PRECISION);
       Assert.AreEqual(16, mathclass.Root(4294967296, 8), PRECISION);
 
+      Assert.AreEqual(0.1, mathclass.Root(1000, -3), PRECISION);
+      Assert.AreEqual(10, mathclass.Root(-1000, 3), PRECISION);
+      Assert.AreEqual(-0.1, mathclass.Root(-1000, -3), PRECISION);
       Assert.AreEqual(double.PositiveInfinity, mathclass.Root(double.PositiveInfinity, 2), PRECISION);
 
       Assert.IsTrue(double.IsNaN(mathclass.Root(-8, 2)));
