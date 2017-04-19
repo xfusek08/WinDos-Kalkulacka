@@ -5,7 +5,7 @@
 * Datum: 15.04.2017
 * Autor: Radim Blaha
 * Naposledy upravil: Radim Blaha
-* Datum poslední změny: 18.04.2017
+* Datum poslední změny: 19.04.2017
 *
 * Popis: Třída interakční logiky pro okno nápovědy kalkulačky.
 *
@@ -20,6 +20,7 @@
 
 using System.Windows;
 using System.Windows.Input;
+using System.IO;
 
 namespace GUI
 {
@@ -30,13 +31,16 @@ namespace GUI
   {
     public help()
     {
+      string fullPath = Path.GetFullPath("doc/index.html"); //překlad relativní cesty na absolutní
       InitializeComponent();
       this.Title = "Kalkulačka - nápověda";
+      webBrowser.Navigate(fullPath);  //navigování na soubor s nápovědou
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
-      this.Close();
+      if (e.Key == Key.Escape)
+        this.Close();
     }
   }
 }
