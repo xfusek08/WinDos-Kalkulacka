@@ -5,7 +5,7 @@
 * Datum: 06.04.2017
 * Autor: Jaromír Franěk
 * Naposledy upravil: Jaromír Franěk
-* Datum poslední změny: 13.04.2017
+* Datum poslední změny: 19.04.2017
 *
 * Popis: Matematická knihovna MathLib.
 * Odpovědný za projekt je Jaromír Franěk.
@@ -118,9 +118,9 @@ namespace MathLib
     /// <returns>Vrací x-tou odmocninu argumentu a</returns>
     public double Root(double a, double x)
     {
-      if ((a < 0) && (x % 2) == 1)
+      if ((a < 0) && ((x % 2) == 1 || (x % 2) == -1))
         return -Math.Pow(-a, 1.0 / x);
-      if (x <= 0)
+      if (x <= 0 && (x % 2) == 0)
         return double.NaN;
       return Math.Pow(a, 1.0 / x);
     }

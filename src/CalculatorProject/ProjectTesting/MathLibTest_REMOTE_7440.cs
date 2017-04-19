@@ -1,12 +1,11 @@
-
 /*******************************************************************
-* Název projektu: IVS-Kalkulačka
+* Název projektu: Testovací třída pro testování funkcí matematické knihovny
 * Balíček: ProjectTesting
 * Soubor: MathLibTest.cs
 * Datum: 21.03.2017
 * Autor: Petr Fusek
-* Naposledy upravil: Jaromír Franěk
-* Datum poslední změny: 09.04.2017
+* Naposledy upravil: Petr Fusek
+* Datum poslední změny: 06.04.2017
 *
 * Popis: Třída testuje funkce matematického objektu MathLib.CalcMath.
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Petr Fusek a Radim Blaha.
@@ -14,9 +13,11 @@
 *****************************************************************/
 
 using System;
+using System.Text;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
 using MathLib;
+using System.Globalization;
 
 namespace ProjectTesting
 {
@@ -190,15 +191,12 @@ namespace ProjectTesting
       Assert.AreEqual(-19, mathclass.Root(-6859, 3), PRECISION);
       Assert.AreEqual(16, mathclass.Root(4294967296, 8), PRECISION);
 
-      Assert.AreEqual(0.1, mathclass.Root(1000, -3), PRECISION);
-      Assert.AreEqual(-10, mathclass.Root(-1000, 3), PRECISION);
-      Assert.AreEqual(-0.1, mathclass.Root(-1000, -3), PRECISION);
       Assert.AreEqual(double.PositiveInfinity, mathclass.Root(double.PositiveInfinity, 2), PRECISION);
 
       Assert.IsTrue(double.IsNaN(mathclass.Root(-8, 2)));
       Assert.IsTrue(double.IsNaN(mathclass.Root(8, 0)));
       Assert.IsTrue(double.IsNaN(mathclass.Root(-4 , -2)));
-      Assert.AreEqual(-0.6299605, mathclass.Root(-4, -3), PRECISION);
+      Assert.IsTrue(double.IsNaN(mathclass.Root(-4 , -3)));
     }
 
     [TestMethod]
