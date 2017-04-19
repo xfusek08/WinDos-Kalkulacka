@@ -5,7 +5,7 @@
 * Datum: 05.04.2017
 * Autor: Radim Blaha
 * Naposledy upravil: Radim Blaha
-* Datum poslední změny: 18.04.2017
+* Datum poslední změny: 19.04.2017
 *
 * Popis: Třída, která ovládá grafické prvky hlavního okna aplikace a
 *        reaguje na příchozí uživatelské události.
@@ -42,6 +42,8 @@ namespace GUI
     private string unicodeRoot = "\u221A";
     private NumSystem currentNumSys = NumSystem.Dec; //výchozí číselná soustava je desítková
     private string lastResult;  //Proměnná pro uložení posledního výsledku
+    private bool removeResult = true;  //říká, zda se má odstranit i výsledek - při převádění mezi soustavami se odstraňovat nesmí
+    private bool removeExprBeforeNumberPrint = false; //říká, zda se má výraz smazat před vypsáním číslovky
 
     public MainWindow()
     {
@@ -61,10 +63,11 @@ namespace GUI
     {
       string lastChar = getLastChar();
 
-      //Pokud existuje výsledek a zadává se číslo, tak se kalkulačka vymaže
-      if (tbResult.Text.Length > 0)
+      //Pokud se má smazat, tak se kalkulačka vymaže
+      if (removeExprBeforeNumberPrint)
       {
         resetCalc(true);
+        removeExprBeforeNumberPrint = false;
       }
 
       if (tbExpression.Text == "0")  //V případě, že je obsah oblast pro výraz rovna "0", tak...
@@ -148,6 +151,8 @@ namespace GUI
       }
       isDotPrintable = true;
       tbExpression.Text = tbExpression.Text + mathOperator; //vytiskne operátor
+
+      removeExprBeforeNumberPrint = false;  //po nasledném stisku čísla nebude mazat výraz
     }
 
     /// <summary>
@@ -158,10 +163,11 @@ namespace GUI
       string lastChar = getLastChar();
       bool isLastCharNumber = isCharNumber(lastChar);
 
-      //Pokud existuje výsledek, tak se kalkulačka vymaže
-      if (tbResult.Text.Length > 0)
+      //Pokud se má vymazat, tak se kalkulačka vymaže
+      if (removeExprBeforeNumberPrint)
       {
         resetCalc(true);
+        removeExprBeforeNumberPrint = false;
       }
 
       if (isDotPrintable && isLastCharNumber)  //Pokud v oblasti pro výpočty není čárka a současně je poslední znak číslo, tak...
@@ -206,6 +212,8 @@ namespace GUI
       }
 
       resetBracketsCounterIfEqual();
+
+      removeExprBeforeNumberPrint = false;  //po nasledném stisku čísla nebude mazat výraz
     }
 
     /// <summary>
@@ -233,6 +241,8 @@ namespace GUI
       }
 
       resetBracketsCounterIfEqual();
+
+      removeExprBeforeNumberPrint = false;  //po nasledném stisku čísla nebude mazat výraz
     }
 
     /// <summary>
@@ -265,6 +275,8 @@ namespace GUI
       }
 
       resetBracketsCounterIfEqual();
+
+      removeExprBeforeNumberPrint = false;  //po nasledném stisku čísla nebude mazat výraz
     }
 
     /// <summary>
@@ -404,6 +416,8 @@ namespace GUI
       //Po následném zmáčknutí desetinné tečky se výraz maže - povolení zmáčkout tečku a zadat "0."
       isDotPrintable = true;
       enable_disableButtons();
+
+      removeExprBeforeNumberPrint = true;  //po zadání čísla smaže výraz
     }
 
     //===== Ostatní funkce =====
@@ -461,7 +475,7 @@ namespace GUI
     }
 
     /// <summary>
-    /// Funkce, která nuluje oblast pro výsledek
+    /// Funkce, která maže oblast pro výsledek
     /// </summary>
     private void resetResult()
     {
@@ -509,6 +523,7 @@ namespace GUI
     /// <param name="numeralSystem">Vyjadřuje číselnou soustavu (0 - DEC, 1 - BIN, 2 - HEX, 3 - OCT)</param>
     private void switchNumeralSystem(byte numeralSystem)
     {
+      removeResult = false; //při převodu mezi soustavami se převádí výsledek, proto se mazat nesmí
       resetCalc(false);  //smaže oblast pro výraz při přepnutí do jiné soustavy - aby zde nezůstávali neplatné znaky pro danou soustavu
       switch (numeralSystem)
       {
@@ -1231,7 +1246,7 @@ namespace GUI
       countExpr();
     }
 
-    //===== Události spouštějící se při kliknutí na přepínače pro změnu soutstavy =====
+    //===== Události spouštějící se při kliknutí na přepínače pro změnu soustavy =====
     private void rbDec_Click(object sender, RoutedEventArgs e)
     {
       switchNumeralSystem(0);
@@ -1255,7 +1270,11 @@ namespace GUI
     //Při změně textu povoluje a zakazuje tlačítka, která lze a nelze zmáčknout
     private void tbExpression_TextChanged(object sender, TextChangedEventArgs e)
     {
-      resetResult();  //vymaže oblast pro výsledek
+      if (removeResult) //Pokud má povoleno smazat výsledek - když se převádí, tak se výsledek mazat nesmí
+      {
+        resetResult();  //vymaže oblast pro výsledek
+        removeResult = false;
+      }
       // v případě, že se nejedná o desítkovou soustavu, tak budou povolena pouze tlačítka vybranéné soustavy
       if (currentNumSys == NumSystem.Dec)
       {
