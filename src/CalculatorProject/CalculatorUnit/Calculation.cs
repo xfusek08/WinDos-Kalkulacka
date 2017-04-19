@@ -15,7 +15,7 @@
 /**
  * @brief Třída výpočtu výpočetní jednotky
  * @file Calculation.cs
- * 
+ *
  * Obsahuje popis modulu a třídu výpočtu **Calculation**
  * @author Petr Fusek
  * @author Pavel Vosyka
@@ -331,7 +331,7 @@ namespace CalculatorUnit
       double tmpval = double.NaN;
       try
       {
-        tmpval = double.Parse(subString, CultureInfo.InvariantCulture);
+        tmpval = NumberConverter.ToDouble(subString, NumSystem.Dec);
       }
       catch (OverflowException)
       {

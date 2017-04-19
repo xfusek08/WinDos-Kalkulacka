@@ -37,10 +37,15 @@ namespace CalculatorUnit
     /// </summary>
     /// <param name="input">Řetězec obsahující číslo ve specifikované číselné soustavě</param>
     /// <param name="numsystem">Číselná soustava ve které je řetězec zapsán <see cref="NumSystem"></param>
-    /// 
+    ///
     /// <returns>Vrací převedené číslo. Pokud je řetězec roven "NaN" vrací NaN, pokud je "INF" nebo "-INF" vrací double.PositiveInfinity nebo double.NegativeInfinity.</returns>
-    /// 
-    /// <exception cref="ArgumentException">Vyjímka je vyhozena, pokud vstupní řetězec obsahuje nepovolené znaky v dané soustavě. Metoda přijímá desetinnou tečku ".", nikoliv čárku ",".</exception>
+    ///
+    /// <exception cref="ArgumentNullException">Input je **null**. (pouze při převodu z desítkového čísla.)
+    /// viz. <a href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException Class</a></exception>
+    /// <exception cref="OverflowException">Číslo přessahuje maximální nebo minimální rozsah. (pouze při převodu z desítkového čísla.)
+    /// viz. <a href="https://msdn.microsoft.com/en-us/library/system.overflowexception(v=vs.110).aspx">OverflowException Class</a></exception>
+    /// <exception cref="FormatException">Vyjímka je vyhozena, pokud vstupní řetězec není platné číslo v dané soustavě. Metoda přijímá desetinnou tečku ".", nikoliv čárku ",".</exception>
+    ///
     public static double ToDouble(string input, NumSystem numsystem)
     {
       if (input == "NaN")
@@ -49,6 +54,24 @@ namespace CalculatorUnit
         return double.PositiveInfinity;
       if (input == "-INF")
         return double.NegativeInfinity;
+
+      // pokud prevadime z desiktove, tak praci za nas udela knihovna ... plus jeste vyhodi spravne chyby
+      if (numsystem == NumSystem.Dec)
+      {
+        double res = double.NaN;
+        try
+        {
+          res = double.Parse(input, CultureInfo.InvariantCulture);
+        }
+        catch (Exception ex)
+        {
+          if (ex is FormatException || ex is ArgumentException)
+            throw new FormatException("Argument neobsahuje validní znaky");
+          else
+            throw ex;
+        }
+        return res;
+      }
 
       double result = 0;
       int charVal;
@@ -74,7 +97,9 @@ namespace CalculatorUnit
           continue;
         if (!digitToInt(input[i], out charVal, (int)numsystem))
         {
-          throw new ArgumentException("Argument neobsahuje validní znaky", "input");
+          //throw new ArgumentException("Argument neobsahuje validní znaky", "input");
+          // vyhodime trochu standartnejsi chybu
+          throw new FormatException("Argument neobsahuje validní znaky");
         }
         result += charVal * Math.Pow((int)numsystem, power);
         power--;
@@ -88,12 +113,12 @@ namespace CalculatorUnit
     /// Konvertuje číslo na řetězec.
     /// </summary>
     /// <description>
-    /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst. 
+    /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst.
     /// Převod o jiných soustav než desítkových je limitován velikostí integer, v takovém případě vrací "NaN".
     /// </description>
     /// <param name="value">Hodnota, která ma být prevedena na číslo</param>
     /// <param name="numbase">Základ soustavy ve které se vypíše viz. <see cref="NumSystem"></param>
-    /// 
+    ///
     /// <param name="format">
     ///   Formátovací řetězec
     ///   <list>
@@ -110,7 +135,7 @@ namespace CalculatorUnit
     ///     </item>
     ///   </list>
     /// </param>
-    /// 
+    ///
     /// <returns>
     ///     číslo v podobě řetězce v požadované číselné soustavě.
     ///     * pokud je <c>value > 'int max'</c> a numbase není NumSystem.Dec potom rací "NaN".
@@ -250,7 +275,7 @@ namespace CalculatorUnit
       {
         case 10:
           return "a";
-        case 11:  
+        case 11:
           return "b";
         case 12:
           return "c";
@@ -258,7 +283,7 @@ namespace CalculatorUnit
           return "d";
         case 14:
           return "e";
-        case 15: 
+        case 15:
           return "f";
         default:
           return "";
