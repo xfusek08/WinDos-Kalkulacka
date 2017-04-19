@@ -13,8 +13,10 @@
 *****************************************************************/
 
 /**
- * @brief Modul výpočetní jednotky
+ * @brief Třída výpočtu výpočetní jednotky
  * @file Calculation.cs
+ * 
+ * Obsahuje popis modulu a třídu výpočtu **Calculation**
  * @author Petr Fusek
  * @author Pavel Vosyka
  * @date 18.04.2017

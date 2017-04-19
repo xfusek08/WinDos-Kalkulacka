@@ -88,9 +88,10 @@ namespace CalculatorUnit
     /// Konvertuje číslo na řetězec.
     /// </summary>
     /// <description>
-    /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst. Převod je limitován velikostí integer, v takovém případě vrací "NaN".
+    /// Konvertuje číslo na řetězec v zadané číselné soustavě na počet zadaných desetinných míst. 
+    /// Převod o jiných soustav než desítkových je limitován velikostí integer, v takovém případě vrací "NaN".
     /// </description>
-    /// <param name="value">číslo pro konvertování</param>
+    /// <param name="value">Hodnota, která ma být prevedena na číslo</param>
     /// <param name="numbase">Základ soustavy ve které se vypíše viz. <see cref="NumSystem"></param>
     /// 
     /// <param name="format">
@@ -98,20 +99,22 @@ namespace CalculatorUnit
     ///   <list>
     ///     <item>Výchozí nastavení formátu je na 4 desetinná místa.</item>
     ///     <item>
-    ///       numbase je '10'
+    ///       pokud: numbase je NumSystem.Dec (desítková soustava)
     ///       * Očekává formátovací řetězec dle standardu <a href="https://msdn.microsoft.com/en-us//library/dwhawy9k(v=vs.110).aspx">.net</a>
     ///       * Pokud je prázdný řetězec použije se výchozí nastavení.
     ///     </item>
     ///     <item>
-    ///       numbase je různá od '10'
+    ///       jinak: numbase je jiná soustava
     ///       * Očekává číslo, které představuje počet desetinných míst.
     ///       * Pokud nebude validní, použije se výchozí nastavení.
     ///     </item>
     ///   </list>
     /// </param>
     /// 
-    /// <returns>číslo v podobě řetězce</returns>
-    /// \bug Pokud je hodnota příliš velká, tak vypisuje nesmyslné hodnoty
+    /// <returns>
+    ///     číslo v podobě řetězce v požadované číselné soustavě.
+    ///     * pokud je <c>value > 'int max'</c> a numbase není NumSystem.Dec potom rací "NaN".
+    /// </returns>
     public static string ToString(double value, NumSystem numbase, string format)
     {
       if (double.IsNaN(value))
