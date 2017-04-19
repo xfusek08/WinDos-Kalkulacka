@@ -6,7 +6,7 @@
 * Datum: 21.03.2017
 * Autor: Petr Fusek
 * Naposledy upravil: Jaromír Franěk
-* Datum poslední změny: 09.04.2017
+* Datum poslední změny: 19.04.2017
 *
 * Popis: Třída testuje funkce matematického objektu MathLib.CalcMath.
 * Testy jsou vytvářeny ve filozofii TDD. Odpovědni za projekt jsou Petr Fusek a Radim Blaha.

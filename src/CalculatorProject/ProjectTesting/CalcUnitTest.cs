@@ -98,7 +98,7 @@ namespace ProjectTesting
       calcunit.Expression = "(-3)@1000";
       Assert.AreEqual(0.1, calcunit.Value, PRECISION);
       calcunit.Expression = "3@-1000";
-      Assert.AreEqual(10, calcunit.Value, PRECISION);
+      Assert.AreEqual(-10, calcunit.Value, PRECISION);
       calcunit.Expression = "(-3)@-1000";
       Assert.AreEqual(-0.1, calcunit.Value, PRECISION);
       calcunit.Expression = "-(-3)@1000";
