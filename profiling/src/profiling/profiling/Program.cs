@@ -27,7 +27,7 @@ namespace profiling
           }
           if (char.IsDigit(character))
             stringNumber += character;
-          if (char.IsWhiteSpace(character) || input.Length == (1 + i))
+          if ((char.IsWhiteSpace(character) || input.Length == (1 + i)) && stringNumber != "" )
           {
             number[position] = double.Parse(stringNumber);
             position++;
