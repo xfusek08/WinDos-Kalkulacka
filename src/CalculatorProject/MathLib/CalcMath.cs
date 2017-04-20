@@ -24,7 +24,7 @@ using System.Globalization;
 /**
   * @brief Matematická knihovna
   * @package MathLib
-  *  
+  *
   * Matematická knihovna pro výpočet základních matematických operací
   * @author  Jaromír Franěk
   */
@@ -127,7 +127,7 @@ namespace MathLib
 
     /// <summary>Factorial</summary>
     /// <description>Factorial z čísla x, o maximální hodnotě 170</description>
-    /// <param name="b">Předá hodnotu factorialu typu byte</param>
+    /// <param name="x">Předá hodnotu factorialu typu byte</param>
     /// <returns>Pokud je x < 170, vrací factorial z čísla x, pokud je x > 170, vrací PositiveInfinity.</returns>
     public double Fact(Byte x)
     {
