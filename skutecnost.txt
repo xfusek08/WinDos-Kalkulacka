@@ -1,0 +1,95 @@
+
+## Fáze 1. - Návrh a specifikace projeku (17.3.2017)
+Plán:
+  * vytvoření plánu projektu
+  * editorconfig
+  * repozitář
+  * doxyfile
+  * pravidla komunikace a používání gitu
+  * specifikace požadavků
+  * architektonický návrh
+
+  ### Rozdělení úkolů:
+    * společně
+Skutečnost:
+  Tento plán se celkem podařilo splnit. Až na Doxyfile a editorconfig, který
+  byl odložen na později.
+  Pravidla komunikace a používání gitu sepsal vedoucí jinak se na všech částech
+  podíleli všichni členové.
+
+## Fáze 2. - Podrobný návrh implementace a vytvoření testů (26.3.2017)
+Plán:
+  * specifikace rozhraní mezi částmi projektu
+
+    komunikace GUI <--> výpočetní jednotka <--> matematická knihovna
+  * návrhy a implementace testovacích programů pro výpočetní jednotku a matematickou knihovnu
+
+  ### Rozdělení úkolů:
+    * podrobný návrh rozhraní podsystémů: společně
+    * testy matematické knihovny:
+      * Radim Blaha
+      * Petr Fusek
+    * testy výpočetní jednotky:
+      * Jaromír Franěk
+      * Pavel Vosyka
+skutečnost:
+  Tato fáze se spozdila zhruba o 2 dny s tím, že v testech zůstalo poměrně velké
+  množství různých chyb, které se musely v dalších fázích opravovat. (nikomu se
+  nechtělo procházet velké mnořství řádků matematických výrazů a všechny
+  kontrolovat).
+  Chyby vyplynuly a byly opravenépři implementaci.
+
+## Fáze 3. - Implementace návrhu a psaní programové dokumentace (2.4.2017)
+Plán:
+  * implementace matematické knihovny a programu kalkulačky (GUI+ovládání)
+  * xml komentáře k jednotlivým funkcím
+
+  ### Rozdělení úkolů:
+    * implementace GUI:
+      * Radim Blaha
+    * implementace výpočetní jednotky:
+      * Petr Fusek
+      * Pavel Vosyka
+    * implementace matematické knihovny:
+      * Jaromír Franěk
+skutečnost:
+  Tato fáze se spozdila o více než týden, kůli velkému množství projektů do
+  jiných předmětů.
+  Rozdělení úkolů se podařilo dodržet.
+  Hodně čaasu sebralo opravování testů a přehodnocování návrhu, ze kterého
+  vyplývalo několik nelogičností.
+  Spousta úprav s oprav se dodělával až do odevzdání.
+
+## Fáze 4. - Instalace/odinstalace, Makefile a profiling (9.4.2017)
+Plán:
+  * vytvoření instalátoru a odinstalátoru programu
+  * vytvoření Makefile pro kompilaci
+  * Tvorba programu pro výpočet směrodatné odchylky a profiling
+
+  ### Rozdělení úkolů:
+    * instalátor/odinstalátor (windows):
+      * Petr Fusek
+    * instalátor/odinstalátor (linux) - pokus o:
+      * Pavel Vosyka
+    * profiling:
+      * Jaromír Franěk
+    * MakeFile:
+      * Radim Blaha
+## Fáze 5. - Uživatelská příručka a finalizační práce (16.4.2017)
+  * tvorba uživatelské příručky
+  * mockup další verze programu´
+
+  ### Rozdělení úkolů:
+  * mockup: Společně
+  * uživatelská příručka: společně s dělbou práce
+  * prezentace: Petr Fusek
+  * Případné dodělávky a opravy budou rozděleny podle potřeby
+Skutečnost:
+  Vzhledem ke časovému skluzu se fáze 4 a 5 spojila do jedné. Vypustil se plán
+  udělat verzi pro linux.
+  Radim Blaha musel udělat uživatelskou příručku kterou zakomponoval do programu
+  jako nápovědu a MakeFile byl přidělen Pavlu Vosykovy.
+
+  Vzhledem ktomu, že projekt byl překládán testován a generován pomocí
+  visualstudia na windows tak bylo zjištěno, že Makefile bude problém na delší
+  dobu a nestihl se.

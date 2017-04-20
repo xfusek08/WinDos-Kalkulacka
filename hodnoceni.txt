@@ -1,0 +1,4 @@
+xblaha28 100 (GUI, uživatelská příručka, architektonický návrh, testy, mockup)
+xfrane16 100 (matematická knihovna, profiling, testy, mockup)
+xfusek08 100 (výpočetní jednotka[vyhodnocovací algoritmus], doxyfile, nastavování a řízení projektu, architektonický návrh, testy)
+xvosyk00 100 (výpočetní jednotka[převody mezi soustavami], architektonický návrh, testy, mocup)
