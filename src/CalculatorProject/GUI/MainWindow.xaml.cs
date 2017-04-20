@@ -45,6 +45,7 @@ namespace GUI
     private string lastResult;  //Proměnná pro uložení posledního výsledku
     private bool removeResult = true;  //říká, zda se má odstranit i výsledek - při převádění mezi soustavami se odstraňovat nesmí
     private bool removeExprBeforeNumberPrint = false; //říká, zda se má výraz smazat před vypsáním číslovky
+    private bool wasError = false;  //říká, že nastala chyba
 
     public MainWindow()
     {
@@ -395,30 +396,48 @@ namespace GUI
         }
         catch (Exception e)
         {
-          MessageBox.Show(e.Message);
+          tbResult.Text = e.Message;
+          wasError = true;
         }
       }
 
-      calc = new Calculation(expr);
-
-      switch (calc.ErrorType)
+      if (!wasError)
       {
-        case CalcErrorType.None:
-          lastResult = NumberConverter.ToString(calc.Value, currentNumSys, "");
-          tbResult.Text = lastResult;
-          break;
-        case CalcErrorType.FuncDomainError:
-          tbResult.Text = "Chybný definiční obor funkce.";
-          break;
-        case CalcErrorType.DataTypeOverflow:
-          tbResult.Text = "Přetečení.";
-          break;
-        case CalcErrorType.ExprFormatError:
-          tbResult.Text = "Chybný výraz.";
-          break;
-        case CalcErrorType.UnknownError:
-          tbResult.Text = "Nespecifikovaná chyba.";
-          break;
+        calc = new Calculation(expr);
+
+        switch (calc.ErrorType)
+        {
+          case CalcErrorType.None:
+            try
+            {
+              lastResult = NumberConverter.ToString(calc.Value, currentNumSys, "");
+            }
+            catch (Exception e)
+            {
+              tbResult.Text = e.Message;
+              wasError = true;
+              break;
+            }
+
+            tbResult.Text = lastResult;
+            break;
+          case CalcErrorType.FuncDomainError:
+            tbResult.Text = "Chybný definiční obor funkce.";
+            wasError = true;
+            break;
+          case CalcErrorType.DataTypeOverflow:
+            tbResult.Text = "Přetečení.";
+            wasError = true;
+            break;
+          case CalcErrorType.ExprFormatError:
+            tbResult.Text = "Chybný výraz.";
+            wasError = true;
+            break;
+          case CalcErrorType.UnknownError:
+            tbResult.Text = "Nespecifikovaná chyba.";
+            wasError = true;
+            break;
+        }
       }
 
       //Po následném zmáčknutí desetinné tečky se výraz maže - povolení zmáčkout tečku a zadat "0."
@@ -439,7 +458,13 @@ namespace GUI
     /// </description>
     private void removeFromBack()
     {
-      string lastChar = getLastChar();
+      string lastChar = "";
+
+      //Když existuje výsledek a maže se pomocí DEL, tak resetuje kalkulačku
+      if (tbResult.Text.Length > 0)
+      {
+        resetCalc(true);
+      }
 
       if (tbExpression.Text.Length > 3)
       {
@@ -448,6 +473,8 @@ namespace GUI
           tbExpression.Text = tbExpression.Text.Remove(tbExpression.Text.Length - 3); // !!!čtvrtý znak se smaže ve funkci později!!!
         }
       }
+
+      lastChar = getLastChar();
 
       //Když je mazaný znak levá závorka, tak sníží počet levých závorek
       if (lastChar == "(")
@@ -507,7 +534,9 @@ namespace GUI
         }
         catch (Exception e)
         {
-          MessageBox.Show(e.Message);
+          tbResult.Text = e.Message;
+          wasError = true;
+          return;
         }
         tbResult.Text = lastResult;
       }
@@ -1285,7 +1314,13 @@ namespace GUI
     //Při změně textu povoluje a zakazuje tlačítka, která lze a nelze zmáčknout
     private void tbExpression_TextChanged(object sender, TextChangedEventArgs e)
     {
-      if (removeResult) //Pokud má povoleno smazat výsledek - když se převádí, tak se výsledek mazat nesmí
+      if (wasError) //Když nastala chyba, tak vymaže kalkulačku
+      {
+        wasError = false;
+        removeResult = false;
+        resetCalc(true);
+      }
+      else if (removeResult) //Pokud má povoleno smazat výsledek - když se převádí, tak se výsledek mazat nesmí
       {
         resetResult();  //vymaže oblast pro výsledek
         removeResult = false;
