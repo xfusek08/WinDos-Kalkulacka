@@ -1,4 +1,4 @@
-# IVS-Kalkulačka
+# WinDos-Kalkulačka
 Týmový projekt do předmětu IVS na FIT VUT
 
 Prostředí
