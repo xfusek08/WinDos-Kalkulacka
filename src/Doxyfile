@@ -36,7 +36,7 @@ DOXYFILE_ENCODING      = UTF-8
 
 # na jméně programu se můžeme dohodnout později
 
-PROJECT_NAME           = "IVS Kalkulačka"
+PROJECT_NAME           = "WinDos Kalkulačka"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -44,7 +44,7 @@ PROJECT_NAME           = "IVS Kalkulačka"
 
 #vymyslet verzovani
 
-PROJECT_NUMBER         = 0.0
+PROJECT_NUMBER         = 1.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -850,7 +850,8 @@ WARN_LOGFILE           = ../Documentation/Warnlog.log
 
 # Pouze validní soubory
 
-INPUT                  = CalculatorProject\MathLib\         \
+INPUT                  = ../README.md \
+                         CalculatorProject\MathLib\         \
                          CalculatorProject\CalculatorUnit\
                          #CalculatorProject\GUI\
 
@@ -1047,7 +1048,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE =
+USE_MDFILE_AS_MAINPAGE = ../README.md
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
