@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="help" Height="600" Width="1000" KeyDown="Window_KeyDown" ResizeMode="NoResize">
+        Title="help" Height="600" Width="720" KeyDown="Window_KeyDown" ResizeMode="NoResize">
   <Grid>
-    <Grid HorizontalAlignment="Left" Height="551" Margin="10,10,0,0" VerticalAlignment="Top" Width="974"/>
-    <WebBrowser x:Name="webBrowser" HorizontalAlignment="Left" Height="551" Margin="10,10,0,0" VerticalAlignment="Top" Width="974"/>
+
+    <WebBrowser x:Name="webBrowser" Margin="10"/>
 
   </Grid>
 </Window>
