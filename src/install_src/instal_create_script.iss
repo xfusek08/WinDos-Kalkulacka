@@ -33,7 +33,8 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: "..\CalculatorProject\GUI\bin\Release\Kalkulaèka.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "..\CalculatorProject\GUI\bin\Release\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\CalculatorProject\GUI\bin\Release\CalculatorUnit.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "..\CalculatorProject\GUI\bin\Release\MathLib.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "..\..\user_manual\html\*"; DestDir: "{app}\bin\doc"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
