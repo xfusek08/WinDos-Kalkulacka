@@ -255,4 +255,4 @@ paket-files/
 Documentation/
 
 #Inno output
-src\install_src\Output\
+src/install_src/Output/
