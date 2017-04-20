@@ -146,6 +146,13 @@ namespace GUI
     {
       string lastChar = getLastChar(); //původní poslední znak
 
+      //Když existuje výsledek, tak se překopíruje do oblasti pro výraz
+      if (tbResult.Text.Length > 0)
+      {
+        tbExpression.Text = tbResult.Text;
+        resetResult();  //vymazání výsledku
+      }
+
       //Smaže poslední znak v případě, že nějaký operátor už na posledním místě výrazu existuje
       if ((lastChar == unicodePlus) || (lastChar == unicodeMinus) || (lastChar == unicodeMultiply) || (lastChar == unicodeDivision) || (lastChar == "%"))
       {
@@ -196,6 +203,15 @@ namespace GUI
       {
         tbExpression.Text = "";  //...smaže oblast pro výraz
       }
+        
+      //Když existuje výsledek, tak se překopíruje do oblasti pro výraz
+      if (tbResult.Text.Length > 0)
+      {
+        if (tbResult.Text.Contains("."))  //Když je ve výsledku tečka, tak ji není možné vypsat znova
+          isDotPrintable = false;
+        tbExpression.Text = tbResult.Text;
+        resetResult();  //vymazání výsledku
+      }
 
       //zjistí poslední znak a to, zda se jedná o číslo
       lastChar = getLastChar();
@@ -223,8 +239,11 @@ namespace GUI
     /// </summary>
     private void printRightBracket()
     {
-      string lastChar = getLastChar();
-      bool isLastCharNumber = isCharNumber(lastChar);
+      string lastChar = "";
+      bool isLastCharNumber = false;
+
+      lastChar = getLastChar();
+      isLastCharNumber = isCharNumber(lastChar);
 
       if ((isLastCharNumber || lastChar == ")" || lastChar == "!") && (tbExpression.Text != "0"))
       { //vytiskne pouze závorku
@@ -255,6 +274,12 @@ namespace GUI
       string lastChar = "";
       bool isLastCharNumber = false;
 
+      //Když existuje výsledek, tak se kalkulačka resetuje
+      if (tbResult.Text.Length > 0)
+      {
+        resetCalc(false); //resetuje kalkulačku, ale nesmaže výsledek
+      }
+
       if (tbExpression.Text == "0")  //V případě, že je oblast pro výraz rovna "0", tak...
       {
         tbExpression.Text = "";  //...smaže oblast pro výraz
@@ -276,6 +301,15 @@ namespace GUI
         tbExpression.Text = tbExpression.Text + unicodeMultiply + "log(";  //připojí na konec *log(
       }
 
+      //Když existuje výsledek, tak se překopíruje do oblasti pro výraz
+      if (tbResult.Text.Length > 0)
+      {
+        if (tbResult.Text.Contains("."))  //Když je ve výsledku tečka, tak ji není možné vypsat znova
+          isDotPrintable = false;
+        tbExpression.Text += tbResult.Text;
+        resetResult();  //vymaže výsledek
+      }
+
       resetBracketsCounterIfEqual();
 
       removeExprBeforeNumberPrint = false;  //po nasledném stisku čísla nebude mazat výraz
@@ -286,6 +320,13 @@ namespace GUI
     /// </summary>
     private void printFact()
     {
+      //Když existuje výsledek, tak se překopíruje do oblasti pro výraz
+      if (tbResult.Text.Length > 0)
+      {
+        tbExpression.Text = tbResult.Text;
+        resetResult();  //vymaže výsledek
+      }
+
       tbExpression.Text += "!";
     }
 
@@ -294,7 +335,22 @@ namespace GUI
     /// </summary>
     private void printRoot()
     {
-      isDotPrintable = true;
+      //Když existuje výsledek, tak se překopíruje do oblasti pro výraz
+      if (tbResult.Text.Length > 0)
+      {
+        if (tbResult.Text.Contains("."))
+        {  //Když je ve výsledku tečka, tak ji není možné vypsat znova
+          isDotPrintable = false;
+        }
+        else
+        {
+          isDotPrintable = true;
+        }
+        removeExprBeforeNumberPrint = false;  //nebude mazat výraz po náledném výpisu čísla
+        tbExpression.Text = tbResult.Text;
+        resetResult();  //vymaže výsledek
+      }
+
       tbExpression.Text += unicodeRoot;
     }
 
@@ -303,6 +359,14 @@ namespace GUI
     /// </summary>
     private void printPow()
     {
+      //Když existuje výsledek, tak se překopíruje do oblasti pro výraz
+      if (tbResult.Text.Length > 0)
+      {
+        removeExprBeforeNumberPrint = false;  //nebude mazat výraz po náledném výpisu čísla
+        tbExpression.Text = tbResult.Text;
+        resetResult();  //vymaže výsledek
+      }
+
       isDotPrintable = true;
       tbExpression.Text += "^";
     }
