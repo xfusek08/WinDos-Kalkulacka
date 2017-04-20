@@ -1,4 +1,4 @@
-# IVS-Kalkulačka
+# WinDos-Kalkulačka
 Týmový projekt do předmětu IVS na FIT VUT
 
 Prostředí
@@ -19,3 +19,8 @@ Licence
 -------
 
 Tento program je poskytován pod licencí GPLv3.0.
+
+Testování
+---------
+Testování je prováděno pomocí frameworku MSTest ve visual studiu. Jednotkové
+testy jsou součástí projektu v "src\CalculatorProject\ProjectTesting\".
