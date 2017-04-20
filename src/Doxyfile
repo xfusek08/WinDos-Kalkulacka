@@ -36,7 +36,7 @@ DOXYFILE_ENCODING      = UTF-8
 
 # na jméně programu se můžeme dohodnout později
 
-PROJECT_NAME           = "IVS Kalkulačka"
+PROJECT_NAME           = "WinDos Kalkulačka"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -44,7 +44,7 @@ PROJECT_NAME           = "IVS Kalkulačka"
 
 #vymyslet verzovani
 
-PROJECT_NUMBER         = 0.0
+PROJECT_NUMBER         = 1.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
