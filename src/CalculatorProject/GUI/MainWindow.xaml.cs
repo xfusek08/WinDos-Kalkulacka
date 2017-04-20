@@ -506,7 +506,9 @@ namespace GUI
 
       //Po následném zmáčknutí desetinné tečky se výraz maže - povolení zmáčkout tečku a zadat "0."
       isDotPrintable = true;
-      enable_disableButtons();
+      //Sekvece povolování a zakazování tlačítek se spustí pouze v případě desítkové soustavy
+      if (currentNumSys == NumSystem.Dec)
+        enable_disableButtons();
 
       removeExprBeforeNumberPrint = true;  //po zadání čísla smaže výraz
     }
