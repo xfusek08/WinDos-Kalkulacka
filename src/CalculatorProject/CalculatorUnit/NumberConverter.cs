@@ -4,8 +4,8 @@
 * Soubor: NumberConverter.cs
 * Datum: 07.04.2017
 * Autor: Pavel Vosyka
-* Naposledy upravil: Petr Fusek
-* Datum poslední změny: 19.04.2017
+* Naposledy upravil: Radim Blaha
+* Datum poslední změny: 20.04.2017
 *
 * Popis: Pomocná statická třída pro konvertování čísla na řetězec.
 *
@@ -66,7 +66,7 @@ namespace CalculatorUnit
         catch (Exception ex)
         {
           if (ex is FormatException || ex is ArgumentException)
-            throw new FormatException("Argument neobsahuje validní znaky");
+            throw new FormatException("Převáděné číslo není platné.");
           else
             throw ex;
         }
@@ -99,7 +99,7 @@ namespace CalculatorUnit
         {
           //throw new ArgumentException("Argument neobsahuje validní znaky", "input");
           // vyhodime trochu standartnejsi chybu
-          throw new FormatException("Argument neobsahuje validní znaky");
+          throw new FormatException("Převáděné číslo není platné.");
         }
         result += charVal * Math.Pow((int)numsystem, power);
         power--;
@@ -162,7 +162,10 @@ namespace CalculatorUnit
       }
 
       if (value > int.MaxValue || value < int.MinValue)
-        return "NaN";
+      {
+        throw new FormatException("Převáděné číslo je mimo rozsah.");
+        //return "NaN";
+      }
 
       string resultstr = "";
       if (value < 0) //pokud je číslo záporné, vloží se mínus a zbytek se převede jako kladné

@@ -5,7 +5,7 @@
 * Datum: 05.04.2017
 * Autor: Radim Blaha
 * Naposledy upravil: Radim Blaha
-* Datum poslední změny: 19.04.2017
+* Datum poslední změny: 20.04.2017
 *
 * Popis: Třída, která ovládá grafické prvky hlavního okna aplikace a
 *        reaguje na příchozí uživatelské události.
@@ -23,6 +23,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using CalculatorUnit;
+using System;
 
 namespace GUI
 {
@@ -388,7 +389,14 @@ namespace GUI
       //Pokud se nejedná o desítkovou soustavu, tak zkonvertuje na desítkovou
       if (currentNumSys != NumSystem.Dec)
       {
-        expr = NumberConverter.ToString(NumberConverter.ToDouble(expr, currentNumSys), NumSystem.Dec, "");
+        try
+        {
+          expr = NumberConverter.ToString(NumberConverter.ToDouble(expr, currentNumSys), NumSystem.Dec, "");
+        }
+        catch (Exception e)
+        {
+          MessageBox.Show(e.Message);
+        }
       }
 
       calc = new Calculation(expr);
@@ -493,7 +501,14 @@ namespace GUI
     {
       if (tbResult.Text != "")  //Pokud má co převádět, tak převede
       {
-        lastResult = NumberConverter.ToString(NumberConverter.ToDouble(lastResult, currentNumSys), numSys, "");
+        try
+        {
+          lastResult = NumberConverter.ToString(NumberConverter.ToDouble(lastResult, currentNumSys), numSys, "");
+        }
+        catch (Exception e)
+        {
+          MessageBox.Show(e.Message);
+        }
         tbResult.Text = lastResult;
       }
     }
